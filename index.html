@@ -11,6 +11,7 @@
 <title>Keto for GERD: 4 Month Plan</title>
 <link rel="manifest" href="./manifest.json" />
 <link rel="apple-touch-icon" href="./icon-192.png" />
+<link rel="icon" type="image/svg+xml" href="./logo.svg" />
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
 <style>
@@ -119,6 +120,19 @@
     background: var(--bg);
     position: sticky; top: 0; z-index: var(--z-header);
   }
+  header.top .brand{
+    display:flex; align-items:center; gap:var(--space-3);
+  }
+  header.top .logo{
+    flex:0 0 auto;
+    width:40px; height:40px;
+    border-radius:12px;
+    background:var(--bg-card);
+    color:var(--terra-deep);
+    display:grid; place-items:center;
+  }
+  header.top .logo svg{ width:22px; height:22px; display:block; }
+  header.top .brand-text{ min-width:0; }
   header.top .eyebrow{
     font-size:12px; color:var(--terra-bright); font-weight:600;
     letter-spacing:0.04em; text-transform:uppercase; word-spacing:0.04em;
@@ -240,17 +254,33 @@
   .grocery-group h3{ margin-bottom:var(--space-2); color:var(--terra-bright); font-size:0.8125rem; letter-spacing:0.04em; text-transform:uppercase; }
   .grocery-group{ margin-bottom:var(--space-4); }
   .grocery-group:last-child{ margin-bottom:0; }
-  .chip-list{ display:flex; flex-wrap:wrap; gap:var(--space-2); }
-  .chip{
-    background:var(--bg-raised); border:none; border-radius:999px;
-    padding:8px 12px; min-height:44px; font-size:13px; color:var(--ink);
-    cursor:pointer; user-select:none; display:inline-flex; align-items:center; gap:6px;
-    transition: background .15s var(--ease), color .15s var(--ease);
+  .g-list{ list-style:none; margin:0; padding:0; }
+  .g-item{
+    display:grid; grid-template-columns:22px 1fr auto; gap:var(--space-2);
+    align-items:center; min-height:48px; padding:10px 0;
+    border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    cursor:pointer; user-select:none; color:var(--ink); font-size:0.9375rem;
+    transition: color .15s var(--ease), opacity .15s var(--ease);
   }
-  .chip:hover{ background:color-mix(in srgb, var(--terra-brand) 28%, var(--bg-raised)); }
-  .chip.done{ text-decoration:line-through; color:var(--muted); opacity:0.8; }
-  .chip .qty{ font-family: inherit; font-weight:600; font-variant-numeric:tabular-nums; color:var(--terra-bright); }
-  .chip.done .qty{ color:var(--muted); }
+  .g-item:last-child{ border-bottom:none; }
+  .g-item:hover{ color:var(--terra-deep); }
+  .g-item:focus-visible{ outline:2px solid var(--terra-deep); outline-offset:2px; border-radius:4px; }
+  .g-box{
+    width:18px; height:18px; border:1.5px solid var(--terra-deep); border-radius:4px;
+    display:grid; place-items:center; flex-shrink:0;
+  }
+  .g-box::after{ content:""; width:8px; height:8px; border-radius:2px; background:transparent; }
+  .g-item.done .g-box{ background:var(--terra-deep); border-color:var(--terra-deep); }
+  .g-item.done .g-box::after{ background:var(--sand); }
+  .g-name{ line-height:1.35; }
+  .g-qty{
+    font-weight:600; font-variant-numeric:tabular-nums; font-size:0.8125rem;
+    color:var(--terra-bright); white-space:nowrap; text-align:right;
+  }
+  .g-item.done{ opacity:0.72; }
+  .g-item.done .g-name{ text-decoration:line-through; color:var(--muted); }
+  .g-item.done .g-qty{ color:var(--muted); }
+  .g-empty{ font-size:0.875rem; color:var(--muted); padding:var(--space-2) 0; }
 
   .wk-day{ display:flex; justify-content:space-between; align-items:center; padding:var(--space-3) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); gap:var(--space-3); }
   .wk-day:last-child{ border-bottom:none; }
@@ -372,8 +402,19 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="top">
-  <div class="eyebrow">Chicken-only keto for GERD · 1 person</div>
-  <h1>95 kg to 78 kg</h1>
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+        <path d="M7 2v20"/>
+        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="eyebrow">KetoGERD · chicken-only · 1 person</div>
+      <h1>95 kg to 78 kg</h1>
+    </div>
+  </div>
   <div class="sub">6'0" · 28 · gentler fat, chicken as the only meat, about 1 kg/week</div>
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
@@ -420,13 +461,13 @@
 
   <section id="grocery" role="tabpanel">
     <div class="card">
-      <h2>Weekly grocery list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Shop packs for this week's meal plan (not recipe spoons). Tap to check off. Saved on this device only.</p>
+      <h2>Weekly bazaar list</h2>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Buy quantities for this week's meals (kg, dozen, litre, packet). Tap a row to tick. Saved on this device only.</p>
     </div>
-    <div class="card grocery-group"><h3>Protein</h3><div class="chip-list" data-group="protein"></div></div>
-    <div class="card grocery-group"><h3>Vegetables</h3><div class="chip-list" data-group="veg"></div></div>
-    <div class="card grocery-group"><h3>Fats & pantry</h3><div class="chip-list" data-group="pantry"></div></div>
-    <div class="card grocery-group"><h3>Dairy & drinks</h3><div class="chip-list" data-group="dairy"></div></div>
+    <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
+    <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
+    <div class="card grocery-group"><h3>Dairy</h3><ul class="g-list" data-group="dairy"></ul></div>
+    <div class="card grocery-group"><h3>Kirana</h3><ul class="g-list" data-group="pantry"></ul></div>
   </section>
 
 </main>
@@ -593,16 +634,16 @@ const SKIP_ING = /^(pinch of salt|ice cubes|dried herbs)/i;
 const BUY_CATALOG = [
   { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> packKg(g, "chicken breast") },
+    shop:g=> packKg(g) },
   { group:"protein", name:"Chicken thigh", re:/chicken thigh/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> packKg(g, "chicken thigh") },
-  { group:"protein", name:"Ground chicken (keema)", re:/ground chicken|keema/i, base:"g",
+    shop:g=> packKg(g) },
+  { group:"protein", name:"Chicken keema", re:/ground chicken|keema/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> packKg(g, "keema") },
-  { group:"protein", name:"Chicken broth", re:/chicken broth/i, base:"cups",
+    shop:g=> packKg(g) },
+  { group:"protein", name:"Chicken stock", re:/chicken broth/i, base:"cups",
     qty:s=>{ const m=s.match(/([\d.]+)\s*cups?/i); return m?+m[1]:1; },
-    shop:c=> c <= 0 ? null : (c <= 4 ? "1 carton (~1 L)" : "2 cartons (~1 L each)") },
+    shop:c=> c <= 0 ? null : (c <= 4 ? "1 L tetra pack" : "2 × 1 L tetra packs") },
   { group:"protein", name:"Eggs", re:/\beggs?\b|egg whites?/i, base:"count",
     qty:s=>{
       let n = 0;
@@ -620,86 +661,86 @@ const BUY_CATALOG = [
     },
     shop:n=>{
       if(n <= 0) return null;
-      if(n <= 6) return "½ dozen (6)";
+      if(n <= 6) return "½ dozen";
       if(n <= 12) return "1 dozen";
       if(n <= 18) return "1½ dozen";
       return Math.ceil(n/12) + " dozen";
     } },
-  { group:"dairy", name:"Cottage cheese", re:/cottage cheese/i, base:"g",
+  { group:"dairy", name:"Paneer / cottage cheese", re:/cottage cheese/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "1 tub (200g)" : g <= 400 ? "1 tub (400g)" : "2 tubs (400g)") },
-  { group:"dairy", name:"Plain full-fat yogurt", re:/yogurt/i, base:"g",
+    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : g <= 400 ? "400 g pack" : "2 × 400 g packs") },
+  { group:"dairy", name:"Dahi (full-fat)", re:/yogurt/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 400 ? "1 tub (400g)" : "1 large tub (1kg)") },
+    shop:g=> g <= 0 ? null : (g <= 400 ? "400 g cup" : "1 kg dabba") },
   { group:"dairy", name:"Hard cheese", re:/hard cheese/i, base:"slices",
     qty:s=>{ const m=s.match(/(\d+)\s*(?:small\s+)?slices?/i); return m?+m[1]:2; },
-    shop:n=> n <= 0 ? null : "1 small pack (~100-150g)" },
+    shop:n=> n <= 0 ? null : "100–150 g pack" },
   { group:"dairy", name:"Butter", re:/\bbutter\b/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 pack (100g)" },
-  { group:"dairy", name:"Unsweetened almond milk", re:/almond milk/i, base:"ml",
+    shop:()=> "100 g pack" },
+  { group:"dairy", name:"Almond milk (unsweetened)", re:/almond milk/i, base:"ml",
     qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
-    shop:ml=> ml <= 0 ? null : (ml <= 1000 ? "1 carton (1 L)" : "2 cartons (1 L)") },
-  { group:"veg", name:"Spinach", re:/spinach/i, base:"use",
+    shop:ml=> ml <= 0 ? null : (ml <= 1000 ? "1 L tetra pack" : "2 × 1 L tetra packs") },
+  { group:"veg", name:"Palak (spinach)", re:/spinach/i, base:"use",
     qty:()=>1,
-    shop:(n)=> n <= 2 ? "1 bag / bunch" : "2 bags" },
-  { group:"veg", name:"Zucchini", re:/zucchini/i, base:"count",
+    shop:n=> n <= 2 ? "1 bunch" : "2 bunches" },
+  { group:"veg", name:"Zucchini (tori)", re:/zucchini/i, base:"count",
     qty:s=> Math.max(0.5, frac(s.match(/([\d./½¼¾]+)/)?.[1] || "0.5")),
-    shop:n=> shopCount(n, "zucchini") },
+    shop:n=> shopPieces(n) },
   { group:"veg", name:"Cucumber", re:/cucumber/i, base:"count",
     qty:s=> Math.max(0.5, frac(s.match(/([\d./½¼¾]+)/)?.[1] || "0.5")),
-    shop:n=> shopCount(n, "cucumber") },
+    shop:n=> shopPieces(n) },
   { group:"veg", name:"Broccoli", re:/broccoli/i, base:"use",
     qty:()=>1,
-    shop:n=> n <= 2 ? "1 head / pack" : "2 heads" },
-  { group:"veg", name:"Green beans", re:/green beans/i, base:"use",
+    shop:n=> n <= 2 ? "1 head" : "2 heads" },
+  { group:"veg", name:"Beans (phali)", re:/green beans/i, base:"use",
     qty:()=>1,
-    shop:n=> n <= 2 ? "1 pack (~250g)" : "2 packs (~250g)" },
-  { group:"veg", name:"Cauliflower", re:/cauliflower/i, base:"use",
+    shop:n=> n <= 2 ? "250 g" : "500 g" },
+  { group:"veg", name:"Cauliflower (phool gobi)", re:/cauliflower/i, base:"use",
     qty:()=>1,
-    shop:n=> n <= 2 ? "1 head (or 1 pack rice)" : "2 heads" },
+    shop:n=> n <= 2 ? "1 head" : "2 heads" },
   { group:"veg", name:"Lettuce", re:/lettuce/i, base:"use",
     qty:()=>1,
-    shop:n=> n <= 2 ? "1 head / pack" : "2 heads" },
-  { group:"veg", name:"Mushrooms", re:/mushroom/i, base:"count",
+    shop:n=> n <= 2 ? "1 head" : "2 heads" },
+  { group:"veg", name:"Mushroom", re:/mushroom/i, base:"count",
     qty:s=>{
       const r=s.match(/(\d+)\s*-\s*(\d+)/); if(r) return Math.ceil((+r[1]+ +r[2])/2);
       const m=s.match(/(\d+)/); return m?+m[1]:3;
     },
-    shop:n=> n <= 0 ? null : (n <= 8 ? "1 punnet (~200g)" : "2 punnets (~200g)") },
-  { group:"veg", name:"Carrot", re:/carrot/i, base:"use",
+    shop:n=> n <= 0 ? null : (n <= 8 ? "200 g pack" : "400 g pack") },
+  { group:"veg", name:"Carrot (gajar)", re:/carrot/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 small pack / 2 carrots" },
+    shop:()=> "2 pieces" },
   { group:"veg", name:"Banana", re:/banana/i, base:"count",
     qty:s=> frac(s.match(/([\d./½]+)/)?.[1] || "0.5"),
-    shop:n=> shopCount(n, "banana") },
+    shop:n=> shopPieces(n) },
   { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 bottle" },
+    shop:()=> "1 bottle (500 ml–1 L)" },
   { group:"pantry", name:"Sesame oil", re:/sesame oil/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 small bottle" },
+    shop:()=> "1 small bottle (100–250 ml)" },
   { group:"pantry", name:"Apple cider vinegar", re:/apple cider vinegar|vinegar/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 bottle" },
+    shop:()=> "1 bottle (500 ml)" },
   { group:"pantry", name:"Light soy sauce", re:/soy sauce/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 bottle" },
+    shop:()=> "1 bottle (200–500 ml)" },
   { group:"pantry", name:"Tahini", re:/tahini/i, base:"use",
     qty:()=>1,
     shop:()=> "1 jar" },
-  { group:"pantry", name:"Ginger (fresh)", re:/ginger/i, base:"use",
+  { group:"pantry", name:"Adrak (ginger)", re:/ginger/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 small knob / piece" },
-  { group:"pantry", name:"Almonds (raw)", re:/almonds/i, base:"use",
+    shop:()=> "50–100 g piece" },
+  { group:"pantry", name:"Badam (raw almonds)", re:/almonds/i, base:"use",
     qty:()=>1,
-    shop:n=> n <= 2 ? "1 small pack (~100g)" : "1 pack (~200g)" },
+    shop:n=> n <= 2 ? "100 g" : "200 g" },
   { group:"pantry", name:"Pumpkin seeds", re:/pumpkin seeds/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 small pack (~100g)" },
-  { group:"pantry", name:"Plain protein powder", re:/protein powder/i, base:"use",
+    shop:()=> "100 g" },
+  { group:"pantry", name:"Protein powder (plain)", re:/protein powder/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 tub (if you don't have it)" }
+    shop:()=> "1 tub (if needed)" }
 ];
 
 function frac(raw){
@@ -712,22 +753,21 @@ function frac(raw){
   return parseFloat(s) || 0;
 }
 
-/** Round grams up to shop packs of 250g / 500g / 1kg. */
+/** Round grams up to common Indian butcher / kirana packs. */
 function packKg(g){
   if(g <= 0) return null;
-  if(g <= 250) return "250g pack";
-  if(g <= 500) return "500g pack";
-  if(g <= 750) return "750g (or 500g + 250g)";
+  if(g <= 250) return "250 g";
+  if(g <= 500) return "500 g";
+  if(g <= 750) return "750 g";
   if(g <= 1000) return "1 kg";
   const kg = Math.ceil(g / 500) / 2;
   return kg % 1 === 0 ? kg + " kg" : kg.toFixed(1) + " kg";
 }
 
-function shopCount(n, noun){
+function shopPieces(n){
   if(n <= 0) return null;
   const c = Math.ceil(n);
-  if(c === 1) return "1 " + noun;
-  return c + " " + noun + (noun.endsWith("s") ? "" : "s");
+  return c === 1 ? "1 piece" : c + " pieces";
 }
 
 function matchBuyLine(line){
@@ -913,28 +953,32 @@ function saveChecked(obj){ safeStorage.set('ketogerd_grocery', JSON.stringify(ob
 
 function renderGrocery(){
   const checked = loadChecked();
-  document.querySelectorAll('.chip-list').forEach(list=>{
+  document.querySelectorAll('.g-list').forEach(list=>{
     const group = list.dataset.group;
     const items = GROCERY[group] || [];
     if(!items.length){
-      list.innerHTML = `<span class="note" style="margin:0;padding:0;border:none;">Nothing this week.</span>`;
+      list.innerHTML = `<li class="g-empty">Nothing this week.</li>`;
       return;
     }
     list.innerHTML = items.map(item => {
       const done = checked[item.key] ? 'done' : '';
-      return `<span class="chip ${done}" role="button" tabindex="0" data-key="${item.key}" aria-pressed="${done?'true':'false'}">${item.name} <span class="qty">${item.qtyLabel}</span></span>`;
+      return `<li class="g-item ${done}" role="checkbox" tabindex="0" data-key="${item.key}" aria-checked="${done?'true':'false'}">
+        <span class="g-box" aria-hidden="true"></span>
+        <span class="g-name">${item.name}</span>
+        <span class="g-qty">${item.qtyLabel}</span>
+      </li>`;
     }).join('');
   });
-  document.querySelectorAll('.chip').forEach(chip=>{
+  document.querySelectorAll('.g-item').forEach(row=>{
     const toggle = ()=>{
       const c = loadChecked();
-      c[chip.dataset.key] = !c[chip.dataset.key];
+      c[row.dataset.key] = !c[row.dataset.key];
       saveChecked(c);
-      chip.classList.toggle('done');
-      chip.setAttribute('aria-pressed', chip.classList.contains('done') ? 'true' : 'false');
+      row.classList.toggle('done');
+      row.setAttribute('aria-checked', row.classList.contains('done') ? 'true' : 'false');
     };
-    chip.addEventListener('click', toggle);
-    chip.addEventListener('keydown', (e)=>{
+    row.addEventListener('click', toggle);
+    row.addEventListener('keydown', (e)=>{
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
     });
   });

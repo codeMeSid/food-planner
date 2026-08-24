@@ -1,8 +1,9 @@
-const CACHE = "keto-gerd-v11";
+const CACHE = "keto-gerd-v13";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./logo.svg",
   "./icon-192.png",
   "./icon-512.png",
   "./icon-maskable-512.png",
