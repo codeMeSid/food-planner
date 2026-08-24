@@ -1,0 +1,17 @@
+{
+  "name": "Keto for GERD: 4 Month Plan",
+  "short_name": "KetoGERD",
+  "description": "A gentler keto plan and tracker built for GERD, from 95kg to 78kg over 4 months.",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "background_color": "#E3CFBB",
+  "theme_color": "#E3CFBB",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#E3CFBB" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="KetoGERD" />
+<title>Keto for GERD: 4 Month Plan</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="apple-touch-icon" href="./icon-192.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+<style>
+  /* Source Sans 3 VF — SIL OFL; self-hosted for offline PWA */
+  @font-face{
+    font-family: "Source Sans 3";
+    src: url("./fonts/SourceSans3VF-Upright.woff2") format("woff2-variations"),
+         url("./fonts/SourceSans3VF-Upright.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root{
+    /* Triad sampled from 3-stripe palette PNG */
+    --sand: #E3CFBB;          /* left stripe — page */
+    --clay: #DBBF9F;          /* middle stripe — surfaces */
+    --terra-brand: #CC956B;   /* right stripe — brand hue */
+    /* Deepened brand for AA interactive fills (white ≥4.5:1) */
+    --terra: #9A6240;
+    --terra-deep: #7A4A2E;    /* small accent text on sand ≥4.5:1 */
+    --terra-bright: #7A4A2E;
+    --terra-dim: color-mix(in srgb, var(--terra-brand) 22%, transparent);
+    --on-terra: #FFFFFF;
+    --bg: var(--sand);
+    --bg-raised: #E0C9B1;     /* subtle step sand→clay */
+    --bg-card: var(--clay);
+    --line: #D4BFA6;
+    --ink: #2A1C14;           /* warm near-black from brand hue */
+    --muted: #5C4335;         /* darker clay tint, not cool gray */
+    --risk-low: #3F6B45;
+    --risk-low-dim: color-mix(in srgb, var(--risk-low) 16%, transparent);
+    --danger: #A33A2E;
+    --backdrop: color-mix(in srgb, var(--ink) 48%, transparent);
+    --radius: 10px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --font: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --z-header: 10;
+    --z-tabbar: 20;
+    --z-dialog: 40;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --tabbar-h: 64px;
+    --app-max: 430px;
+    --float-inset: 12px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html{
+    margin:0; padding:0;
+    min-height:100%;
+    min-height:100dvh;
+    height:auto;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-text-size-adjust:100%;
+    touch-action:manipulation;
+  }
+  body{
+    margin:0; padding:0;
+    min-height:100%;
+    min-height:100dvh;
+    height:auto;
+    overflow-x:hidden;
+    overflow-y:visible;
+    background:var(--bg);
+    color:var(--ink);
+    font-family: var(--font);
+    font-size:16px;
+    font-weight:400;
+    line-height:1.55;
+    letter-spacing:0.01em;
+    word-spacing:0.02em;
+    padding-bottom: calc(var(--tabbar-h) + var(--float-inset) + var(--space-5) + env(safe-area-inset-bottom, 0px));
+    max-width: var(--app-max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1,h2,h3{
+    font-family: var(--font);
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.03em;
+    word-spacing:0.01em;
+    text-wrap:balance;
+    line-height:1.25;
+  }
+  .mono{ font-family: ui-monospace, "SF Mono", Menlo, monospace; letter-spacing:0; word-spacing:0; }
+  a{color:inherit;}
+  :focus-visible{ outline: 2px solid var(--terra); outline-offset: 2px; }
+  button, input{ font-family: inherit; }
+  .skip{
+    position:absolute; left:-999px; top:var(--space-2);
+    background:var(--terra); color:var(--on-terra);
+    padding:var(--space-2) var(--space-3); border-radius:8px; z-index:50;
+    font-weight:600;
+  }
+  .skip:focus{ left:var(--space-2); }
+
+  header.top{
+    padding: var(--space-3) var(--space-4);
+    padding-top: calc(var(--space-3) + env(safe-area-inset-top, 0px));
+    background: var(--bg);
+    position: sticky; top: 0; z-index: var(--z-header);
+  }
+  header.top .eyebrow{
+    font-size:12px; color:var(--terra-bright); font-weight:600;
+    letter-spacing:0.04em; text-transform:uppercase; word-spacing:0.04em;
+  }
+  header.top h1{ font-size:1.5rem; margin-top:var(--space-1); letter-spacing:-0.035em; }
+  header.top .sub{ color:var(--muted); font-size:0.875rem; margin-top:var(--space-1); max-width:65ch; line-height:1.5; }
+
+  .goal-strip{
+    display:flex; gap:var(--space-2); margin-top:var(--space-3);
+    overflow-x:auto; overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .goal-strip::-webkit-scrollbar{ display:none; }
+  .pill{
+    flex: 0 0 auto;
+    background:var(--bg-raised);
+    border:none;
+    border-radius:999px;
+    padding:6px 10px; min-height:32px;
+    font-size:12px; color:var(--muted); white-space:nowrap;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .pill b{ color:var(--ink); font-family: inherit; font-weight:600; font-variant-numeric:tabular-nums; }
+
+  main{ padding: var(--space-3) var(--space-4) var(--space-2); max-width:none; margin:0; }
+  section{ display:none; }
+  section.active{ display:block; }
+  @media (prefers-reduced-motion: no-preference){
+    section.active{ animation: fade .18s var(--ease); }
+    @keyframes fade{ from{opacity:0; transform:translateY(3px);} to{opacity:1; transform:none;} }
+  }
+
+  .card{
+    background:var(--bg-card);
+    border:none;
+    border-radius: var(--radius);
+    padding:var(--space-3) var(--space-4);
+    margin-bottom:var(--space-3);
+  }
+  .card h2{ font-size:1.125rem; letter-spacing:-0.03em; }
+  .card h3{ font-size:0.9375rem; letter-spacing:-0.02em; }
+
+  /* Meal plan: sand page shows through as white space between clay tiles */
+  #dayCard{
+    display:flex;
+    flex-direction:column;
+    gap:var(--space-3);
+    background:transparent;
+    border:none;
+    border-radius:0;
+    padding:0;
+  }
+  #dayCard > h2{
+    padding:0 var(--space-1) var(--space-1);
+  }
+  #dayCard > .note{
+    margin-top:0;
+    padding:var(--space-3) var(--space-4);
+    border-top:none;
+    background:var(--bg-raised);
+    border-radius:var(--radius);
+  }
+
+  .day-switch{
+    display:flex; gap:var(--space-2); overflow-x:auto; overscroll-behavior-x:contain;
+    margin-bottom:var(--space-3); scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .day-switch::-webkit-scrollbar{ display:none; }
+  .day-switch button{
+    flex:0 0 auto; min-height:44px; min-width:44px;
+    background:var(--bg-raised); border:none; color:var(--muted);
+    padding:8px 12px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer;
+    letter-spacing:0.01em;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  .day-switch button:hover{ color:var(--ink); background:var(--clay); }
+  .day-switch button.on{ background:var(--terra); color:var(--on-terra); }
+
+  .meal{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-3);
+    text-align:left;
+    padding:var(--space-4);
+    margin:0;
+    width:100%;
+    border:none;
+    background:var(--bg-card);
+    color:inherit;
+    cursor:pointer;
+    border-radius:var(--radius);
+    min-height:52px;
+  }
+  .meal:hover{ background:color-mix(in srgb, var(--clay) 85%, var(--terra) 15%); }
+  .meal:active{ background:color-mix(in srgb, var(--clay) 80%, var(--terra) 20%); }
+  .meal .when{ font-size:12px; color:var(--terra-bright); font-weight:600; margin-bottom:2px; letter-spacing:0.02em;}
+  .meal .name{ font-size:1rem; font-weight:600; margin-bottom:var(--space-1); letter-spacing:-0.02em; }
+  .meal .items{ font-size:0.875rem; color:var(--muted); line-height:1.5; }
+  .meal .hint{ font-size:12px; color:var(--terra-bright); margin-top:var(--space-2); font-weight:600; }
+  .meal .risk{
+    flex:0 0 auto; align-self:flex-start;
+    font-size:11px; font-weight:600; padding:4px 8px; border-radius:999px; white-space:nowrap;
+  }
+  @media (max-width: 360px){
+    .meal{ flex-wrap:wrap; }
+    .meal .risk{ margin-top:var(--space-2); }
+  }
+  .risk.low{ background:var(--risk-low-dim); color:var(--risk-low); }
+  .risk.med{ background:var(--terra-dim); color:var(--terra-deep); }
+
+  .note{ font-size:0.875rem; color:var(--muted); line-height:1.55; margin-top:var(--space-3); padding-top:var(--space-3); border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent); max-width:65ch; }
+  .note b{ color:var(--terra-bright); font-weight:600; }
+
+  ul.plain{ margin:var(--space-2) 0 0; padding-left:18px; font-size:0.875rem; color:var(--muted); line-height:1.6; max-width:65ch; }
+  ul.plain li b{ color:var(--ink); }
+  ol.steps{ margin:var(--space-2) 0 0; padding-left:20px; font-size:0.875rem; color:var(--muted); line-height:1.6; }
+  ol.steps li{ margin-bottom:var(--space-2); color:var(--ink); }
+
+  .grocery-group h3{ margin-bottom:var(--space-2); color:var(--terra-bright); font-size:0.8125rem; letter-spacing:0.04em; text-transform:uppercase; }
+  .grocery-group{ margin-bottom:var(--space-4); }
+  .grocery-group:last-child{ margin-bottom:0; }
+  .chip-list{ display:flex; flex-wrap:wrap; gap:var(--space-2); }
+  .chip{
+    background:var(--bg-raised); border:none; border-radius:999px;
+    padding:8px 12px; min-height:44px; font-size:13px; color:var(--ink);
+    cursor:pointer; user-select:none; display:inline-flex; align-items:center; gap:6px;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  .chip:hover{ background:color-mix(in srgb, var(--terra-brand) 28%, var(--bg-raised)); }
+  .chip.done{ text-decoration:line-through; color:var(--muted); opacity:0.8; }
+  .chip .qty{ font-family: inherit; font-weight:600; font-variant-numeric:tabular-nums; color:var(--terra-bright); }
+  .chip.done .qty{ color:var(--muted); }
+
+  .wk-day{ display:flex; justify-content:space-between; align-items:center; padding:var(--space-3) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); gap:var(--space-3); }
+  .wk-day:last-child{ border-bottom:none; }
+  .wk-day .d{ font-weight:600; font-size:0.9375rem; }
+  .wk-day .t{ font-size:0.8125rem; color:var(--muted); text-align:right; }
+  .ex{ display:flex; justify-content:space-between; padding:var(--space-2) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); font-size:0.875rem; gap:var(--space-3); min-height:44px; align-items:center; }
+  .ex:last-child{ border-bottom:none; }
+  .ex .sr{ font-family: inherit; font-variant-numeric:tabular-nums; color:var(--terra-bright); font-size:13px; font-weight:600; white-space:nowrap; padding-left:var(--space-2);}
+
+  nav.tabbar{
+    position:fixed;
+    z-index: var(--z-tabbar);
+    left: max(var(--float-inset), calc(50% - (var(--app-max) / 2) + var(--float-inset)));
+    right: max(var(--float-inset), calc(50% - (var(--app-max) / 2) + var(--float-inset)));
+    bottom: calc(var(--float-inset) + env(safe-area-inset-bottom, 0px));
+    width: auto;
+    max-width: calc(var(--app-max) - 2 * var(--float-inset));
+    margin: 0 auto;
+    display:flex;
+    align-items:stretch;
+    gap:2px;
+    padding: 6px;
+    background: color-mix(in srgb, var(--bg-raised) 92%, #fff 8%);
+    border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    border-radius: 22px;
+    box-shadow:
+      0 8px 28px color-mix(in srgb, var(--ink) 16%, transparent),
+      0 1px 0 color-mix(in srgb, #fff 35%, transparent) inset;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  nav.tabbar button{
+    flex:1; min-width:0; min-height:52px; background:none; border:none; color:var(--muted);
+    font-size:10.5px; font-weight:650; padding:6px 2px; white-space:nowrap;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; cursor:pointer;
+    letter-spacing:0.02em;
+    border-radius: 16px;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  nav.tabbar button svg{ width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; flex:0 0 auto; }
+  nav.tabbar button span{ white-space:nowrap; line-height:1.15; }
+  nav.tabbar button:hover{ color:var(--ink); }
+  nav.tabbar button.on{
+    color:var(--terra-deep);
+    background: color-mix(in srgb, var(--terra-brand) 22%, var(--sand));
+  }
+  nav.tabbar button:active{ transform: scale(0.97); }
+
+  @media (prefers-reduced-transparency: reduce){
+    nav.tabbar{ backdrop-filter:none; -webkit-backdrop-filter:none; background:var(--bg-raised); }
+  }
+
+  /* Recipe dialog: mobile sheet */
+  dialog.recipe-dialog{
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background: transparent;
+    color: var(--ink);
+    overflow: hidden;
+  }
+  dialog.recipe-dialog[open]{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  dialog.recipe-dialog::backdrop{ background:var(--backdrop); }
+  .dlg-inner{
+    display:flex; flex-direction:column;
+    width: min(100%, var(--app-max));
+    max-height: min(88dvh, 720px);
+    background: var(--clay);
+    border: none;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -8px 40px color-mix(in srgb, var(--ink) 20%, transparent);
+  }
+  @media (min-width: 480px){
+    dialog.recipe-dialog[open]{ align-items: center; }
+    .dlg-inner{
+      border-radius: 16px;
+      max-height: min(86vh, 720px);
+      box-shadow: 0 12px 40px color-mix(in srgb, var(--ink) 22%, transparent);
+    }
+  }
+  .dlg-head{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-3);
+    padding:var(--space-4) var(--space-4) var(--space-3);
+    border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    flex:0 0 auto;
+    background: var(--bg-raised);
+  }
+  .dlg-head h2{ font-size:1.25rem; padding-right:var(--space-2); letter-spacing:-0.03em; }
+  .dlg-meta{ font-size:0.8125rem; color:var(--muted); margin-top:var(--space-1); }
+  .dlg-close{
+    flex:0 0 auto; min-width:44px; min-height:44px;
+    background:var(--clay); border:none; color:var(--ink);
+    border-radius:8px; cursor:pointer; font-size:20px; line-height:1;
+  }
+  .dlg-close:hover{ background:var(--terra-dim); color:var(--terra-bright); }
+  .dlg-body{
+    padding:var(--space-3) var(--space-4) var(--space-4);
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+  .dlg-body h3{ font-size:0.8125rem; color:var(--terra-bright); margin:var(--space-3) 0 var(--space-2); letter-spacing:0.04em; text-transform:uppercase; }
+  .dlg-body h3:first-child{ margin-top:0; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="eyebrow">Chicken-only keto for GERD · 1 person</div>
+  <h1>95 kg to 78 kg</h1>
+  <div class="sub">6'0" · 28 · gentler fat, chicken as the only meat, about 1 kg/week</div>
+  <div class="goal-strip">
+    <div class="pill">Days left <b id="daysLeft">-</b></div>
+    <div class="pill">Target <b>1,950</b> kcal/day</div>
+    <div class="pill">Carbs under <b>45g</b> net</div>
+    <div class="pill">Gym <b>4x</b>/week</div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section id="today" class="active" role="tabpanel">
+    <div class="day-switch" id="daySwitch"></div>
+    <div class="card" id="dayCard"></div>
+    <div class="card">
+      <h2>Reflux ground rules</h2>
+      <ul class="plain">
+        <li><b>Stop eating 3 hrs before lying down</b>. Bigger lever than any single food.</li>
+        <li><b>Smaller, more frequent meals</b> beat 3 large ones.</li>
+        <li>Sit upright 20-30 min after eating. Elevate the head of your bed if nights are rough.</li>
+        <li>Coffee, alcohol, carbonated drinks, mint and chocolate are cut out entirely.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="workout" role="tabpanel">
+    <div class="card">
+      <h2>Weekly split</h2>
+      <div id="wkOverview"></div>
+      <p class="note">Walk <b>8,000-10,000 steps</b> every day regardless of gym day. This is your biggest fat-loss lever after diet, and it is GERD-friendly (upright, low-impact).</p>
+    </div>
+    <div id="wkDetails"></div>
+    <div class="card">
+      <h2>Training around GERD</h2>
+      <ul class="plain">
+        <li>Train <b>at least 2 hours after eating</b>, never right after a meal.</li>
+        <li>Skip lying-flat crunches/sit-ups and heavy leg raises. Use standing cable crunches, planks, or Pallof presses instead.</li>
+        <li>Avoid deep forward folds or inversions on a full stomach.</li>
+        <li>Sip water through the session, don't gulp large amounts at once.</li>
+        <li>Protein target (~150g/day) matters as much as the workouts for keeping muscle while losing 17 kg. Don't skip meals around training.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="grocery" role="tabpanel">
+    <div class="card">
+      <h2>Weekly grocery list</h2>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Shop packs for this week's meal plan (not recipe spoons). Tap to check off. Saved on this device only.</p>
+    </div>
+    <div class="card grocery-group"><h3>Protein</h3><div class="chip-list" data-group="protein"></div></div>
+    <div class="card grocery-group"><h3>Vegetables</h3><div class="chip-list" data-group="veg"></div></div>
+    <div class="card grocery-group"><h3>Fats & pantry</h3><div class="chip-list" data-group="pantry"></div></div>
+    <div class="card grocery-group"><h3>Dairy & drinks</h3><div class="chip-list" data-group="dairy"></div></div>
+  </section>
+
+</main>
+
+<nav class="tabbar" role="tablist" aria-label="App sections">
+  <button type="button" class="tab on" role="tab" aria-selected="true" aria-controls="today" data-tab="today">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16M4 11l2-6h12l2 6M6 11v7h12v-7M9 18v-4h6v4"/></svg>
+    <span>Today</span>
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="workout" data-tab="workout">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v6M18 9v6M8 12h8M4 10v4M20 10v4"/></svg>
+    <span>Workout</span>
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="grocery" data-tab="grocery">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-1.5 9H8L6 7z"/><path d="M6 7 5 4H3"/><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg>
+    <span>Grocery</span>
+  </button>
+</nav>
+
+<dialog class="recipe-dialog" id="recipeDialog" aria-labelledby="dlgTitle">
+  <div class="dlg-inner">
+    <div class="dlg-head">
+      <div>
+        <h2 id="dlgTitle"></h2>
+        <div class="dlg-meta" id="dlgMeta"></div>
+      </div>
+      <button type="button" class="dlg-close" id="dlgClose" aria-label="Close recipe">×</button>
+    </div>
+    <div class="dlg-body" id="dlgBody"></div>
+  </div>
+</dialog>
+
+<script>
+/* ---------- Safe storage (works in sandboxed previews AND on GitHub Pages) ---------- */
+const memoryStore = {};
+const safeStorage = {
+  get(key){
+    try{ const v = localStorage.getItem(key); if(v !== null) return v; }catch(e){}
+    return Object.prototype.hasOwnProperty.call(memoryStore, key) ? memoryStore[key] : null;
+  },
+  set(key, val){
+    memoryStore[key] = val;
+    try{ localStorage.setItem(key, val); }catch(e){ /* falls back to memory only */ }
+  }
+};
+
+/* ---------- Data ---------- */
+const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+const RECIPES = {
+  B1:{type:"Breakfast", risk:"low", name:"Soft Herb Egg Scramble",
+    ing:["2 whole eggs","1 egg white","Handful spinach, chopped","1 tsp olive oil","Pinch of salt"],
+    steps:["Whisk eggs and egg white with a pinch of salt.","Warm olive oil in a non-stick pan on low-medium heat.","Add spinach, wilt for 30 seconds.","Pour in eggs, stir gently until just set.","Serve immediately."]},
+  B2:{type:"Breakfast", risk:"low", name:"Chicken & Egg White Scramble",
+    ing:["60g cooked chicken breast, shredded","2 egg whites","2-3 button mushrooms, sliced","1 tsp olive oil"],
+    steps:["Heat olive oil in a pan on medium.","Sauté mushrooms 2-3 min until soft.","Add shredded chicken, warm through.","Pour in egg whites, stir until set.","Season lightly and serve."]},
+  B3:{type:"Breakfast", risk:"low", name:"Cottage Cheese & Cucumber Bowl",
+    ing:["150g cottage cheese","1/2 cucumber, diced","1 tsp olive oil","Pinch of salt, dried herbs"],
+    steps:["Spoon cottage cheese into a bowl.","Top with diced cucumber.","Drizzle olive oil, season with salt and herbs.","Serve chilled."]},
+  B4:{type:"Breakfast", risk:"low", name:"Protein Smoothie",
+    ing:["200ml unsweetened almond milk","1 scoop plain protein powder","1/2 ripe banana","4-5 ice cubes"],
+    steps:["Add all ingredients to a blender.","Blend until smooth, about 30-45 seconds.","Pour and drink slowly, don't gulp."]},
+  L1:{type:"Lunch", risk:"low", name:"Grilled Chicken Breast Bowl",
+    ing:["150g chicken breast","1/2 cucumber, sliced","Handful lettuce","Handful green beans, steamed","1 tbsp olive oil","1 tsp apple cider vinegar"],
+    steps:["Season chicken breast lightly with salt, pan-grill 5-6 min per side until cooked through.","Rest 3 min, then slice.","Steam green beans 4-5 min.","Arrange lettuce, cucumber and beans in a bowl, top with sliced chicken.","Whisk olive oil and vinegar, drizzle over."]},
+  L2:{type:"Lunch", risk:"low", name:"Chicken & Cauliflower Rice",
+    ing:["150g chicken thigh, diced","1.5 cups cauliflower rice","1/2 zucchini, diced","1 tbsp olive oil","1/2 tsp grated ginger"],
+    steps:["Heat olive oil in a pan on medium-high.","Cook chicken thigh pieces 6-8 min until browned and cooked through, set aside.","In the same pan, sauté zucchini and ginger 2 min.","Add cauliflower rice, cook 4-5 min stirring often.","Return chicken to the pan, mix and serve."]},
+  L3:{type:"Lunch", risk:"low", name:"Chicken & Greens Broth Soup",
+    ing:["100g cooked chicken breast, shredded","2 cups clear chicken broth (no tomato)","Handful spinach","1/2 zucchini, sliced","1/4 tsp grated ginger"],
+    steps:["Bring broth to a gentle simmer with ginger.","Add zucchini, simmer 4-5 min until tender.","Stir in spinach and shredded chicken.","Simmer 2 more minutes and serve hot."]},
+  L4:{type:"Lunch", risk:"low", name:"Chicken Lettuce Wraps",
+    ing:["120g ground chicken (keema)","1 tsp olive oil","1/4 cup shredded carrot","4-5 large lettuce cups","1 tsp tahini"],
+    steps:["Heat olive oil in a pan on medium-high.","Cook ground chicken 6-7 min, breaking it up, until no longer pink.","Season lightly with salt.","Spoon into lettuce cups, top with shredded carrot and a drizzle of tahini."]},
+  D1:{type:"Dinner", risk:"low", name:"Baked Chicken Thigh & Greens",
+    ing:["150g skinless chicken thigh","Handful green beans","1 tbsp olive oil","Pinch of salt, dried herbs"],
+    steps:["Preheat oven to 200°C (400°F).","Rub chicken thigh with 1 tsp olive oil, salt and herbs.","Bake 22-25 min until cooked through (internal temp 75°C/165°F).","Toss green beans in remaining olive oil, roast alongside for the last 12-15 min.","Serve together."]},
+  D2:{type:"Dinner", risk:"low", name:"Chicken & Mashed Cauliflower",
+    ing:["150g grilled chicken breast","1.5 cups cauliflower florets","1 tsp butter","Handful spinach","1 tsp olive oil"],
+    steps:["Steam or boil cauliflower until very soft, about 10 min.","Mash with butter and a pinch of salt until smooth.","Sauté spinach in olive oil for 1-2 min until wilted.","Grill chicken breast 5-6 min per side until cooked through, slice.","Plate mash, spinach and sliced chicken together."]},
+  D3:{type:"Dinner", risk:"low", name:"Chicken Stir-Fry",
+    ing:["120g chicken breast, sliced into strips","1/2 zucchini, sliced","Handful green beans","1/2 tsp grated ginger","1 tsp light soy sauce","1/2 tsp sesame oil"],
+    steps:["Heat sesame oil in a wok or pan on high.","Stir-fry chicken strips 4-5 min until cooked through, set aside.","Add zucchini, green beans and ginger, stir-fry 3-4 min.","Return chicken to the pan, add soy sauce, toss 1 minute and serve."]},
+  D4:{type:"Dinner", risk:"low", name:"Roast Chicken & Veg Plate",
+    ing:["150g chicken breast","1/2 zucchini, sliced","Handful broccoli florets","1 tbsp olive oil","Pinch of salt"],
+    steps:["Preheat oven to 200°C (400°F).","Toss zucchini and broccoli with half the olive oil and salt, spread on a tray.","Rub chicken breast with remaining oil and salt, place on the same tray.","Roast 20-22 min until chicken is cooked through and veg is tender."]},
+  S1:{type:"Snack", risk:"low", name:"Almond Handful",
+    ing:["18-20 raw almonds"],
+    steps:["Portion out the almonds. Pre-measuring avoids overeating this one.","Eat slowly with a glass of water."]},
+  S2:{type:"Snack", risk:"low", name:"Yogurt & Seeds",
+    ing:["100g plain full-fat yogurt","1 tbsp pumpkin seeds"],
+    steps:["Spoon yogurt into a bowl.","Top with pumpkin seeds and serve."]},
+  S3:{type:"Snack", risk:"low", name:"Boiled Egg",
+    ing:["1-2 eggs"],
+    steps:["Place eggs in a pot, cover with cold water.","Bring to a boil, then simmer 8-9 min for firm yolks.","Cool in cold water, peel and eat with a pinch of salt."]},
+  S4:{type:"Snack", risk:"med", name:"Cheese & Cucumber",
+    ing:["2 small slices hard cheese","1/2 cucumber, sliced"],
+    steps:["Slice cucumber into rounds.","Serve alongside the cheese.","Keep the cheese portion small. It is an amber-list food."]}
+};
+
+const PLAN = {
+  Mon: ["B1","S1","L1","S2","D1"],
+  Tue: ["B2","S3","L2","S4","D2"],
+  Wed: ["B3","S1","L3","S2","D3"],
+  Thu: ["B4","S3","L4","S4","D4"],
+  Fri: ["B1","S1","L1","S2","D1"],
+  Sat: ["B2","S3","L2","S4","D2"],
+  Sun: ["B3","S1","L3","S2","D3"]
+};
+const SLOT_TIME = {0:"7:30 AM",1:"11:00 AM",2:"1:30 PM",3:"4:30 PM",4:"7:30 PM"};
+
+const WORKOUT = [
+  {day:"Mon", title:"Upper Body Strength", type:"Gym", exercises:[
+    ["Push-up or DB bench press","3 x 8-10"],
+    ["Seated cable row / DB row","3 x 10"],
+    ["Overhead DB shoulder press","3 x 10"],
+    ["Lat pulldown","3 x 10"],
+    ["Bicep curl","2 x 12"],
+    ["Triceps pushdown","2 x 12"]
+  ]},
+  {day:"Tue", title:"Lower Body Strength", type:"Gym", exercises:[
+    ["Goblet squat or leg press","3 x 10"],
+    ["Romanian deadlift (DB or barbell)","3 x 10"],
+    ["Walking lunges","3 x 12/leg"],
+    ["Leg curl (machine)","3 x 12"],
+    ["Standing calf raise","3 x 15"]
+  ]},
+  {day:"Wed", title:"Active Recovery", type:"Walk + mobility", exercises:[
+    ["Brisk incline walk","30-40 min"],
+    ["Hip and shoulder mobility flow","10 min"]
+  ]},
+  {day:"Thu", title:"Upper Body Strength (B)", type:"Gym", exercises:[
+    ["Incline DB press","3 x 10"],
+    ["Seated row","3 x 10"],
+    ["Lateral raise","3 x 15"],
+    ["Face pull","3 x 15"],
+    ["Hammer curl","2 x 12"],
+    ["Overhead triceps extension","2 x 12"]
+  ]},
+  {day:"Fri", title:"Lower Body + Core", type:"Gym", exercises:[
+    ["Hip thrust","3 x 10"],
+    ["Leg press","3 x 10"],
+    ["Step-ups","3 x 10/leg"],
+    ["Standing cable crunch or Pallof press","3 x 15"],
+    ["Plank","3 x 30-40s"]
+  ]},
+  {day:"Sat", title:"Cardio / Conditioning", type:"Cardio", exercises:[
+    ["Incline treadmill walk or cycling, conversational pace","25-30 min"],
+    ["Light full-body mobility","10 min"]
+  ]},
+  {day:"Sun", title:"Rest", type:"Rest", exercises:[["Full rest. Walk if you feel like it","optional"]]}
+];
+
+const START_DATE = new Date('2026-08-24');
+const END_DATE = new Date(START_DATE); END_DATE.setDate(END_DATE.getDate()+120);
+
+/* ---------- Grocery: weekly buy list in shop pack sizes ---------- */
+const SKIP_ING = /^(pinch of salt|ice cubes|dried herbs)/i;
+
+/**
+ * Match recipe lines → accumulate base usage for the week, then convert
+ * to what you actually buy (packs, bottles, kg). Not "2 tbsp olive oil".
+ */
+const BUY_CATALOG = [
+  { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=> packKg(g, "chicken breast") },
+  { group:"protein", name:"Chicken thigh", re:/chicken thigh/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=> packKg(g, "chicken thigh") },
+  { group:"protein", name:"Ground chicken (keema)", re:/ground chicken|keema/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=> packKg(g, "keema") },
+  { group:"protein", name:"Chicken broth", re:/chicken broth/i, base:"cups",
+    qty:s=>{ const m=s.match(/([\d.]+)\s*cups?/i); return m?+m[1]:1; },
+    shop:c=> c <= 0 ? null : (c <= 4 ? "1 carton (~1 L)" : "2 cartons (~1 L each)") },
+  { group:"protein", name:"Eggs", re:/\beggs?\b|egg whites?/i, base:"count",
+    qty:s=>{
+      let n = 0;
+      const whites = s.match(/(\d+)\s*egg whites?/i);
+      if(whites) n += +whites[1];
+      if(/\bwhole eggs?\b/i.test(s) || (/\beggs?\b/i.test(s) && !/egg\s*white/i.test(s))){
+        const r=s.match(/(\d+)\s*-\s*(\d+)/);
+        if(r) n += Math.ceil((+r[1]+ +r[2])/2);
+        else {
+          const m=s.match(/(\d+)\s*(?:whole\s+)?eggs?\b/i);
+          n += m?+m[1]:1;
+        }
+      }
+      return n;
+    },
+    shop:n=>{
+      if(n <= 0) return null;
+      if(n <= 6) return "½ dozen (6)";
+      if(n <= 12) return "1 dozen";
+      if(n <= 18) return "1½ dozen";
+      return Math.ceil(n/12) + " dozen";
+    } },
+  { group:"dairy", name:"Cottage cheese", re:/cottage cheese/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=> g <= 0 ? null : (g <= 200 ? "1 tub (200g)" : g <= 400 ? "1 tub (400g)" : "2 tubs (400g)") },
+  { group:"dairy", name:"Plain full-fat yogurt", re:/yogurt/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=> g <= 0 ? null : (g <= 400 ? "1 tub (400g)" : "1 large tub (1kg)") },
+  { group:"dairy", name:"Hard cheese", re:/hard cheese/i, base:"slices",
+    qty:s=>{ const m=s.match(/(\d+)\s*(?:small\s+)?slices?/i); return m?+m[1]:2; },
+    shop:n=> n <= 0 ? null : "1 small pack (~100-150g)" },
+  { group:"dairy", name:"Butter", re:/\bbutter\b/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 pack (100g)" },
+  { group:"dairy", name:"Unsweetened almond milk", re:/almond milk/i, base:"ml",
+    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
+    shop:ml=> ml <= 0 ? null : (ml <= 1000 ? "1 carton (1 L)" : "2 cartons (1 L)") },
+  { group:"veg", name:"Spinach", re:/spinach/i, base:"use",
+    qty:()=>1,
+    shop:(n)=> n <= 2 ? "1 bag / bunch" : "2 bags" },
+  { group:"veg", name:"Zucchini", re:/zucchini/i, base:"count",
+    qty:s=> Math.max(0.5, frac(s.match(/([\d./½¼¾]+)/)?.[1] || "0.5")),
+    shop:n=> shopCount(n, "zucchini") },
+  { group:"veg", name:"Cucumber", re:/cucumber/i, base:"count",
+    qty:s=> Math.max(0.5, frac(s.match(/([\d./½¼¾]+)/)?.[1] || "0.5")),
+    shop:n=> shopCount(n, "cucumber") },
+  { group:"veg", name:"Broccoli", re:/broccoli/i, base:"use",
+    qty:()=>1,
+    shop:n=> n <= 2 ? "1 head / pack" : "2 heads" },
+  { group:"veg", name:"Green beans", re:/green beans/i, base:"use",
+    qty:()=>1,
+    shop:n=> n <= 2 ? "1 pack (~250g)" : "2 packs (~250g)" },
+  { group:"veg", name:"Cauliflower", re:/cauliflower/i, base:"use",
+    qty:()=>1,
+    shop:n=> n <= 2 ? "1 head (or 1 pack rice)" : "2 heads" },
+  { group:"veg", name:"Lettuce", re:/lettuce/i, base:"use",
+    qty:()=>1,
+    shop:n=> n <= 2 ? "1 head / pack" : "2 heads" },
+  { group:"veg", name:"Mushrooms", re:/mushroom/i, base:"count",
+    qty:s=>{
+      const r=s.match(/(\d+)\s*-\s*(\d+)/); if(r) return Math.ceil((+r[1]+ +r[2])/2);
+      const m=s.match(/(\d+)/); return m?+m[1]:3;
+    },
+    shop:n=> n <= 0 ? null : (n <= 8 ? "1 punnet (~200g)" : "2 punnets (~200g)") },
+  { group:"veg", name:"Carrot", re:/carrot/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small pack / 2 carrots" },
+  { group:"veg", name:"Banana", re:/banana/i, base:"count",
+    qty:s=> frac(s.match(/([\d./½]+)/)?.[1] || "0.5"),
+    shop:n=> shopCount(n, "banana") },
+  { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 bottle" },
+  { group:"pantry", name:"Sesame oil", re:/sesame oil/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small bottle" },
+  { group:"pantry", name:"Apple cider vinegar", re:/apple cider vinegar|vinegar/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 bottle" },
+  { group:"pantry", name:"Light soy sauce", re:/soy sauce/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 bottle" },
+  { group:"pantry", name:"Tahini", re:/tahini/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 jar" },
+  { group:"pantry", name:"Ginger (fresh)", re:/ginger/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small knob / piece" },
+  { group:"pantry", name:"Almonds (raw)", re:/almonds/i, base:"use",
+    qty:()=>1,
+    shop:n=> n <= 2 ? "1 small pack (~100g)" : "1 pack (~200g)" },
+  { group:"pantry", name:"Pumpkin seeds", re:/pumpkin seeds/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small pack (~100g)" },
+  { group:"pantry", name:"Plain protein powder", re:/protein powder/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 tub (if you don't have it)" }
+];
+
+function frac(raw){
+  if(raw == null) return 0;
+  const s = String(raw).trim();
+  if(s === "½" || s === "1/2") return 0.5;
+  if(s === "¼" || s === "1/4") return 0.25;
+  if(s === "¾" || s === "3/4") return 0.75;
+  if(s.includes("/")){ const [a,b]=s.split("/"); return (+a)/(+b||1); }
+  return parseFloat(s) || 0;
+}
+
+/** Round grams up to shop packs of 250g / 500g / 1kg. */
+function packKg(g){
+  if(g <= 0) return null;
+  if(g <= 250) return "250g pack";
+  if(g <= 500) return "500g pack";
+  if(g <= 750) return "750g (or 500g + 250g)";
+  if(g <= 1000) return "1 kg";
+  const kg = Math.ceil(g / 500) / 2;
+  return kg % 1 === 0 ? kg + " kg" : kg.toFixed(1) + " kg";
+}
+
+function shopCount(n, noun){
+  if(n <= 0) return null;
+  const c = Math.ceil(n);
+  if(c === 1) return "1 " + noun;
+  return c + " " + noun + (noun.endsWith("s") ? "" : "s");
+}
+
+function matchBuyLine(line){
+  if(SKIP_ING.test(line.trim())) return null;
+  for(const item of BUY_CATALOG){
+    if(!item.re.test(line)) continue;
+    const amount = item.qty(line);
+    if(!amount || amount <= 0) return null;
+    return { group:item.group, name:item.name, base:item.base, amount, shop:item.shop };
+  }
+  return null;
+}
+
+/** Walk every Mon-Sun slot (Fri/Sat/Sun copies still count as separate days). */
+function buildWeeklyGrocery(){
+  const totals = Object.create(null);
+  DAYS.forEach(day=>{
+    (PLAN[day] || []).forEach(id=>{
+      const r = RECIPES[id];
+      if(!r) return;
+      r.ing.forEach(line=>{
+        const hit = matchBuyLine(line);
+        if(!hit) return;
+        const key = hit.group + "|" + hit.name;
+        if(!totals[key]){
+          totals[key] = { group:hit.group, name:hit.name, amount:0, shop:hit.shop };
+        }
+        totals[key].amount += hit.amount;
+      });
+    });
+  });
+  const byGroup = { protein:[], veg:[], pantry:[], dairy:[] };
+  Object.values(totals).forEach(row=>{
+    const qtyLabel = row.shop(row.amount);
+    if(!qtyLabel) return;
+    byGroup[row.group].push({
+      name: row.name,
+      qtyLabel,
+      key: row.group + ":" + row.name + ":" + qtyLabel
+    });
+  });
+  Object.keys(byGroup).forEach(g=>{
+    byGroup[g].sort((a,b)=> a.name.localeCompare(b.name));
+  });
+  return byGroup;
+}
+
+const GROCERY = buildWeeklyGrocery();
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.tabbar .tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tabbar .tab').forEach(b=>{
+      b.classList.remove('on');
+      b.setAttribute('aria-selected','false');
+    });
+    document.querySelectorAll('main section').forEach(s=>{
+      s.classList.remove('active');
+      s.setAttribute('aria-hidden','true');
+    });
+    btn.classList.add('on');
+    btn.setAttribute('aria-selected','true');
+    const panel = document.getElementById(btn.dataset.tab);
+    panel.classList.add('active');
+    panel.setAttribute('aria-hidden','false');
+    window.scrollTo(0, 0);
+  });
+});
+
+/* ---------- Today / day switch ---------- */
+let activeDay = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay()-1];
+let lastMealTrigger = null;
+
+function renderDaySwitch(){
+  const el = document.getElementById('daySwitch');
+  el.innerHTML = '';
+  DAYS.forEach(d=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = d;
+    b.setAttribute('aria-pressed', d === activeDay ? 'true' : 'false');
+    if(d === activeDay) b.classList.add('on');
+    b.addEventListener('click', ()=>{ activeDay = d; renderDaySwitch(); renderDayCard(); });
+    el.appendChild(b);
+  });
+}
+
+function renderDayCard(){
+  const card = document.getElementById('dayCard');
+  const ids = PLAN[activeDay];
+  card.innerHTML = `<h2>${activeDay} · meal plan (1 person)</h2>` + ids.map((id,i) => {
+    const r = RECIPES[id];
+    return `<button type="button" class="meal" data-recipe="${id}" aria-haspopup="dialog">
+      <div>
+        <div class="when">${SLOT_TIME[i]}</div>
+        <div class="name">${r.name}</div>
+        <div class="items">${r.ing.join(", ")}</div>
+        <div class="hint">Tap for recipe</div>
+      </div>
+      <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
+    </button>`;
+  }).join('') + `<div class="note">Tap a meal for ingredients and steps. Portions scale to ~1,950 kcal for one person. Nudge protein/fat up or down to fit your hunger.</div>`;
+
+  card.querySelectorAll('.meal').forEach(btn=>{
+    btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
+  });
+}
+
+/* ---------- Recipe dialog ---------- */
+const dialog = document.getElementById('recipeDialog');
+const dlgTitle = document.getElementById('dlgTitle');
+const dlgMeta = document.getElementById('dlgMeta');
+const dlgBody = document.getElementById('dlgBody');
+const dlgClose = document.getElementById('dlgClose');
+
+function openRecipeDialog(id, trigger){
+  const r = RECIPES[id];
+  if(!r) return;
+  lastMealTrigger = trigger || document.activeElement;
+  dlgTitle.textContent = r.name;
+  dlgMeta.textContent = `${r.type} · Serves 1 · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
+  dlgBody.innerHTML = `
+    <h3>Ingredients</h3>
+    <ul class="plain">${r.ing.map(i=>`<li>${i}</li>`).join('')}</ul>
+    <h3>Steps</h3>
+    <ol class="steps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+  `;
+  if(typeof dialog.showModal === 'function') dialog.showModal();
+  else dialog.setAttribute('open','');
+  dlgClose.focus();
+}
+
+function closeRecipeDialog(){
+  if(dialog.open) dialog.close();
+}
+
+dlgClose.addEventListener('click', closeRecipeDialog);
+dialog.addEventListener('click', closeRecipeDialog);
+dialog.querySelector('.dlg-inner').addEventListener('click', (e)=> e.stopPropagation());
+dialog.addEventListener('cancel', (e)=>{
+  e.preventDefault();
+  closeRecipeDialog();
+});
+dialog.addEventListener('close', ()=>{
+  if(lastMealTrigger && typeof lastMealTrigger.focus === 'function'){
+    lastMealTrigger.focus();
+  }
+  lastMealTrigger = null;
+});
+
+/* Focus trap for browsers with incomplete dialog support */
+dialog.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Tab' || !dialog.open) return;
+  const focusables = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  const list = [...focusables].filter(el => !el.disabled && el.offsetParent !== null);
+  if(!list.length) return;
+  const first = list[0];
+  const last = list[list.length-1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+
+/* ---------- Workout ---------- */
+function renderWorkout(){
+  document.getElementById('wkOverview').innerHTML = WORKOUT.map(w=>`
+    <div class="wk-day"><span class="d">${w.day}: ${w.title}</span><span class="t">${w.type}</span></div>
+  `).join('');
+
+  document.getElementById('wkDetails').innerHTML = WORKOUT.map(w=>`
+    <div class="card">
+      <h3>${w.day} · ${w.title}</h3>
+      ${w.exercises.map(e=>`<div class="ex"><span>${e[0]}</span><span class="sr">${e[1]}</span></div>`).join('')}
+    </div>
+  `).join('');
+}
+
+/* ---------- Grocery ---------- */
+function loadChecked(){
+  try{ return JSON.parse(safeStorage.get('ketogerd_grocery') || '{}'); }
+  catch(e){ return {}; }
+}
+function saveChecked(obj){ safeStorage.set('ketogerd_grocery', JSON.stringify(obj)); }
+
+function renderGrocery(){
+  const checked = loadChecked();
+  document.querySelectorAll('.chip-list').forEach(list=>{
+    const group = list.dataset.group;
+    const items = GROCERY[group] || [];
+    if(!items.length){
+      list.innerHTML = `<span class="note" style="margin:0;padding:0;border:none;">Nothing this week.</span>`;
+      return;
+    }
+    list.innerHTML = items.map(item => {
+      const done = checked[item.key] ? 'done' : '';
+      return `<span class="chip ${done}" role="button" tabindex="0" data-key="${item.key}" aria-pressed="${done?'true':'false'}">${item.name} <span class="qty">${item.qtyLabel}</span></span>`;
+    }).join('');
+  });
+  document.querySelectorAll('.chip').forEach(chip=>{
+    const toggle = ()=>{
+      const c = loadChecked();
+      c[chip.dataset.key] = !c[chip.dataset.key];
+      saveChecked(c);
+      chip.classList.toggle('done');
+      chip.setAttribute('aria-pressed', chip.classList.contains('done') ? 'true' : 'false');
+    };
+    chip.addEventListener('click', toggle);
+    chip.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+}
+
+/* ---------- Header days left ---------- */
+function renderDaysLeft(){
+  const daysLeft = Math.max(0, Math.ceil((END_DATE - new Date())/86400000));
+  document.getElementById('daysLeft').textContent = daysLeft;
+}
+
+/* ---------- Service worker ---------- */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
+  });
+}
+
+/* ---------- Init ---------- */
+renderDaySwitch();
+renderDayCard();
+renderWorkout();
+renderGrocery();
+renderDaysLeft();
+document.querySelectorAll('main section').forEach(s=>{
+  s.setAttribute('aria-hidden', s.classList.contains('active') ? 'false' : 'true');
+});
+</script>
+</body>
+</html>
