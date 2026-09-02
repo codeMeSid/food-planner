@@ -1,4 +1,4 @@
-const CACHE = "keto-gerd-v13";
+const CACHE = "keto-gerd-v21";
 const ASSETS = [
   "./",
   "./index.html",

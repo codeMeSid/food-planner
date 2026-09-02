@@ -7,8 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="KetoGERD" />
-<title>Keto for GERD: 4 Month Plan</title>
+<meta name="apple-mobile-web-app-title" content="ProteinGERD" />
+<title>High-Protein GERD Plan</title>
 <link rel="manifest" href="./manifest.json" />
 <link rel="apple-touch-icon" href="./icon-192.png" />
 <link rel="icon" type="image/svg+xml" href="./logo.svg" />
@@ -282,6 +282,76 @@
   .g-item.done .g-qty{ color:var(--muted); }
   .g-empty{ font-size:0.875rem; color:var(--muted); padding:var(--space-2) 0; }
 
+  .energy-card{
+    margin-bottom:var(--space-3);
+    padding:var(--space-3) var(--space-4);
+    overflow:hidden;
+  }
+  .energy-toggle{
+    display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);
+    width:100%; min-height:44px; cursor:pointer; position:relative;
+  }
+  .energy-label{
+    flex:1; min-width:0;
+    font-size:0.9375rem; font-weight:600; color:var(--ink);
+    letter-spacing:-0.01em; line-height:1.35;
+  }
+  .energy-check{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+  .energy-switch{
+    flex:0 0 44px;
+    width:44px; height:26px;
+    display:block;
+  }
+  .energy-track{
+    display:block;
+    position:relative;
+    width:44px; height:26px; min-width:44px;
+    border-radius:13px;
+    overflow:hidden;
+    box-sizing:border-box;
+    background:color-mix(in srgb, var(--ink) 14%, var(--sand));
+    box-shadow:inset 0 1px 3px color-mix(in srgb, var(--ink) 18%, transparent);
+    transition: background .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .energy-thumb{
+    position:absolute; top:2px; left:2px;
+    width:22px; height:22px;
+    border-radius:50%;
+    background:#fff;
+    color:var(--terra-deep);
+    display:grid; place-items:center;
+    box-shadow:0 1px 4px color-mix(in srgb, var(--ink) 22%, transparent);
+    transform:translateX(0) rotate(0deg);
+    transition: transform .28s var(--ease), color .25s var(--ease);
+    will-change:transform;
+  }
+  .energy-thumb svg{ width:12px; height:12px; display:block; }
+  .energy-toggle:has(.energy-check:checked) .energy-track{
+    background:linear-gradient(180deg, var(--terra-brand) 0%, var(--terra) 100%);
+    box-shadow:inset 0 1px 2px color-mix(in srgb, var(--ink) 15%, transparent);
+  }
+  .energy-toggle:has(.energy-check:checked) .energy-thumb{
+    transform:translateX(18px) rotate(180deg);
+    color:var(--terra);
+  }
+  .energy-toggle:has(.energy-check:focus-visible) .energy-track{
+    outline:2px solid var(--terra-deep);
+    outline-offset:2px;
+  }
+  .meal.addon{
+    border:1.5px dashed color-mix(in srgb, var(--terra) 45%, var(--line));
+    background:color-mix(in srgb, var(--bg-card) 88%, var(--sand));
+  }
+  .meal.addon .when{ color:var(--terra); }
+  .addon-heading{
+    font-size:0.8125rem; font-weight:600; color:var(--terra-bright);
+    letter-spacing:0.04em; text-transform:uppercase;
+    padding:var(--space-2) var(--space-1) var(--space-1);
+  }
+
   .wk-day{ display:flex; justify-content:space-between; align-items:center; padding:var(--space-3) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); gap:var(--space-3); }
   .wk-day:last-child{ border-bottom:none; }
   .wk-day .d{ font-weight:600; font-size:0.9375rem; }
@@ -411,15 +481,15 @@
       </svg>
     </div>
     <div class="brand-text">
-      <div class="eyebrow">KetoGERD · chicken-only · 1 person</div>
+      <div class="eyebrow">High protein · GERD-safe · 1 person</div>
       <h1>95 kg to 78 kg</h1>
     </div>
   </div>
-  <div class="sub">6'0" · 28 · gentler fat, chicken as the only meat, about 1 kg/week</div>
+  <div class="sub">6'0" · 28 · chicken, eggs, paneer, dahi · day starts 11 AM</div>
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
-    <div class="pill">Target <b>1,950</b> kcal/day</div>
-    <div class="pill">Carbs under <b>45g</b> net</div>
+    <div class="pill">Target <b id="kcalTarget">1,300</b> kcal/day</div>
+    <div class="pill">Protein <b>~140</b> g/day</div>
     <div class="pill">Gym <b>4x</b>/week</div>
   </div>
 </header>
@@ -428,6 +498,23 @@
 
   <section id="today" class="active" role="tabpanel">
     <div class="day-switch" id="daySwitch"></div>
+    <div class="card energy-card">
+      <label class="energy-toggle">
+        <span class="energy-label">Low on energy?</span>
+        <input type="checkbox" id="energyBoost" class="energy-check" aria-label="Low on energy? Show calorie add-ons" />
+        <span class="energy-switch" aria-hidden="true">
+          <span class="energy-track">
+            <span class="energy-thumb">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                <path d="M7 2v20"/>
+                <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+              </svg>
+            </span>
+          </span>
+        </span>
+      </label>
+    </div>
     <div class="card" id="dayCard"></div>
     <div class="card">
       <h2>Reflux ground rules</h2>
@@ -454,7 +541,7 @@
         <li>Skip lying-flat crunches/sit-ups and heavy leg raises. Use standing cable crunches, planks, or Pallof presses instead.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session, don't gulp large amounts at once.</li>
-        <li>Protein target (~150g/day) matters as much as the workouts for keeping muscle while losing 17 kg. Don't skip meals around training.</li>
+        <li>Protein target <b>~140 g/day</b> matters as much as the workouts for keeping muscle while losing 17 kg. Use add-ons on flat days, not every day.</li>
       </ul>
     </div>
   </section>
@@ -518,66 +605,95 @@ const safeStorage = {
 const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const RECIPES = {
-  B1:{type:"Breakfast", risk:"low", name:"Soft Herb Egg Scramble",
-    ing:["2 whole eggs","1 egg white","Handful spinach, chopped","1 tsp olive oil","Pinch of salt"],
-    steps:["Whisk eggs and egg white with a pinch of salt.","Warm olive oil in a non-stick pan on low-medium heat.","Add spinach, wilt for 30 seconds.","Pour in eggs, stir gently until just set.","Serve immediately."]},
-  B2:{type:"Breakfast", risk:"low", name:"Chicken & Egg White Scramble",
-    ing:["60g cooked chicken breast, shredded","2 egg whites","2-3 button mushrooms, sliced","1 tsp olive oil"],
+  B1:{type:"Brunch", risk:"low", name:"Soft Herb Egg Scramble",
+    ing:["1 whole egg","2 egg whites","Handful spinach, chopped","1 tsp olive oil","Pinch of salt"],
+    steps:["Whisk egg and whites with a pinch of salt.","Warm olive oil in a non-stick pan on low-medium heat.","Add spinach, wilt 30 seconds.","Pour in eggs, stir gently until just set.","Serve immediately."]},
+  B2:{type:"Brunch", risk:"low", name:"Chicken & Egg White Scramble",
+    ing:["80g cooked boneless chicken breast, shredded","3 egg whites","2-3 button mushrooms, sliced","1 tsp olive oil"],
     steps:["Heat olive oil in a pan on medium.","Sauté mushrooms 2-3 min until soft.","Add shredded chicken, warm through.","Pour in egg whites, stir until set.","Season lightly and serve."]},
-  B3:{type:"Breakfast", risk:"low", name:"Cottage Cheese & Cucumber Bowl",
-    ing:["150g cottage cheese","1/2 cucumber, diced","1 tsp olive oil","Pinch of salt, dried herbs"],
-    steps:["Spoon cottage cheese into a bowl.","Top with diced cucumber.","Drizzle olive oil, season with salt and herbs.","Serve chilled."]},
-  B4:{type:"Breakfast", risk:"low", name:"Protein Smoothie",
-    ing:["200ml unsweetened almond milk","1 scoop plain protein powder","1/2 ripe banana","4-5 ice cubes"],
-    steps:["Add all ingredients to a blender.","Blend until smooth, about 30-45 seconds.","Pour and drink slowly, don't gulp."]},
-  L1:{type:"Lunch", risk:"low", name:"Grilled Chicken Breast Bowl",
-    ing:["150g chicken breast","1/2 cucumber, sliced","Handful lettuce","Handful green beans, steamed","1 tbsp olive oil","1 tsp apple cider vinegar"],
-    steps:["Season chicken breast lightly with salt, pan-grill 5-6 min per side until cooked through.","Rest 3 min, then slice.","Steam green beans 4-5 min.","Arrange lettuce, cucumber and beans in a bowl, top with sliced chicken.","Whisk olive oil and vinegar, drizzle over."]},
-  L2:{type:"Lunch", risk:"low", name:"Chicken & Cauliflower Rice",
-    ing:["150g chicken thigh, diced","1.5 cups cauliflower rice","1/2 zucchini, diced","1 tbsp olive oil","1/2 tsp grated ginger"],
-    steps:["Heat olive oil in a pan on medium-high.","Cook chicken thigh pieces 6-8 min until browned and cooked through, set aside.","In the same pan, sauté zucchini and ginger 2 min.","Add cauliflower rice, cook 4-5 min stirring often.","Return chicken to the pan, mix and serve."]},
-  L3:{type:"Lunch", risk:"low", name:"Chicken & Greens Broth Soup",
-    ing:["100g cooked chicken breast, shredded","2 cups clear chicken broth (no tomato)","Handful spinach","1/2 zucchini, sliced","1/4 tsp grated ginger"],
-    steps:["Bring broth to a gentle simmer with ginger.","Add zucchini, simmer 4-5 min until tender.","Stir in spinach and shredded chicken.","Simmer 2 more minutes and serve hot."]},
-  L4:{type:"Lunch", risk:"low", name:"Chicken Lettuce Wraps",
-    ing:["120g ground chicken (keema)","1 tsp olive oil","1/4 cup shredded carrot","4-5 large lettuce cups","1 tsp tahini"],
-    steps:["Heat olive oil in a pan on medium-high.","Cook ground chicken 6-7 min, breaking it up, until no longer pink.","Season lightly with salt.","Spoon into lettuce cups, top with shredded carrot and a drizzle of tahini."]},
-  D1:{type:"Dinner", risk:"low", name:"Baked Chicken Thigh & Greens",
-    ing:["150g skinless chicken thigh","Handful green beans","1 tbsp olive oil","Pinch of salt, dried herbs"],
-    steps:["Preheat oven to 200°C (400°F).","Rub chicken thigh with 1 tsp olive oil, salt and herbs.","Bake 22-25 min until cooked through (internal temp 75°C/165°F).","Toss green beans in remaining olive oil, roast alongside for the last 12-15 min.","Serve together."]},
-  D2:{type:"Dinner", risk:"low", name:"Chicken & Mashed Cauliflower",
-    ing:["150g grilled chicken breast","1.5 cups cauliflower florets","1 tsp butter","Handful spinach","1 tsp olive oil"],
-    steps:["Steam or boil cauliflower until very soft, about 10 min.","Mash with butter and a pinch of salt until smooth.","Sauté spinach in olive oil for 1-2 min until wilted.","Grill chicken breast 5-6 min per side until cooked through, slice.","Plate mash, spinach and sliced chicken together."]},
+  B3:{type:"Brunch", risk:"low", name:"Paneer & Cucumber Bowl",
+    ing:["100g paneer, cubed","1/2 cucumber, diced","Pinch of salt, dried herbs"],
+    steps:["Cube paneer and dice cucumber.","Combine in a bowl.","Season with salt and herbs.","Serve chilled."]},
+  B4:{type:"Brunch", risk:"low", name:"Protein Isolate Shake",
+    ing:["1 scoop plain protein isolate","250ml water","Pinch of salt","4-5 ice cubes"],
+    steps:["Add isolate, water, salt and ice to a blender (or shaker).","Blend or shake until smooth.","Drink slowly, don't gulp."]},
+  SA1:{type:"Salad", risk:"low", name:"Chicken Garden Salad",
+    ing:["100g boneless chicken breast","Large handful lettuce","1/2 cucumber, sliced","1/4 carrot, grated","1 tsp olive oil","1 tsp apple cider vinegar"],
+    steps:["Season chicken lightly, pan-grill 5-6 min per side until cooked. Rest and slice.","Arrange lettuce, cucumber and carrot on a plate.","Top with sliced chicken.","Whisk olive oil and vinegar, drizzle over. Toss gently."]},
+  SA2:{type:"Salad", risk:"low", name:"Paneer & Chicken Salad",
+    ing:["60g boneless chicken breast, grilled","60g paneer, cubed","Large handful lettuce","1/2 cucumber, sliced","2 tbsp dahi","Pinch dried herbs"],
+    steps:["Grill or pan-cook chicken, slice. Cube paneer.","Whisk dahi with herbs for dressing.","Toss lettuce and cucumber with half the dressing.","Top with chicken and paneer, drizzle remaining dahi."]},
+  SA3:{type:"Salad", risk:"low", name:"Egg & Chicken Salad Bowl",
+    ing:["2 boiled eggs","80g boneless chicken breast, sliced","Large handful lettuce","1/2 cucumber, sliced","1 tsp olive oil","Pinch of salt"],
+    steps:["Boil eggs 8-9 min, cool and halve.","Grill chicken, slice thin.","Arrange lettuce and cucumber in a bowl.","Top with eggs and chicken, drizzle olive oil and salt."]},
+  SA4:{type:"Salad", risk:"low", name:"Chicken Tahini Salad",
+    ing:["100g boneless chicken breast","Large handful lettuce","1/2 cucumber, sliced","1 tsp olive oil","1 tsp tahini","1 tbsp water"],
+    steps:["Grill chicken, slice.","Whisk tahini, water and olive oil into a thin dressing.","Toss lettuce and cucumber with dressing.","Top with chicken and serve."]},
+  D1:{type:"Dinner", risk:"low", name:"Grilled Chicken & Green Beans",
+    ing:["100g boneless chicken breast","Handful green beans","1 tsp olive oil","Pinch of salt, dried herbs"],
+    steps:["Season chicken with salt and herbs. Pan-grill 5-6 min per side until cooked through.","Steam or sauté green beans in remaining oil 4-5 min.","Serve chicken with beans."]},
+  D2:{type:"Dinner", risk:"low", name:"Chicken & Cauliflower Plate",
+    ing:["100g boneless chicken breast","1.5 cups cauliflower florets","Handful spinach","1 tsp olive oil"],
+    steps:["Steam cauliflower until tender, about 10 min.","Sauté spinach in half the oil 1-2 min until wilted.","Grill chicken in remaining oil 5-6 min per side, slice.","Plate cauliflower, spinach and chicken together."]},
   D3:{type:"Dinner", risk:"low", name:"Chicken Stir-Fry",
-    ing:["120g chicken breast, sliced into strips","1/2 zucchini, sliced","Handful green beans","1/2 tsp grated ginger","1 tsp light soy sauce","1/2 tsp sesame oil"],
-    steps:["Heat sesame oil in a wok or pan on high.","Stir-fry chicken strips 4-5 min until cooked through, set aside.","Add zucchini, green beans and ginger, stir-fry 3-4 min.","Return chicken to the pan, add soy sauce, toss 1 minute and serve."]},
-  D4:{type:"Dinner", risk:"low", name:"Roast Chicken & Veg Plate",
-    ing:["150g chicken breast","1/2 zucchini, sliced","Handful broccoli florets","1 tbsp olive oil","Pinch of salt"],
-    steps:["Preheat oven to 200°C (400°F).","Toss zucchini and broccoli with half the olive oil and salt, spread on a tray.","Rub chicken breast with remaining oil and salt, place on the same tray.","Roast 20-22 min until chicken is cooked through and veg is tender."]},
-  S1:{type:"Snack", risk:"low", name:"Almond Handful",
-    ing:["18-20 raw almonds"],
-    steps:["Portion out the almonds. Pre-measuring avoids overeating this one.","Eat slowly with a glass of water."]},
-  S2:{type:"Snack", risk:"low", name:"Yogurt & Seeds",
-    ing:["100g plain full-fat yogurt","1 tbsp pumpkin seeds"],
-    steps:["Spoon yogurt into a bowl.","Top with pumpkin seeds and serve."]},
-  S3:{type:"Snack", risk:"low", name:"Boiled Egg",
-    ing:["1-2 eggs"],
-    steps:["Place eggs in a pot, cover with cold water.","Bring to a boil, then simmer 8-9 min for firm yolks.","Cool in cold water, peel and eat with a pinch of salt."]},
-  S4:{type:"Snack", risk:"med", name:"Cheese & Cucumber",
-    ing:["2 small slices hard cheese","1/2 cucumber, sliced"],
-    steps:["Slice cucumber into rounds.","Serve alongside the cheese.","Keep the cheese portion small. It is an amber-list food."]}
+    ing:["100g boneless chicken breast, sliced","1/2 zucchini, sliced","Handful green beans","1/2 tsp grated ginger","1 tsp light soy sauce","1/2 tsp sesame oil"],
+    steps:["Heat sesame oil in a wok or pan on high.","Stir-fry chicken 4-5 min until cooked through, set aside.","Add zucchini, beans and ginger, stir-fry 3-4 min.","Return chicken, add soy sauce, toss 1 min and serve."]},
+  D4:{type:"Dinner", risk:"low", name:"Baked Chicken & Broccoli",
+    ing:["100g boneless chicken breast","Handful broccoli florets","1/2 zucchini, sliced","1 tsp olive oil","Pinch of salt"],
+    steps:["Preheat oven to 200°C (400°F).","Toss zucchini and broccoli with half the oil and salt on a tray.","Rub chicken with remaining oil and salt, place on tray.","Roast 20-22 min until chicken is cooked through and veg is tender."]},
+  D5:{type:"Dinner", risk:"med", name:"Chicken Shiro Miso Ramen",
+    ing:["100g boneless chicken breast, shredded","1/4 small onion, thin sliced","1 small garlic clove, minced","4-5 button mushrooms, sliced","400ml water","1 pack shiro miso ramen noodles","1 tastemaker sachet (from pack)","1 tbsp white miso paste","1 tsp light soy sauce"],
+    steps:["Poach or pan-cook chicken until done; rest and shred with forks.","In a pot on medium, sauté onion and garlic 2 min until soft (don't brown hard).","Add mushrooms, cook 2 min more.","Pour in water, bring to a gentle simmer.","Stir in tastemaker sachet and soy sauce.","Cook ramen noodles in the broth 3-4 min (or separately per pack).","Take pot off heat, whisk in white miso paste until dissolved (don't boil miso).","Top with shredded chicken. Serve warm, eat slowly."]},
+  S1:{type:"Snack", risk:"low", name:"Boiled Egg",
+    ing:["1 boiled egg"],
+    steps:["Simmer egg 8-9 min for a firm yolk.","Cool in cold water, peel and eat with a pinch of salt."]},
+  S2:{type:"Snack", risk:"low", name:"Dahi & Cucumber",
+    ing:["100g dahi (full-fat)","1/4 cucumber, sliced","Pinch of salt"],
+    steps:["Spoon dahi into a bowl.","Top with cucumber slices and a pinch of salt.","Eat slowly."]},
+  S3:{type:"Snack", risk:"low", name:"Egg Whites",
+    ing:["2 egg whites"],
+    steps:["Scramble egg whites in a non-stick pan with a pinch of salt, or boil in silicone cups.","Serve warm."]},
+  S4:{type:"Snack", risk:"low", name:"Paneer Cubes",
+    ing:["50g paneer, cubed","Pinch of salt, dried herbs"],
+    steps:["Cube paneer, season lightly.","Eat as a quick protein snack with water."]}
+};
+
+/** Optional extras when energy toggle is on — not part of weekly grocery totals. */
+const ENERGY_ADDONS = {
+  E1:{type:"Add-on", risk:"low", name:"Half scoop protein isolate", kcal:"+50",
+    ing:["½ scoop plain protein isolate","150ml water"],
+    steps:["Shake or blend until smooth.","Adds ~50 kcal and ~12 g protein."]},
+  E2:{type:"Add-on", risk:"low", name:"1 boiled egg", kcal:"+70",
+    ing:["1 boiled egg"],
+    steps:["Simmer 8-9 min, cool and peel.","Adds ~70 kcal and ~6 g protein."]},
+  E3:{type:"Add-on", risk:"low", name:"50g paneer", kcal:"+90",
+    ing:["50g paneer, cubed"],
+    steps:["Cube and eat with a pinch of salt.","Adds ~90 kcal and ~9 g protein."]},
+  E4:{type:"Add-on", risk:"low", name:"100g dahi", kcal:"+60",
+    ing:["100g dahi (full-fat)"],
+    steps:["Spoon into a bowl, eat slowly.","Adds ~60 kcal and ~5 g protein."]},
+  E5:{type:"Add-on", risk:"low", name:"50g cooked chicken", kcal:"+80",
+    ing:["50g boneless chicken breast, cooked"],
+    steps:["Warm leftover or quickly pan-grill a small piece.","Adds ~80 kcal and ~15 g protein."]},
+  E6:{type:"Add-on", risk:"low", name:"Full scoop protein isolate", kcal:"+100",
+    ing:["1 scoop plain protein isolate","200ml water"],
+    steps:["Shake or blend until smooth.","Adds ~100 kcal and ~25 g protein."]},
+  E7:{type:"Add-on", risk:"low", name:"Paneer & dahi combo", kcal:"+150",
+    ing:["50g paneer, cubed","100g dahi"],
+    steps:["Cube paneer, serve with dahi on the side or mixed.","Adds ~150 kcal and ~14 g protein."]}
 };
 
 const PLAN = {
-  Mon: ["B1","S1","L1","S2","D1"],
-  Tue: ["B2","S3","L2","S4","D2"],
-  Wed: ["B3","S1","L3","S2","D3"],
-  Thu: ["B4","S3","L4","S4","D4"],
-  Fri: ["B1","S1","L1","S2","D1"],
-  Sat: ["B2","S3","L2","S4","D2"],
-  Sun: ["B3","S1","L3","S2","D3"]
+  Mon: ["B1","S1","B4","S2","D1"],
+  Tue: ["B2","S3","SA2","S4","D2"],
+  Wed: ["B3","S1","SA3","S2","D3"],
+  Thu: ["B1","S3","B4","S4","D4"],
+  Fri: ["B1","S1","B4","S2","D1"],
+  Sat: ["B2","S3","SA2","S4","D5"],
+  Sun: ["B3","S1","SA3","S2","D3"]
 };
-const SLOT_TIME = {0:"7:30 AM",1:"11:00 AM",2:"1:30 PM",3:"4:30 PM",4:"7:30 PM"};
+const SLOT_TIME = {0:"11:00 AM",1:"1:30 PM",2:"4:00 PM",3:"7:00 PM",4:"9:30 PM"};
+const ADDON_IDS = ["E1","E2","E3","E4","E5","E6","E7"];
 
 const WORKOUT = [
   {day:"Mon", title:"Upper Body Strength", type:"Gym", exercises:[
@@ -621,7 +737,7 @@ const WORKOUT = [
   {day:"Sun", title:"Rest", type:"Rest", exercises:[["Full rest. Walk if you feel like it","optional"]]}
 ];
 
-const START_DATE = new Date('2026-08-24');
+const START_DATE = new Date('2026-09-01');
 const END_DATE = new Date(START_DATE); END_DATE.setDate(END_DATE.getDate()+120);
 
 /* ---------- Grocery: weekly buy list in shop pack sizes ---------- */
@@ -649,7 +765,7 @@ const BUY_CATALOG = [
       let n = 0;
       const whites = s.match(/(\d+)\s*egg whites?/i);
       if(whites) n += +whites[1];
-      if(/\bwhole eggs?\b/i.test(s) || (/\beggs?\b/i.test(s) && !/egg\s*white/i.test(s))){
+      if(/\bwhole eggs?\b/i.test(s) || /\bboiled eggs?\b/i.test(s) || (/\beggs?\b/i.test(s) && !/egg\s*white/i.test(s))){
         const r=s.match(/(\d+)\s*-\s*(\d+)/);
         if(r) n += Math.ceil((+r[1]+ +r[2])/2);
         else {
@@ -666,21 +782,12 @@ const BUY_CATALOG = [
       if(n <= 18) return "1½ dozen";
       return Math.ceil(n/12) + " dozen";
     } },
-  { group:"dairy", name:"Paneer / cottage cheese", re:/cottage cheese/i, base:"g",
+  { group:"dairy", name:"Paneer", re:/paneer/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : g <= 400 ? "400 g pack" : "2 × 400 g packs") },
-  { group:"dairy", name:"Dahi (full-fat)", re:/yogurt/i, base:"g",
+  { group:"dairy", name:"Dahi (full-fat)", re:/dahi|yogurt/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> g <= 0 ? null : (g <= 400 ? "400 g cup" : "1 kg dabba") },
-  { group:"dairy", name:"Hard cheese", re:/hard cheese/i, base:"slices",
-    qty:s=>{ const m=s.match(/(\d+)\s*(?:small\s+)?slices?/i); return m?+m[1]:2; },
-    shop:n=> n <= 0 ? null : "100–150 g pack" },
-  { group:"dairy", name:"Butter", re:/\bbutter\b/i, base:"use",
-    qty:()=>1,
-    shop:()=> "100 g pack" },
-  { group:"dairy", name:"Almond milk (unsweetened)", re:/almond milk/i, base:"ml",
-    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
-    shop:ml=> ml <= 0 ? null : (ml <= 1000 ? "1 L tetra pack" : "2 × 1 L tetra packs") },
   { group:"veg", name:"Palak (spinach)", re:/spinach/i, base:"use",
     qty:()=>1,
     shop:n=> n <= 2 ? "1 bunch" : "2 bunches" },
@@ -702,6 +809,9 @@ const BUY_CATALOG = [
   { group:"veg", name:"Lettuce", re:/lettuce/i, base:"use",
     qty:()=>1,
     shop:n=> n <= 2 ? "1 head" : "2 heads" },
+  { group:"veg", name:"Onion (pyaz)", re:/\bonion\b/i, base:"use",
+    qty:()=>1,
+    shop:()=> "250 g" },
   { group:"veg", name:"Mushroom", re:/mushroom/i, base:"count",
     qty:s=>{
       const r=s.match(/(\d+)\s*-\s*(\d+)/); if(r) return Math.ceil((+r[1]+ +r[2])/2);
@@ -711,9 +821,15 @@ const BUY_CATALOG = [
   { group:"veg", name:"Carrot (gajar)", re:/carrot/i, base:"use",
     qty:()=>1,
     shop:()=> "2 pieces" },
-  { group:"veg", name:"Banana", re:/banana/i, base:"count",
-    qty:s=> frac(s.match(/([\d./½]+)/)?.[1] || "0.5"),
-    shop:n=> shopPieces(n) },
+  { group:"pantry", name:"Garlic (lahsun)", re:/garlic/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small bulb" },
+  { group:"pantry", name:"Shiro miso ramen", re:/shiro miso ramen/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 pack" },
+  { group:"pantry", name:"White miso paste", re:/white miso|miso paste/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 small tub" },
   { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
     qty:()=>1,
     shop:()=> "1 bottle (500 ml–1 L)" },
@@ -732,13 +848,7 @@ const BUY_CATALOG = [
   { group:"pantry", name:"Adrak (ginger)", re:/ginger/i, base:"use",
     qty:()=>1,
     shop:()=> "50–100 g piece" },
-  { group:"pantry", name:"Badam (raw almonds)", re:/almonds/i, base:"use",
-    qty:()=>1,
-    shop:n=> n <= 2 ? "100 g" : "200 g" },
-  { group:"pantry", name:"Pumpkin seeds", re:/pumpkin seeds/i, base:"use",
-    qty:()=>1,
-    shop:()=> "100 g" },
-  { group:"pantry", name:"Protein powder (plain)", re:/protein powder/i, base:"use",
+  { group:"pantry", name:"Protein isolate (plain)", re:/protein isolate/i, base:"use",
     qty:()=>1,
     shop:()=> "1 tub (if needed)" }
 ];
@@ -840,6 +950,21 @@ document.querySelectorAll('.tabbar .tab').forEach(btn=>{
 /* ---------- Today / day switch ---------- */
 let activeDay = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay()-1];
 let lastMealTrigger = null;
+const ENERGY_KEY = 'ketogerd_energy_boost';
+
+function isEnergyBoostOn(){
+  return safeStorage.get(ENERGY_KEY) === '1';
+}
+function setEnergyBoost(on){
+  safeStorage.set(ENERGY_KEY, on ? '1' : '0');
+  document.getElementById('energyBoost').checked = on;
+  document.getElementById('kcalTarget').textContent = on ? 'up to 1,500' : '1,300';
+  renderDayCard();
+}
+
+function getRecipe(id){
+  return RECIPES[id] || ENERGY_ADDONS[id] || null;
+}
 
 function renderDaySwitch(){
   const el = document.getElementById('daySwitch');
@@ -858,6 +983,7 @@ function renderDaySwitch(){
 function renderDayCard(){
   const card = document.getElementById('dayCard');
   const ids = PLAN[activeDay];
+  const boost = isEnergyBoostOn();
   card.innerHTML = `<h2>${activeDay} · meal plan (1 person)</h2>` + ids.map((id,i) => {
     const r = RECIPES[id];
     return `<button type="button" class="meal" data-recipe="${id}" aria-haspopup="dialog">
@@ -869,7 +995,21 @@ function renderDayCard(){
       </div>
       <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
     </button>`;
-  }).join('') + `<div class="note">Tap a meal for ingredients and steps. Portions scale to ~1,950 kcal for one person. Nudge protein/fat up or down to fit your hunger.</div>`;
+  }).join('') + (boost ? `
+    <div class="addon-heading">Energy add-ons · pick 1–2</div>
+    ${ADDON_IDS.map(id => {
+      const r = ENERGY_ADDONS[id];
+      return `<button type="button" class="meal addon" data-recipe="${id}" aria-haspopup="dialog">
+        <div>
+          <div class="when">${r.kcal} kcal</div>
+          <div class="name">${r.name}</div>
+          <div class="items">${r.ing.join(", ")}</div>
+          <div class="hint">Tap for details</div>
+        </div>
+        <div class="risk ${r.risk}">Optional</div>
+      </button>`;
+    }).join('')}
+  ` : '') + `<div class="note">Base day ≈ <b>1,300 kcal</b> and <b>~140 g protein</b>. Chicken, eggs, paneer, dahi, protein isolate only. ${boost ? 'Add-ons stack on top for <b>1,400–1,500 kcal</b> on flat days.' : 'Toggle low energy above if you need extra.'}</div>`;
 
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
@@ -884,11 +1024,12 @@ const dlgBody = document.getElementById('dlgBody');
 const dlgClose = document.getElementById('dlgClose');
 
 function openRecipeDialog(id, trigger){
-  const r = RECIPES[id];
+  const r = getRecipe(id);
   if(!r) return;
   lastMealTrigger = trigger || document.activeElement;
   dlgTitle.textContent = r.name;
-  dlgMeta.textContent = `${r.type} · Serves 1 · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
+  const kcalNote = r.kcal ? ` · ${r.kcal} kcal` : '';
+  dlgMeta.textContent = `${r.type} · Serves 1${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
   dlgBody.innerHTML = `
     <h3>Ingredients</h3>
     <ul class="plain">${r.ing.map(i=>`<li>${i}</li>`).join('')}</ul>
@@ -998,6 +1139,11 @@ if('serviceWorker' in navigator){
 }
 
 /* ---------- Init ---------- */
+document.getElementById('energyBoost').checked = isEnergyBoostOn();
+document.getElementById('kcalTarget').textContent = isEnergyBoostOn() ? 'up to 1,500' : '1,300';
+document.getElementById('energyBoost').addEventListener('change', (e)=>{
+  setEnergyBoost(e.target.checked);
+});
 renderDaySwitch();
 renderDayCard();
 renderWorkout();
