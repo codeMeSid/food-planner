@@ -1,5 +1,5 @@
 ---
-name: Keto GERD Plan
+name: Plate 78
 description: Warm ceramic-sand meal tool keyed to 3-stripe palette (sand / clay / terracotta)
 colors:
   sand: "#E3CFBB"

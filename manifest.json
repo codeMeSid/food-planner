@@ -1,7 +1,7 @@
 {
-  "name": "Keto for GERD: 4 Month Plan",
-  "short_name": "KetoGERD",
-  "description": "A gentler keto plan and tracker built for GERD, from 95kg to 78kg over 4 months.",
+  "name": "Plate 78",
+  "short_name": "Plate 78",
+  "description": "GERD-safe Indian meal plan: 95 kg to 78 kg in 120 days at 1,500 kcal.",
   "start_url": "./",
   "scope": "./",
   "id": "./",

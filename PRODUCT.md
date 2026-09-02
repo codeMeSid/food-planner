@@ -6,11 +6,11 @@ product
 
 ## Users
 
-One person following a 120-day chicken-only keto plan while managing GERD. Primary surface is a phone home-screen PWA: morning meal check with recipe detail, gym split, weekly grocery with buy quantities. Used in the kitchen and at the gym, often one-handed.
+One person following a 120-day GERD-safe Indian meal plan while losing fat (95→78 kg). Primary surface is a phone home-screen PWA: day's five meals with cook steps on tap, gym split, weekly grocery with buy quantities. Used in the kitchen and at the gym, often one-handed.
 
 ## Product Purpose
 
-Make the day's five meals (with cook steps on tap), workout, food rules, and a weekly grocery list available offline with no account. Success is opening Today, cooking the right thing, and buying only what the week needs so food does not go bad.
+Make the day's five meals (with cook steps on tap), workout, food rules, and a weekly grocery list available offline with no account. Success is opening Today, cooking the weighed recipe, hitting ~1,500 kcal / ~150 g protein, and buying only what the week needs.
 
 ## Brand Personality
 
@@ -31,6 +31,7 @@ Calm, exact, kitchen-practical. Ceramic-sand page (`#E3CFBB`) with clay surfaces
 - Device-local honesty: saved-here copy, no fake sync.
 - Offline is a requirement, not a bonus: self-hosted fonts in SW cache, no runtime font CDNs, relative asset URLs.
 - Quiet chrome: surface color over borders, 4/8 spacing, restrained pills.
+- Macros are computed from weighed ingredient lines — copy never invents a different number.
 
 ## Accessibility & Inclusion
 
