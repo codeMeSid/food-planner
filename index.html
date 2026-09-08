@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Plate 78" />
-<title>Plate 78 · 95 to 78 kg</title>
+<title>Plate 78 · 95 to 80 kg</title>
 <link rel="manifest" href="./manifest.json" />
 <link rel="apple-touch-icon" href="./icon-192.png" />
 <link rel="icon" type="image/svg+xml" href="./logo.svg" />
@@ -482,23 +482,23 @@
     </div>
     <div class="brand-text">
       <div class="eyebrow">Plate 78 · GERD-safe · 1 person</div>
-      <h1>95 kg to 78 kg</h1>
+      <h1>95 kg to 80 kg</h1>
     </div>
   </div>
-  <div class="sub">6'0" · 28 · Indian home cooking · olive oil · day starts 11 AM</div>
+  <div class="sub">6'0" · 28 · Sunday meal prep · 10k treadmill then lift · Jan 1</div>
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
     <div class="pill">On track <b id="onTrackKg">-</b> kg</div>
     <div class="pill">Target <b id="kcalTarget">1,500</b> kcal/day</div>
     <div class="pill">Protein <b>~150</b> g/day</div>
-    <div class="pill">Gym <b>4x</b>/week</div>
+    <div class="pill">Steps <b>10k</b> + gym</div>
   </div>
 </header>
 
 <main id="main">
 
   <section id="today" class="active" role="tabpanel">
-    <div class="day-switch" id="daySwitch"></div>
+    <div class="day-switch" id="daySwitch" role="toolbar" aria-label="Meal"></div>
     <div class="card energy-card">
       <label class="energy-toggle">
         <span class="energy-label">Hard session — need fuel?</span>
@@ -521,9 +521,9 @@
       <h2>Reflux ground rules</h2>
       <ul class="plain">
         <li><b>Stop eating 3 hrs before lying down</b>. Dinner is 8:30 PM — then a 10-min upright walk.</li>
-        <li><b>Weigh raw grams</b> for chicken, rice, atta, paneer, oil (level tsp). Eyeballing breaks the deficit.</li>
+        <li><b>Weigh raw grams</b> for chicken, dal, paneer, soya, oil (level tsp). Eyeballing breaks the deficit.</li>
         <li>Olive oil hard cap: <b>3 level tsp/day</b>. Light/refined for cooking; EVOO only on salads.</li>
-        <li>Toned paneer + toned dahi only. No coffee, alcohol, or soda. Sat muesli (40 g weighed) is the chocolate exception. KILRR packs (incl. pudina/peri/mirchi/achaari) OK on chicken — if reflux flares, switch to milder packs next day.</li>
+        <li>Toned paneer + toned dahi only. Chaas = 150 g dahi + water + jeera — no mint, chili, onion, or sugar. No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki. KILRR OK on chicken — if reflux flares, switch to a milder pack.</li>
         <li>After lunch/dinner: saunf or ajwain water. Sit upright 20-30 min. Elevate bed head if nights are rough.</li>
         <li>Week 1 scale may rise 1–1.5 kg (glycogen water). Judge the 7-day average only.</li>
       </ul>
@@ -534,17 +534,18 @@
     <div class="card">
       <h2>Weekly split</h2>
       <div id="wkOverview"></div>
-      <p class="note">Walk <b>8,000-10,000 steps</b> every day regardless of gym day. This is your biggest fat-loss lever after diet, and it is GERD-friendly (upright, low-impact).</p>
+      <p class="note">Every day: <b>10,000 treadmill steps first</b>, then lifting on gym days. Upright, incline OK. This is the fat-loss lever after the 1,500 kcal plate.</p>
     </div>
     <div id="wkDetails"></div>
     <div class="card">
       <h2>Training around GERD</h2>
       <ul class="plain">
-        <li>Train <b>at least 2 hours after eating</b>, never right after a meal.</li>
+        <li>Every session: <b>10k treadmill steps first</b>, then weights. Stay upright.</li>
+        <li>Train <b>at least 2 hours after eating</b>, never right after a meal. Morning gym → cheela after. Evening gym → after lunch, dinner still 8:30.</li>
         <li>Skip lying-flat crunches/sit-ups and heavy leg raises. Use standing cable crunches, planks, or Pallof presses instead.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session, don't gulp large amounts at once.</li>
-        <li>Protein target <b>~150 g/day</b> keeps the 17 kg mostly fat. Add-ons only after a brutal session — base day is already 1,500.</li>
+        <li>Protein <b>~150 g/day</b> from the weekday plate so the 15 kg is mostly fat and you can still lift. Add-ons only if a meal is missed or the session was brutal.</li>
       </ul>
     </div>
   </section>
@@ -552,7 +553,7 @@
   <section id="grocery" role="tabpanel">
     <div class="card">
       <h2>Weekly bazaar list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Buy quantities for this week's meals (kg, dozen, litre, packet). Tap a row to tick. Saved on this device only.</p>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Mon–Fri plate × 5. Sat/Sun not on this list. Also grab 15 SlideSeal bags + 2 ice-cube trays. Tap a row to tick. Saved on this device only.</p>
     </div>
     <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
     <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
@@ -625,6 +626,9 @@ const MACRO_RULES = [
   { re:/atta\s+(\d+)\s*g/i, kcal:g=>g*(102/30), protein:g=>g*(3.6/30) },
   { re:/rice,? raw\s+(\d+)\s*g/i, kcal:g=>g*(155/45), protein:g=>g*(3/45) },
   { re:/moong dal[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*(104/30), protein:g=>g*(7.2/30) },
+  { re:/soya chunks[,\s]+dry\s+(\d+)\s*g/i, kcal:g=>g*3.45, protein:g=>g*0.52 },
+  { re:/besan\s+(\d+)\s*g/i, kcal:g=>g*3.87, protein:g=>g*0.22 },
+  { re:/fresh coriander\s+(\d+)\s*g/i, kcal:g=>g*0.23, protein:g=>g*0.021 },
   { re:/olive oil\s+([\d.]+)\s*tsp/i, kcal:n=>n*40, protein:()=>0 },
   { re:/tahini\s+([\d.]+)\s*tsp/i, kcal:n=>n*30, protein:n=>n*1.7 },
   { re:/grated coconut\s+(\d+)\s*g/i, kcal:g=>g*3.5, protein:g=>g*0.03 },
@@ -672,111 +676,46 @@ function fmtKcal(n){ return Math.round(n).toLocaleString("en-IN"); }
 function fmtProt(n){ return Math.round(n); }
 
 const RECIPES = {
-  B1:{type:"Brunch", risk:"low", name:"Masala egg-chicken bhurji",
-    ing:["1 whole egg","5 egg whites","Chicken breast, raw 80 g","Palak 75 g","Olive oil 1 tsp","Pinch of salt, jeera, saunf, grated ginger","KILRR ⅓ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ⅓ pack with 1 tbsp water or 1 tbsp toned dahi. Marinate the 80 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Whisk egg + whites with salt, crushed jeera, saunf until frothy — froth = fluffier bhurji.","Warm oil medium-low. Soft-sauté ginger 20 sec. Add chopped palak; wilt till just soft and bright green.","Add marinated (or plain salted) chicken mince/shreds; cook till no pink and spices smell toasted.","Pour eggs. Fold slow on low heat till soft-set — pull off heat while still glossy. Don't dry-scramble."]},
-  B2:{type:"Brunch", risk:"low", name:"Paneer bhurji (saunf-ginger)",
-    ing:["Toned paneer 100 g","1 whole egg","3 egg whites","Palak 50 g","Olive oil 1 tsp","Pinch of salt, saunf, grated ginger, dhania powder"],
-    steps:["Crumble paneer with fingers (not knife — softer texture). Whisk egg + whites with salt + dhania till slightly frothy.","Warm oil. Crack saunf 10 sec, add ginger 15 sec — kitchen should smell sweet-spice.","Wilt palak. Add paneer; press lightly into pan so edges catch light gold.","Pour eggs. Soft scramble; finish with a pinch more saunf off heat. Eat hot."]},
-  B3:{type:"Brunch", risk:"low", name:"Curd rice with eggs & chicken",
-    ing:["Rice, raw 25 g","Toned dahi 150 g","2 whole eggs","3 egg whites","Chicken breast, raw 50 g","Olive oil 0.5 tsp","Pinch of salt, curry leaves, grated ginger, jeera","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 50 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Cook rice soft (slightly overdone is right for curd rice). Cool till warm, not hot — hot rice kills dahi tang.","Whisk dahi smooth with salt; fold into rice till creamy.","Soft scramble or soft-boil eggs + whites. Pan-cook marinated chicken till juicy.","Tadka: warm oil, crackle jeera + curry leaves + ginger. Pour over curd rice. Top chicken + eggs. Serve lukewarm."]},
-  B4:{type:"Brunch", risk:"low", name:"Moong chilla, paneer-stuffed",
-    ing:["Moong dal, raw 35 g","Toned paneer 90 g","3 egg whites","Cucumber 40 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger, hing (tiny pinch)"],
-    steps:["Soak moong 2–4 hrs. Blend silky with ginger, jeera, salt, tiny hing + just enough water — pourable like dosa batter. Rest 10 min.","Crumble paneer with salt + pinch jeera. Whisk whites lightly.","Non-stick pan, medium heat, brush oil. Pour thin chilla. Spread paneer + whites on top; cover 30 sec so whites set.","Flip once for light gold. Fold. Serve with crunchy cucumber — contrast is the point."]},
-  B5:{type:"Brunch", risk:"low", name:"Chicken keema roti wrap",
-    ing:["Chicken keema, raw 110 g","Atta 30 g","2 egg whites","Cucumber 25 g","Carrot 15 g","Olive oil 1 tsp","Pinch of salt, jeera, dhania powder, grated ginger","KILRR ⅓ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ⅓ pack with 1 tbsp water or 1 tbsp toned dahi. Marinate the 110 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Knead soft atta dough; rest 10 min. Roll thin roti; dry-roast both sides till soft brown spots. Keep wrapped in cloth.","Cook marinated keema in ½ tsp oil till water evaporates and meat smells roasted — don't leave it wet.","Scramble whites in remaining oil.","Spread hot keema + whites on roti, add shredded cucumber/carrot for crunch, roll tight. Eat immediately."]},
-  B6:{type:"Brunch", risk:"med", name:"Yoga Bar muesli bowl + eggs",
-    ing:["Yoga Bar muesli 40 g","Toned milk 150 ml","1 whole egg","4 egg whites","Pinch of salt (optional)"],
-    steps:["Weigh 40 g dry Yoga Bar Choco Almond & Cranberry — no free pour, no second scoop.","Pour 150 ml cold toned milk. Eat crunchy; don't soak into mush unless you prefer soft.","Soft scramble or soft-boil 1 egg + 4 whites with pinch salt — protein side that makes the bowl a real brunch.","Sit upright 20–30 min. If reflux hits from chocolate/fruit, swap this brunch next week."]},
-  B7:{type:"Brunch", risk:"low", name:"Moong-chicken khichdi + curd",
-    ing:["Moong dal, raw 30 g","Rice, raw 20 g","Chicken breast, raw 120 g","Toned dahi 80 g","Olive oil 0.5 tsp","Pinch of salt, jeera, grated ginger, turmeric, curry leaves","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 120 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Rinse moong + rice. Pressure-cook with turmeric, salt, ginger + marinated chicken (~3 whistles) till porridge-soft — khichdi should spoon, not grain.","Warm oil; crackle jeera + curry leaves till fragrant. Pour tadka over.","Whisk toned dahi smooth; serve on the side for cool contrast. Eat warm."]},
-  L1:{type:"Lunch", risk:"low", name:"Dahi chicken curry + rice",
-    ing:["Chicken breast, raw 150 g","Toned dahi 80 g","Olive oil 1 tsp","Rice, raw 50 g","Green beans 80 g","Carrot 70 g","Pinch of salt, jeera, dhania powder, turmeric, grated ginger, curry leaves","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 150 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Cook rice measured raw. Steam beans + carrot till tender-crisp with pinch salt.","Warm oil; crackle jeera + curry leaves + ginger. Seal marinated chicken 3–4 min till edges colour.","Lower heat. Whisk dahi with dhania + turmeric + salt till lump-free; stir in. Soft simmer 6–8 min — never hard boil or dahi splits. Gravy should coat the spoon.","Plate rice, sabzi, curry. Spoon gravy over rice."]},
-  L2:{type:"Lunch", risk:"low", name:"Palak paneer with chicken + roti",
-    ing:["Toned paneer 100 g","Chicken breast, raw 70 g","Palak 150 g","Toned dahi 30 g","Atta 30 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger, dhania powder","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 70 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Soft roti from 30 g atta — keep pliable under a cloth.","Blanch/wilt palak; blend silky with ginger + salt (bright green, not khaki).","Warm oil; crackle jeera. Cook marinated chicken through. Stir in palak puree + whisked dahi + pinch dhania. Soft simmer 3 min.","Slide in paneer cubes; warm gently so they stay soft. Serve with roti mopping the gravy."]},
-  L3:{type:"Lunch", risk:"low", name:"Bhindi masala + chicken + roti",
-    ing:["Chicken breast, raw 150 g","Bhindi 120 g","Atta 30 g","Olive oil 1 tsp","Pinch of salt, jeera, dhania powder, turmeric, grated ginger, ajwain","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 150 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Soft roti from 30 g atta.","Dry-sauté sliced bhindi on medium, uncovered, till sticky slime goes and edges brown — this is the taste unlock. Set aside.","Warm oil; crackle jeera + ajwain + ginger. Cook marinated chicken till done and lightly browned.","Toss in bhindi with dhania, turmeric, salt 2 min so spice coats every piece. Plate with roti."]},
-  L4:{type:"Lunch", risk:"low", name:"Saunf-jeera chicken pulao",
-    ing:["Chicken breast, raw 130 g","Rice, raw 45 g","Toned dahi 60 g","Olive oil 1 tsp","Cucumber 40 g","Carrot 40 g","Pinch of salt, jeera, saunf, grated ginger, turmeric, curry leaves","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 130 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Warm oil; crackle jeera + saunf + curry leaves + ginger till aromatic.","Seal marinated chicken 2–3 min. Add rinsed rice, turmeric, salt; toast 30–40 sec so grains shine.","Add water ~1.6× rice by volume. Cover, low simmer till rice fluffy and chicken tender.","Fold whisked dahi off heat for creamy finish. Serve with cucumber-carrot salad."]},
-  L5:{type:"Lunch", risk:"low", name:"Dahi egg curry + rice",
-    ing:["1 whole egg","4 egg whites","Chicken breast, raw 60 g","Toned dahi 80 g","Olive oil 1 tsp","Rice, raw 40 g","Lettuce 30 g","Cucumber 30 g","Carrot 20 g","Pinch of salt, jeera, grated ginger, turmeric, dhania powder, curry leaves","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 60 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Cook rice. Soft scramble or soft-boil eggs + whites — keep yolks/whites tender.","Warm oil; crackle jeera + curry leaves + ginger. Cook marinated chicken strips till just done.","Lower heat. Stir in whisked dahi + turmeric + dhania + salt. Soft simmer 3 min. Fold eggs in gently so they stay in chunks.","Serve over rice with lettuce, cucumber, carrot."]},
-  L6:{type:"Lunch", risk:"low", name:"Biryani-lite (KILRR + dahi)",
-    ing:["Chicken breast, raw 140 g","Rice, raw 45 g","Toned dahi 50 g","Olive oil 1 tsp","Lettuce 30 g","Cucumber 30 g","Carrot 20 g","Pinch of salt, jeera, saunf, grated ginger, turmeric, dhania powder, curry leaves, kasuri methi","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water + the 50 g toned dahi. Marinate the 140 g chicken ≥30 min (or overnight) — this is your biryani marinade. Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Warm oil; crackle jeera + saunf + curry leaves. Add chicken + all marinade; cook till chicken is just done and gravy thickens.","Add rinsed rice + turmeric + salt + water (~1.6×). Cover on low till rice is steamed soft and fragrant.","Crush kasuri methi between palms over the top. Rest 3 min covered. Serve with lettuce, cucumber, carrot."]},
-  L7:{type:"Lunch", risk:"low", name:"Puttu with chicken gravy",
-    ing:["Puttu podi 40 g","Grated coconut 8 g","Chicken breast, raw 130 g","Coconut milk 25 ml","Olive oil 1 tsp","Pinch of salt, saunf, grated ginger, curry leaves, dhania powder, black pepper","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 130 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Moisten puttu podi with salted water till it clumps when pressed. Layer with coconut in puttu kutti or idli steamer. Steam 6–8 min till fluffy.","Warm oil; crackle curry leaves + ginger + saunf. Add marinated chicken; cook through and let spices bloom.","Lower heat. Splash water, stir coconut milk + pinch dhania/pepper if needed. Soft simmer 2 min — never hard boil coconut milk.","Spoon hot gravy over puttu so it soaks the steam-cake."]},
-  S1:{type:"Snack", risk:"low", name:"Makhana + masala chaas",
-    ing:["Makhana 20 g","Toned dahi 150 g","Pinch of salt, roasted jeera powder"],
-    steps:["Dry-roast makhana on low, stirring, till crisp and nutty (no oil). Cool 1 min.","Whisk dahi with cold water to thin chaas; salt + roasted jeera. Chill if you can.","Sip chaas; crunch makhana between sips."]},
-  S2:{type:"Snack", risk:"low", name:"Cucumber-jeera raita + paneer",
-    ing:["Toned dahi 150 g","Cucumber 100 g","Toned paneer 40 g","Pinch of salt, roasted jeera powder"],
-    steps:["Whisk dahi cold and smooth with salt + roasted jeera.","Fold diced cucumber + paneer cubes — keep cucumber crunchy, don't wait.","Eat chilled."]},
-  S3:{type:"Snack", risk:"low", name:"Papaya + dahi",
-    ing:["Papaya 150 g","Toned dahi 100 g","Pinch of salt (optional)"],
-    steps:["Cube ripe papaya (sweet, orange — not raw green).","Spoon chilled toned dahi alongside. Optional tiny salt on papaya wakes flavour.","Eat slow."]},
-  S4:{type:"Snack", risk:"low", name:"Tawa paneer tikka bites",
-    ing:["Toned paneer 70 g","Pinch of salt, dhania powder, turmeric, grated ginger, kasuri methi"],
-    steps:["Toss paneer with salt, dhania, turmeric, ginger, crushed kasuri methi. Rest 5 min.","Dry non-stick tawa, medium heat. Roast turning till light gold char on edges.","Eat warm — smoky edges are the snack."]},
-  S5:{type:"Snack", risk:"low", name:"Dahi + cucumber",
-    ing:["Toned dahi 200 g","Cucumber 100 g","Pinch of salt, roasted jeera powder"],
-    steps:["Whisk dahi with salt + roasted jeera till creamy.","Top thick cucumber slices.","Eat cold and slow."]},
-  S6:{type:"Snack", risk:"low", name:"Banana + chaas",
-    ing:["Banana 80 g","Toned dahi 100 g","Pinch of salt, roasted jeera powder"],
-    steps:["Whisk dahi with water to thin chaas; salt + roasted jeera.","Eat ripe banana first, then sip chaas to finish clean.","Skip if banana is green/chalky."]},
-  SA1:{type:"Salad", risk:"low", name:"Chicken tahini-dahi salad",
-    ing:["Chicken breast, raw 120 g","Lettuce 80 g","Cucumber 70 g","Carrot 50 g","Tahini 1 tsp","Toned dahi 50 g","Pinch of salt, roasted jeera","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 120 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Grill/pan chicken till just cooked; rest 3 min, slice against the grain.","Whisk tahini + dahi + splash water + jeera + salt till pourable and pale.","Toss cold lettuce, cucumber, carrot with half dressing.","Top chicken; drizzle rest. Crunch + cream + spice."]},
-  SA2:{type:"Soup", risk:"low", name:"Chicken clear soup + egg whites",
-    ing:["Chicken breast, raw 100 g","3 egg whites","Mushroom 80 g","Pinch of salt, grated ginger, curry leaves, black pepper","KILRR ⅓ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ⅓ pack with 1 tbsp water or 1 tbsp toned dahi. Marinate the 100 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Simmer marinated chicken in ~400 ml water with ginger + curry leaves + salt 12–15 min. Shred back into broth.","Add sliced mushrooms; simmer 3 min till soft and brothy.","Stream egg whites in a thin ribbon while stirring for silky threads.","Black pepper finish. Sip hot."]},
-  SA3:{type:"Salad", risk:"low", name:"Paneer-chicken sesame salad",
-    ing:["Toned paneer 80 g","Chicken breast, raw 50 g","Lettuce 60 g","Cucumber 50 g","Carrot 40 g","Tahini 1 tsp","Pinch of salt, grated ginger","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 50 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Cook marinated chicken; warm or dry-tawa paneer cubes with pinch salt till edges toast.","Whisk tahini + water + ginger + salt to silky dressing.","Toss greens with half; top proteins; drizzle rest."]},
-  SA4:{type:"Salad", risk:"low", name:"Egg & chicken tahini salad",
-    ing:["2 whole eggs","Chicken breast, raw 50 g","Lettuce 60 g","Cucumber 50 g","Carrot 40 g","Tahini 1 tsp","Pinch of salt","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 50 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Boil eggs 8–9 min; ice-bath; peel and halve. Grill marinated chicken; slice.","Whisk tahini + water + salt.","Bed of greens → eggs + chicken → dress. Eat cool."]},
-  SA5:{type:"Snack", risk:"low", name:"Grilled paneer, coriander-coconut",
-    ing:["Toned paneer 70 g","Chicken breast, raw 50 g","2 egg whites","Grated coconut 8 g","Lettuce 30 g","Cucumber 30 g","Carrot 20 g","Pinch of salt, fresh coriander, grated ginger, cumin","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 50 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Blitz coconut + fresh coriander + ginger + cumin + salt + splash water into thick green chutney.","Dry-tawa paneer; pan-cook marinated chicken + soft scrambled whites.","Plate protein with big spoon of chutney + lettuce, cucumber, carrot."]},
-  SA6:{type:"Salad", risk:"low", name:"Chicken salad, light ACV",
-    ing:["Chicken breast, raw 130 g","Lettuce 80 g","Cucumber 60 g","Carrot 40 g","Apple cider vinegar 1 tsp","Pinch of salt, black pepper","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 130 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Grill marinated chicken till charred edges; rest; slice thin.","Toss greens with ACV + salt + pepper (no oil — fat used elsewhere today).","Top chicken. Sharp + spicy + clean."]},
-  SA7:{type:"Soup", risk:"low", name:"Egg-drop palak soup + chicken",
-    ing:["1 whole egg","5 egg whites","Palak 100 g","Chicken breast, raw 60 g","Pinch of salt, grated ginger, black pepper","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 60 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Simmer marinated chicken + ginger in ~400 ml water 12 min; shred back in.","Add chopped palak; cook 2 min till green and soft.","Stream whisked egg + whites while stirring for ribbons. Pepper + salt. Sip hot."]},
-  D1:{type:"Dinner", risk:"low", name:"Tawa chicken + beans & carrot",
-    ing:["Chicken breast, raw 150 g","Green beans 100 g","Carrot 100 g","Olive oil 1 tsp","Pinch of salt, dhania powder, grated ginger","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 150 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Hot tawa/pan, ½ tsp oil. Cook marinated chicken 5–6 min/side till deep gold and juices run clear. Rest 3 min.","Sauté beans + carrot in remaining oil with pinch salt till tender-crisp and lightly blistered.","Slice chicken; plate over veg. 10-min upright walk."]},
-  D2:{type:"Dinner", risk:"low", name:"Keema kebab + sautéed capsicum",
-    ing:["Chicken keema, raw 150 g","Capsicum 150 g","Olive oil 1 tsp","Pinch of salt, jeera, dhania powder, grated ginger, saunf","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 150 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Mix marinated keema firm; pat into flat kebabs. Cook in ½ tsp oil medium till browned both sides and cooked through.","Sauté capsicum strips in remaining oil with pinch salt till sweet and blistered.","Plate kebabs on peppers. 10-min walk."]},
-  D3:{type:"Dinner", risk:"low", name:"Ginger-coriander chicken + zucchini",
-    ing:["Chicken breast, raw 140 g","Zucchini 180 g","Olive oil 1 tsp","Pinch of salt, grated ginger, dhania powder, fresh coriander","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 140 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Cook marinated chicken in ½ tsp oil till browned and done. Rest; slice.","Sauté zucchini rounds in remaining oil with pinch salt till golden edges.","Pile chicken on zucchini; shower fresh coriander. Walk 10 min."]},
-  D4:{type:"Dinner", risk:"low", name:"Palak chicken (dahi-ginger)",
-    ing:["Chicken breast, raw 140 g","Palak 150 g","Toned dahi 40 g","Olive oil 1 tsp","Pinch of salt, grated ginger, jeera, turmeric","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 140 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Wilt palak; blend smooth with ginger + salt — vivid green.","Warm oil; crackle jeera. Brown marinated chicken pieces.","Stir in palak puree + whisked dahi + turmeric. Soft simmer 3–4 min till gravy hugs chicken. Walk after."]},
-  D5:{type:"Dinner", risk:"low", name:"Chicken veg stir-fry, sesame-ginger",
-    ing:["Chicken breast, raw 140 g","Zucchini 80 g","Green beans 50 g","Capsicum 50 g","Olive oil 1 tsp","Pinch of salt, grated ginger, light soy sauce 1 tsp","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 140 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Slice chicken thin. Hot pan, oil; stir-fry marinated chicken till just cooked; set aside.","Blast veg + ginger 3–4 min on high — keep crunch.","Return chicken; splash soy; toss 30 sec till glossy. Walk after."]},
-  D6:{type:"Dinner", risk:"low", name:"Paneer-chicken palak plate",
-    ing:["Toned paneer 80 g","Chicken breast, raw 60 g","Palak 120 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 60 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Wilt palak with ginger + salt; keep it saucy on the plate.","Cook marinated chicken in ½ tsp oil. Warm paneer in remaining oil with jeera till edges toast.","Bed of palak → chicken + paneer. Walk 10 min."]},
-  D8:{type:"Dinner", risk:"med", name:"Shin Ramyun chicken bowl (full pack)",
-    ing:["Shin Ramyun 1 pack","Chicken breast, raw 140 g","Mushroom 80 g","3 egg whites","KILRR ½ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ½ pack with 1½ tbsp water or 1 tbsp toned dahi. Marinate the 140 g chicken ≥30 min (or overnight fridge). No cream, butter, or extra oil — non-stick sear or poach.","Full Nongshim Shin Ramyun pack — noodles + flakes + seasoning sachet. Spicy: reflux watch. Sit upright after; 10-min walk.","Cook marinated chicken till done; rest and slice. Soft-sauté mushrooms dry or in a spoon of broth.","Boil noodles + flakes in water 4–5 min per pack. Stir in full seasoning sachet (or ½ if throat already angry).","Add chicken + mushrooms. Stream 3 egg whites into hot broth while stirring for ribbons. Eat hot — last food of the day. No 4pm or 7pm on Shin night."]},
-  D7:{type:"Dinner", risk:"low", name:"Grilled paneer + chicken + zucchini",
-    ing:["Toned paneer 80 g","Chicken breast, raw 70 g","Zucchini 100 g","Green beans 80 g","Olive oil 1 tsp","Pinch of salt, dhania powder, grated ginger","KILRR ¼ pack (optional)"],
-    steps:["KILRR (any combo pack): mix ¼ pack with 2 tsp water or 1 tbsp toned dahi. Marinate the 70 g chicken ≥30 min (or overnight fridge). Cook with only this recipe’s olive oil — no cream, butter, or extra oil from the pack tip.","Grill marinated chicken; dry-tawa paneer with dhania + salt till charred spots.","Sauté zucchini + beans in oil till blistered.","Plate everything hot. Walk 10 min — last food of the day."]}
+  B1:{type:"Breakfast", risk:"low", name:"Paneer-soya cheela + chutney cube",
+    ing:["Toned paneer 100 g","Soya chunks, dry 50 g","Besan 20 g","Capsicum 35 g","Carrot 35 g","Olive oil 0.5 tsp","Palak 40 g","Fresh coriander 10 g","Toned dahi 20 g","Pinch of salt, jeera, grated ginger"],
+    steps:[
+      "Equipment: 5 SlideSeal bags + 2 ice-cube trays. Sunday cook once; freeze bags + cubes.",
+      "Sunday cheela — soak 250 g dry soya chunks in hot water 15 min. Squeeze hard. Chop fine.",
+      "Crumble 500 g toned paneer. Mix with the soya, 100 g besan, 175 g fine-diced capsicum, 175 g fine-diced carrot, 1 tsp jeera, 1 tbsp grated ginger, salt. No onion, garlic, chili, tomato.",
+      "Add water 1 tbsp at a time until thick batter (drops off a spoon, not dosa-thin). Weigh the bowl. Divide by 5. One SlideSeal bag each. Press flat. Label Day 1–5. Freeze.",
+      "Sunday chutney — blanch 200 g palak 30 sec, ice-cold, squeeze. Blend with 50 g dhania, 100 g toned dahi, 1 tsp ginger, salt. No garlic, chili, lemon, mint. Fill trays ¾ full (~35–40 ml). Freeze 4–6 h.",
+      "Day — thaw 1 bag 10–15 min (or cook from frozen with 1 tbsp water). Non-stick tawa, 0.5 tsp olive oil. Spread. Medium heat, gold both sides.",
+      "Pop 1 chutney cube. Thaw with a splash of water while the cheela cooks. Sit upright 20–30 min."
+    ]},
+  L1:{type:"Lunch", risk:"low", name:"Moong dal + shredded chicken",
+    ing:["Chicken breast, raw 150 g","Moong dal, raw 50 g","Olive oil 0.5 tsp","KILRR ½ pack","Pinch of salt, jeera, turmeric, curry leaves"],
+    steps:[
+      "Sunday chicken — mix 2½ KILRR packs with 3 tbsp water (or 3 tbsp toned dahi — marinade only). Marinate 750 g chicken breast ≥30 min.",
+      "Cook through on non-stick. No extra oil (oil is in the dal tadka). Juices run clear. Rest 5 min. Shred.",
+      "Divide 5 × 150 g into SlideSeal bags. Press flat. Freeze.",
+      "Sunday dal — wash 250 g moong dal. Cook soft with ~1.1 L water, ½ tsp turmeric, salt, 1 tbsp grated ginger (2–3 whistles / ~20 min). Thin stew, not paste. Add water if thick.",
+      "2.5 tsp olive oil (0.5 tsp × 5): crackle 1 tsp jeera + curry leaves. Into the dal. Stir. Cool uncovered 20–30 min. One lidded box. Fridge. Do not freeze. Keeps 5 days.",
+      "Day — ladle ⅕ of the dal (~200–220 g cooked). Rolling boil. Drop 1 frozen chicken bag in until steaming hot. Sit upright 20–30 min. This is the carb slot."
+    ]},
+  S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + chaas",
+    ing:["2 boiled eggs","Makhana 25 g","Toned dahi 150 g","Water 150 ml","Pinch of salt, roasted jeera powder"],
+    steps:[
+      "Sunday — boil 10 eggs 8–9 min. Cool. Store unpeeled in a fridge box. Peel 2 the day you eat them — peeled eggs go off faster.",
+      "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Airtight jar, room temp.",
+      "Chaas is day-of, not Sunday. Keep the 1 kg dahi dabba sealed. Weigh 150 g toned dahi each snack.",
+      "Day — peel 2 eggs. Weigh 25 g makhana. Whisk 150 g dahi with 150 ml cold water, pinch salt + roasted jeera. No pudina, raw onion, chili, or sugar.",
+      "Sip chaas upright — don't chug. Evening gym (after 1:30 dal, lift ~3:30–5): drink chaas after the session, or finish it ≥20 min before you get under the bar."
+    ]},
+  D1:{type:"Dinner", risk:"low", name:"Chicken palak (frozen bags)",
+    ing:["Chicken breast, raw 150 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","KILRR ½ pack","Pinch of salt, jeera, grated ginger"],
+    steps:[
+      "Sunday — mix 2½ KILRR packs with 3 tbsp water (or dahi, marinade only). Marinate 750 g chicken breast ≥30 min. No cream, butter, tomato, garlic.",
+      "Wilt 800 g palak. Blend with 1 tbsp grated ginger + salt until bright green — not khaki.",
+      "5 tsp olive oil (1 tsp × 5): crackle 1 tsp jeera. Cook marinated chicken through.",
+      "Stir in palak puree + 150 g whisked toned dahi. Soft simmer 3–4 min. Never hard boil or dahi splits.",
+      "Cool fully (shallow, <1 hour to fridge/freezer). Divide into 5 SlideSeal bags. Press flat. Freeze. Fridge palak goes swampy; freeze is the point.",
+      "Day — 1 bag in a pot with 2 tbsp water. Heat until bubbling. Last food of the day. 10-min upright walk. Stop eating 3 h before lying down."
+    ]}
 };
 
 /** Optional extras — hard sessions only. Pushes day over 1,500. Not in grocery totals. */
@@ -804,66 +743,87 @@ const ENERGY_ADDONS = {
     steps:["Cube paneer; serve with dahi."]}
 };
 
-/* Slot order: brunch → lunch (carbs) → snack → salad/soup → dinner */
+/* Mon–Fri same 4 slots. Sat/Sun free (not in grocery). */
+const WEEKDAY_MEALS = ["B1","L1","S1","D1"];
 const PLAN = {
-  Mon: ["B1","L1","S1","SA1","D1"],
-  Tue: ["B2","L2","S2","SA2","D2"],
-  Wed: ["B3","L3","S3","SA3","D3"],
-  Thu: ["B4","L4","S4","SA4","D4"],
-  Fri: ["B5","L5","S1","SA5","D5"],
-  Sat: ["B6","L6","D8"],
-  Sun: ["B7","L7","S6","SA7","D7"]
+  Mon: WEEKDAY_MEALS,
+  Tue: WEEKDAY_MEALS,
+  Wed: WEEKDAY_MEALS,
+  Thu: WEEKDAY_MEALS,
+  Fri: WEEKDAY_MEALS,
+  Sat: [],
+  Sun: []
 };
-/* Sat without Shin: restore snack + 7pm salad + palak dinner */
-const PLAN_SAT_ALT = ["B6","L6","S5","SA6","D6"];
-const SLOT_TIME = {0:"11:00 AM",1:"1:30 PM",2:"4:00 PM",3:"7:00 PM",4:"8:30 PM"};
-const SLOT_TIME_SAT_SHIN = {0:"11:00 AM",1:"1:30 PM",2:"8:30 PM"};
+const MEAL_SLOTS = [
+  { id:"B1", chip:"Breakfast", time:"11:00 AM" },
+  { id:"L1", chip:"Lunch", time:"1:30 PM" },
+  { id:"S1", chip:"Snack", time:"4:00 PM" },
+  { id:"D1", chip:"Dinner", time:"8:30 PM" }
+];
+const SLOT_TIME = {0:"11:00 AM",1:"1:30 PM",2:"4:00 PM",3:"8:30 PM"};
 const ADDON_IDS = ["E1","E2","E3","E4","E5","E6","E7"];
 
 const WORKOUT = [
-  {day:"Mon", title:"Upper Body Strength", type:"Gym", exercises:[
-    ["Push-up or DB bench press","3 x 8-10"],
+  {day:"Mon", title:"10k treadmill + Upper A", type:"Walk then lift", exercises:[
+    ["Treadmill walk — 10,000 steps (incline OK, conversational)","first"],
+    ["DB bench press or push-up","3 x 8-10"],
     ["Seated cable row / DB row","3 x 10"],
     ["Overhead DB shoulder press","3 x 10"],
     ["Lat pulldown","3 x 10"],
-    ["Bicep curl","2 x 12"],
-    ["Triceps pushdown","2 x 12"]
+    ["Bicep curl","3 x 10-12"],
+    ["Triceps pushdown","3 x 10-12"]
   ]},
-  {day:"Tue", title:"Lower Body Strength", type:"Gym", exercises:[
-    ["Goblet squat or leg press","3 x 10"],
-    ["Romanian deadlift (DB or barbell)","3 x 10"],
-    ["Walking lunges","3 x 12/leg"],
-    ["Leg curl (machine)","3 x 12"],
-    ["Standing calf raise","3 x 15"]
+  {day:"Tue", title:"10k treadmill + Lower A", type:"Walk then lift", exercises:[
+    ["Treadmill walk — 10,000 steps","first"],
+    ["Goblet squat or leg press","3 x 8-10"],
+    ["Romanian deadlift (DB or barbell)","3 x 8-10"],
+    ["Walking lunges","3 x 10/leg"],
+    ["Leg curl","3 x 10-12"],
+    ["Standing calf raise","3 x 12-15"]
   ]},
-  {day:"Wed", title:"Active Recovery", type:"Walk + mobility", exercises:[
-    ["Brisk incline walk","30-40 min"],
-    ["Hip and shoulder mobility flow","10 min"]
-  ]},
-  {day:"Thu", title:"Upper Body Strength (B)", type:"Gym", exercises:[
-    ["Incline DB press","3 x 10"],
-    ["Seated row","3 x 10"],
-    ["Lateral raise","3 x 15"],
+  {day:"Wed", title:"10k treadmill + Upper B (pull)", type:"Walk then lift", exercises:[
+    ["Treadmill walk — 10,000 steps","first"],
+    ["Chest-supported or DB row","3 x 10"],
+    ["Lat pulldown (close or wide)","3 x 10"],
     ["Face pull","3 x 15"],
-    ["Hammer curl","2 x 12"],
-    ["Overhead triceps extension","2 x 12"]
+    ["Rear-delt fly","3 x 12-15"],
+    ["Hammer curl","3 x 10-12"],
+    ["Plank (not a crunch)","3 x 30-40s"]
   ]},
-  {day:"Fri", title:"Lower Body + Core", type:"Gym", exercises:[
-    ["Hip thrust","3 x 10"],
+  {day:"Thu", title:"10k treadmill + Lower B", type:"Walk then lift", exercises:[
+    ["Treadmill walk — 10,000 steps","first"],
+    ["Hip thrust","3 x 8-10"],
     ["Leg press","3 x 10"],
     ["Step-ups","3 x 10/leg"],
-    ["Standing cable crunch or Pallof press","3 x 15"],
-    ["Plank","3 x 30-40s"]
+    ["Leg curl","3 x 12"],
+    ["Standing calf raise","3 x 12-15"]
   ]},
-  {day:"Sat", title:"Cardio / Conditioning", type:"Cardio", exercises:[
-    ["Incline treadmill walk or cycling, conversational pace","25-30 min"],
-    ["Light full-body mobility","10 min"]
+  {day:"Fri", title:"10k treadmill + Upper C", type:"Walk then lift", exercises:[
+    ["Treadmill walk — 10,000 steps","first"],
+    ["Incline DB press","3 x 10"],
+    ["Seated row","3 x 10"],
+    ["Lateral raise","3 x 12-15"],
+    ["Overhead triceps extension","3 x 10-12"],
+    ["Bicep curl","3 x 10-12"],
+    ["Standing cable crunch or Pallof press","3 x 12-15"]
   ]},
-  {day:"Sun", title:"Rest", type:"Rest", exercises:[["Full rest. Walk if you feel like it","optional"]]}
+  {day:"Sat", title:"10k treadmill + mobility", type:"Walk", exercises:[
+    ["Treadmill walk — 10,000 steps","required"],
+    ["Light full-body mobility","10 min"],
+    ["No heavy lift — recover for Mon","—"]
+  ]},
+  {day:"Sun", title:"10k treadmill + meal prep", type:"Walk + cook", exercises:[
+    ["Treadmill walk — 10,000 steps","required"],
+    ["Sunday batch cook (cheela bags, dal, chicken, palak bags, eggs, makhana)","after the walk"]
+  ]}
 ];
 
-const START_DATE = new Date('2026-09-01');
-const END_DATE = new Date(START_DATE); END_DATE.setDate(END_DATE.getDate()+120);
+const START_DATE = new Date(2026, 8, 8); // 8 Sep 2026 local — clock starts today
+const END_DATE = new Date(2027, 0, 1);
+const START_KG = 95;
+const GOAL_KG = 80;
+const LOSS_KG = START_KG - GOAL_KG;
+const SPAN_DAYS = Math.round((END_DATE - START_DATE) / 86400000);
 
 /* ---------- Grocery: weekly buy list in shop pack sizes ---------- */
 const SKIP_ING = /^(ice cubes|water\s+\d)/i;
@@ -909,7 +869,10 @@ const BUY_CATALOG = [
     shop:ml=> ml <= 0 ? null : (ml <= 500 ? "500 ml packet" : "1 L packet") },
   { group:"veg", name:"Palak (spinach)", re:/palak|spinach/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "1 bunch" : g <= 500 ? "2 bunches" : "3 bunches") },
+    shop:g=> g <= 0 ? null : (g <= 250 ? "1 bunch" : g <= 500 ? "2 bunches" : g <= 750 ? "3 bunches" : "4 bunches (~1 kg)") },
+  { group:"veg", name:"Dhania (coriander)", re:/fresh coriander/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:10; },
+    shop:g=> g <= 0 ? null : "1 small bunch" },
   { group:"veg", name:"Zucchini (tori)", re:/zucchini|tori/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> g <= 0 ? null : (g <= 300 ? "2 pieces" : "3–4 pieces") },
@@ -958,6 +921,12 @@ const BUY_CATALOG = [
   { group:"pantry", name:"Moong dal", re:/moong dal/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
     shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
+  { group:"pantry", name:"Soya chunks (dry)", re:/soya chunks/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
+    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g pack" : "500 g pack") },
+  { group:"pantry", name:"Besan", re:/\bbesan\s+\d/i, base:"g",
+    qty:s=>{ const m=s.match(/besan\s+(\d+)\s*g/i); return m?+m[1]:20; },
+    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : "500 g pack") },
   { group:"pantry", name:"Makhana", re:/makhana/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:20; },
     shop:()=> "1 pack (100–200 g)" },
@@ -1031,7 +1000,7 @@ function matchBuyLine(line){
   return null;
 }
 
-/** Walk every Mon-Sun slot. Sat includes both Shin + alt paths for bazaar. */
+/** Walk Mon–Fri weekday plate × 5. Sat/Sun free — not in bazaar. */
 function buildWeeklyGrocery(){
   const totals = Object.create(null);
   function addRecipe(id){
@@ -1050,7 +1019,6 @@ function buildWeeklyGrocery(){
   DAYS.forEach(day=>{
     (PLAN[day] || []).forEach(addRecipe);
   });
-  (PLAN_SAT_ALT || []).forEach(addRecipe);
   const byGroup = { protein:[], veg:[], pantry:[], dairy:[] };
   Object.values(totals).forEach(row=>{
     const qtyLabel = row.shop(row.amount);
@@ -1089,11 +1057,17 @@ document.querySelectorAll('.tabbar .tab').forEach(btn=>{
   });
 });
 
-/* ---------- Today / day switch ---------- */
-let activeDay = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay()-1];
+/* ---------- Today / meal chips (Mon–Fri plate) ---------- */
+function defaultMealId(){
+  const h = new Date().getHours();
+  if(h < 13) return "B1";
+  if(h < 16) return "L1";
+  if(h < 20) return "S1";
+  return "D1";
+}
+let activeMealId = defaultMealId();
 let lastMealTrigger = null;
 const ENERGY_KEY = 'plate78_energy';
-const SAT_SHIN_KEY = 'plate78_sat_shin';
 
 function isEnergyBoostOn(){
   return safeStorage.get(ENERGY_KEY) === '1';
@@ -1105,26 +1079,6 @@ function setEnergyBoost(on){
   renderDayCard();
 }
 
-/** Default ON — full Shin Sat dinner. OFF → 7pm salad + palak plate. */
-function isSatShinOn(){
-  const v = safeStorage.get(SAT_SHIN_KEY);
-  return v === null || v === '1';
-}
-function setSatShin(on){
-  safeStorage.set(SAT_SHIN_KEY, on ? '1' : '0');
-  renderDayCard();
-}
-
-function getDayMealIds(day){
-  if(day === 'Sat') return isSatShinOn() ? PLAN.Sat : PLAN_SAT_ALT;
-  return PLAN[day] || [];
-}
-
-function getDaySlotTime(day, index, mealCount){
-  if(day === 'Sat' && isSatShinOn()) return SLOT_TIME_SAT_SHIN[index];
-  return SLOT_TIME[index];
-}
-
 function getRecipe(id){
   return RECIPES[id] || ENERGY_ADDONS[id] || null;
 }
@@ -1132,63 +1086,55 @@ function getRecipe(id){
 function renderDaySwitch(){
   const el = document.getElementById('daySwitch');
   el.innerHTML = '';
-  DAYS.forEach(d=>{
+  el.setAttribute('aria-label', 'Meal');
+  MEAL_SLOTS.forEach(slot=>{
     const b = document.createElement('button');
     b.type = 'button';
-    b.textContent = d;
-    b.setAttribute('aria-pressed', d === activeDay ? 'true' : 'false');
-    if(d === activeDay) b.classList.add('on');
-    b.addEventListener('click', ()=>{ activeDay = d; renderDaySwitch(); renderDayCard(); });
+    b.textContent = slot.chip;
+    b.setAttribute('aria-pressed', slot.id === activeMealId ? 'true' : 'false');
+    if(slot.id === activeMealId) b.classList.add('on');
+    b.addEventListener('click', ()=>{ activeMealId = slot.id; renderDaySwitch(); renderDayCard(); });
     el.appendChild(b);
   });
 }
 
 function renderDayCard(){
   const card = document.getElementById('dayCard');
-  const ids = getDayMealIds(activeDay);
   const boost = isEnergyBoostOn();
-  const shin = isSatShinOn();
-  const totals = dayMacros(ids);
-  const satToggle = activeDay === 'Sat' ? `
-    <label class="energy-toggle" style="margin:0 0 12px;padding:12px;background:var(--bg-raised);border-radius:var(--radius);display:flex;align-items:center;justify-content:space-between;gap:12px;">
-      <span class="energy-label">Sat dinner: Shin Ramyun (full pack)<br><small style="font-weight:400;color:var(--muted)">On = skip 4pm + 7pm. Off = snack + salad + palak plate</small></span>
-      <input type="checkbox" id="satShin" class="energy-check" aria-label="Shin Ramyun Saturday dinner" ${shin ? 'checked' : ''} />
-      <span class="energy-switch" aria-hidden="true"><span class="energy-track"><span class="energy-thumb"></span></span></span>
-    </label>` : '';
-  card.innerHTML = `<h2>${activeDay} · meal plan (1 person)</h2>` + satToggle + ids.map((id,i) => {
-    const r = RECIPES[id];
-    const m = recipeMacros(r);
-    const when = getDaySlotTime(activeDay, i, ids.length);
-    return `<button type="button" class="meal" data-recipe="${id}" aria-haspopup="dialog">
+  const totals = dayMacros(WEEKDAY_MEALS);
+  const slot = MEAL_SLOTS.find(s=> s.id === activeMealId) || MEAL_SLOTS[0];
+  const r = RECIPES[slot.id];
+  const m = recipeMacros(r);
+  const dow = new Date().getDay();
+  const weekend = dow === 0 || dow === 6;
+  const mealBtn = `<button type="button" class="meal" data-recipe="${slot.id}" aria-haspopup="dialog">
       <div>
-        <div class="when">${when} · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein</div>
+        <div class="when">${slot.time} · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein</div>
         <div class="name">${r.name}</div>
         <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^KILRR/i.test(x)).join(", ")}</div>
-        <div class="hint">Tap for recipe</div>
+        <div class="hint">Tap for Sunday batch + day-of steps</div>
       </div>
       <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
     </button>`;
-  }).join('') + (boost ? `
-    <div class="addon-heading">Hard-session add-ons · pick 1 — pushes over 1,500</div>
+  card.innerHTML = `<h2>${slot.chip} · weekday plate</h2>` +
+    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Sat/Sun is free eating. This is the <b>Mon–Fri</b> prep plate — use it Sunday to batch-cook.</div>` : '') +
+    mealBtn + (boost ? `
+    <div class="addon-heading">Hard-session add-ons · pick 1 — extra protein if the lift was brutal</div>
     ${ADDON_IDS.map(id => {
-      const r = ENERGY_ADDONS[id];
-      const m = recipeMacros(r);
+      const ar = ENERGY_ADDONS[id];
+      const am = recipeMacros(ar);
       return `<button type="button" class="meal addon" data-recipe="${id}" aria-haspopup="dialog">
         <div>
-          <div class="when">+${fmtKcal(m.kcal)} kcal · +${fmtProt(m.protein)} g protein</div>
-          <div class="name">${r.name}</div>
-          <div class="items">${r.ing.join(", ")}</div>
+          <div class="when">+${fmtKcal(am.kcal)} kcal · +${fmtProt(am.protein)} g protein</div>
+          <div class="name">${ar.name}</div>
+          <div class="items">${ar.ing.join(", ")}</div>
           <div class="hint">Tap for details</div>
         </div>
-        <div class="risk ${r.risk}">Optional</div>
+        <div class="risk ${ar.risk}">Optional</div>
       </button>`;
     }).join('')}
-  ` : '') + `<div class="note">This day computes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil ≤ 3 tsp. ${activeDay==='Sat' && shin ? 'Shin night: brunch + lunch + full-pack dinner only — no 4pm/7pm.' : 'Carbs mainly at 1:30.'} Dinner 8:30 → 10-min walk. ${boost ? 'Add-ons are emergency fuel only.' : 'Toggle energy above only after a brutal session.'}</div>`;
+  ` : '') + `<div class="note">Weekday plate computes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil 2 tsp (cap 3). Dal + cheela are the carbs. Dinner 8:30 → 10-min walk. ${boost ? 'Add-ons are extra fuel, not daily.' : 'Toggle energy above only after a brutal session.'}</div>`;
 
-  const shinEl = document.getElementById('satShin');
-  if(shinEl){
-    shinEl.addEventListener('change', (e)=> setSatShin(e.target.checked));
-  }
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
   });
@@ -1208,9 +1154,10 @@ function openRecipeDialog(id, trigger){
   dlgTitle.textContent = r.name;
   const m = recipeMacros(r);
   const kcalNote = m.kcal ? ` · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein` : '';
-  dlgMeta.textContent = `${r.type} · Serves 1${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
+  const isAddon = !!ENERGY_ADDONS[id];
+  dlgMeta.textContent = `${r.type} · ${isAddon ? 'Optional add-on' : '1 day (Sunday batch in steps)'}${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
   dlgBody.innerHTML = `
-    <h3>Ingredients</h3>
+    <h3>${isAddon ? 'Ingredients' : 'Ingredients (1 day)'}</h3>
     <ul class="plain">${r.ing.map(i=>`<li>${i}</li>`).join('')}</ul>
     <h3>Steps</h3>
     <ol class="steps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
@@ -1313,8 +1260,8 @@ function renderDaysLeft(){
 function renderOnTrack(){
   const el = document.getElementById('onTrackKg');
   if(!el) return;
-  const elapsed = Math.max(0, Math.min(120, Math.floor((Date.now() - START_DATE.getTime())/86400000)));
-  const onTrack = 95 - 17 * (elapsed / 120);
+  const elapsed = Math.max(0, Math.min(SPAN_DAYS, Math.floor((Date.now() - START_DATE.getTime())/86400000)));
+  const onTrack = START_KG - LOSS_KG * (elapsed / SPAN_DAYS);
   el.textContent = onTrack.toFixed(1);
 }
 
