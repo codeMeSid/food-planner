@@ -522,8 +522,8 @@
       <ul class="plain">
         <li><b>Stop eating 3 hrs before lying down</b>. Dinner is 8:30 PM — then a 10-min upright walk.</li>
         <li><b>Weigh raw grams</b> for chicken, dal, paneer, soya, oil (level tsp). Eyeballing breaks the deficit.</li>
-        <li>Olive oil hard cap: <b>3 level tsp/day</b>. Light/refined for cooking; EVOO only on salads.</li>
-        <li>Toned paneer + toned dahi only. Chaas = 150 g dahi + water + jeera — no mint, chili, onion, or sugar. No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki. KILRR OK on chicken — if reflux flares, switch to a milder pack.</li>
+        <li>Olive oil hard cap: <b>3 level tsp/day</b>. Same bottle for cooking — level tsp, not a free pour.</li>
+        <li>Toned paneer + toned dahi for cooking. Snack buttermilk: <b>200 ml from the 1 L tetra</b> — plain salted only, no masala/pudina/chili. No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki. KILRR OK on chicken — if reflux flares, switch to a milder pack.</li>
         <li>After lunch/dinner: saunf or ajwain water. Sit upright 20-30 min. Elevate bed head if nights are rough.</li>
         <li>Week 1 scale may rise 1–1.5 kg (glycogen water). Judge the 7-day average only.</li>
       </ul>
@@ -553,7 +553,7 @@
   <section id="grocery" role="tabpanel">
     <div class="card">
       <h2>Weekly bazaar list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Mon–Fri plate × 5. Sat/Sun not on this list. Also grab 15 SlideSeal bags + 2 ice-cube trays. Tap a row to tick. Saved on this device only.</p>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Mon–Fri plate × 5, rounded to packs you can actually buy. Sat/Sun free eating — not on this list. Also grab 15 SlideSeal bags + 2 ice-cube trays. Protein isolate stays off the list (hard-session add-ons only). Tap a row to tick. Saved on this device only.</p>
     </div>
     <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
     <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
@@ -609,36 +609,24 @@ const safeStorage = {
 const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 /**
- * Macro ledger — raw weights. Order matters (first match wins):
- * puttu/jowar before atta/rice; toned paneer/dahi before generics.
+ * Macro ledger — raw weights only. First regex match wins.
+ * Buttermilk = Amul-style tetra chaas (~29 kcal / 1.5 g protein per 100 ml).
+ * Protein isolate kept for ENERGY_ADDONS display macros (not in grocery).
  */
 const MACRO_RULES = [
-  { re:/chicken (?:breast|keema|mince)[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*1.20, protein:g=>g*0.225 },
-  { re:/(\d+)\s*whole eggs?/i, kcal:n=>n*72, protein:n=>n*6.3 },
+  { re:/chicken breast[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*1.20, protein:g=>g*0.225 },
   { re:/(\d+)\s*boiled eggs?/i, kcal:n=>n*72, protein:n=>n*6.3 },
-  { re:/(\d+)\s*egg whites?/i, kcal:n=>n*17, protein:n=>n*3.6 },
   { re:/toned paneer\s+(\d+)\s*g/i, kcal:g=>g*1.85, protein:g=>g*0.19 },
+  { re:/buttermilk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.29, protein:ml=>ml*0.015 },
   { re:/toned dahi\s+(\d+)\s*g/i, kcal:g=>g*0.60, protein:g=>g*0.035 },
-  { re:/toned milk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.58, protein:ml=>ml*0.031 },
-  { re:/yoga bar muesli\s+(\d+)\s*g/i, kcal:g=>g*3.86, protein:g=>g*0.23 },
-  { re:/puttu podi\s+(\d+)\s*g/i, kcal:g=>g*(183/50), protein:g=>g*(3/50) },
-  { re:/jowar atta\s+(\d+)\s*g/i, kcal:g=>g*(102/30), protein:g=>g*(3.6/30) },
-  { re:/atta\s+(\d+)\s*g/i, kcal:g=>g*(102/30), protein:g=>g*(3.6/30) },
-  { re:/rice,? raw\s+(\d+)\s*g/i, kcal:g=>g*(155/45), protein:g=>g*(3/45) },
   { re:/moong dal[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*(104/30), protein:g=>g*(7.2/30) },
   { re:/soya chunks[,\s]+dry\s+(\d+)\s*g/i, kcal:g=>g*3.45, protein:g=>g*0.52 },
   { re:/besan\s+(\d+)\s*g/i, kcal:g=>g*3.87, protein:g=>g*0.22 },
   { re:/fresh coriander\s+(\d+)\s*g/i, kcal:g=>g*0.23, protein:g=>g*0.021 },
   { re:/olive oil\s+([\d.]+)\s*tsp/i, kcal:n=>n*40, protein:()=>0 },
-  { re:/tahini\s+([\d.]+)\s*tsp/i, kcal:n=>n*30, protein:n=>n*1.7 },
-  { re:/grated coconut\s+(\d+)\s*g/i, kcal:g=>g*3.5, protein:g=>g*0.03 },
-  { re:/coconut milk\s+(\d+)\s*ml/i, kcal:ml=>ml*1.5, protein:ml=>ml*(0.5/30) },
   { re:/makhana\s+(\d+)\s*g/i, kcal:g=>g*(52/15), protein:g=>g*(1.5/15) },
   { re:/protein isolate\s+(\d+)\s*g/i, kcal:g=>g*(115/30), protein:g=>g*(25/30) },
-  { re:/banana\s+(\d+)\s*g/i, kcal:g=>g*0.89, protein:g=>g*0.011 },
-  { re:/papaya\s+(\d+)\s*g/i, kcal:g=>g*0.39, protein:g=>g*0.006 },
-  { re:/shin ramyun\s+([\d.]+)\s*pack/i, kcal:n=>n*500, protein:n=>n*10 },
-  { re:/(?:palak|spinach|green beans|beans|carrot|cucumber|lettuce|zucchini|tori|bhindi|capsicum|mushroom|broccoli)[^\d]*(\d+)\s*g/i,
+  { re:/(?:palak|spinach|carrot|capsicum)[^\d]*(\d+)\s*g/i,
     kcal:g=>g*0.25, protein:g=>g*0.015 }
 ];
 
@@ -695,16 +683,16 @@ const RECIPES = {
       "Divide 5 × 150 g into SlideSeal bags. Press flat. Freeze.",
       "Sunday dal — wash 250 g moong dal. Cook soft with ~1.1 L water, ½ tsp turmeric, salt, 1 tbsp grated ginger (2–3 whistles / ~20 min). Thin stew, not paste. Add water if thick.",
       "2.5 tsp olive oil (0.5 tsp × 5): crackle 1 tsp jeera + curry leaves. Into the dal. Stir. Cool uncovered 20–30 min. One lidded box. Fridge. Do not freeze. Keeps 5 days.",
-      "Day — ladle ⅕ of the dal (~200–220 g cooked). Rolling boil. Drop 1 frozen chicken bag in until steaming hot. Sit upright 20–30 min. This is the carb slot."
+      "Day — ladle ⅕ of the pot (~260 g cooked). Rolling boil. Drop 1 frozen chicken bag in until steaming hot. Sit upright 20–30 min. This is the carb slot."
     ]},
-  S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + chaas",
-    ing:["2 boiled eggs","Makhana 25 g","Toned dahi 150 g","Water 150 ml","Pinch of salt, roasted jeera powder"],
+  S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + buttermilk",
+    ing:["2 boiled eggs","Makhana 25 g","Buttermilk 200 ml","Pinch of salt, roasted jeera powder"],
     steps:[
       "Sunday — boil 10 eggs 8–9 min. Cool. Store unpeeled in a fridge box. Peel 2 the day you eat them — peeled eggs go off faster.",
       "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Airtight jar, room temp.",
-      "Chaas is day-of, not Sunday. Keep the 1 kg dahi dabba sealed. Weigh 150 g toned dahi each snack.",
-      "Day — peel 2 eggs. Weigh 25 g makhana. Whisk 150 g dahi with 150 ml cold water, pinch salt + roasted jeera. No pudina, raw onion, chili, or sugar.",
-      "Sip chaas upright — don't chug. Evening gym (after 1:30 dal, lift ~3:30–5): drink chaas after the session, or finish it ≥20 min before you get under the bar."
+      "Buy 1 L tetra buttermilk (plain salted — not masala, not pudina). 200 ml × 5 days = the pack, but an opened tetra only keeps ~3 days chilled. Open Mon, finish by Wed. Thu/Fri: whisk 60 g toned dahi with 150 ml water + salt (the 400 g dahi cup has the spare).",
+      "Day — peel 2 eggs. Weigh 25 g makhana. Pour 200 ml buttermilk (⅕ of the tetra). If the pack is unsalted, pinch roasted jeera. Skip extra salt if already salty.",
+      "Sip upright — don't chug. Evening gym (after 1:30 dal, lift ~3:30–5): drink buttermilk after the session, or finish it ≥20 min before you get under the bar."
     ]},
   D1:{type:"Dinner", risk:"low", name:"Chicken palak (frozen bags)",
     ing:["Chicken breast, raw 150 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","KILRR ½ pack","Pinch of salt, jeera, grated ginger"],
@@ -754,13 +742,13 @@ const PLAN = {
   Sat: [],
   Sun: []
 };
+/** Today chips — same 4 meals Mon–Fri. Times live here (no separate SLOT_TIME). */
 const MEAL_SLOTS = [
   { id:"B1", chip:"Breakfast", time:"11:00 AM" },
   { id:"L1", chip:"Lunch", time:"1:30 PM" },
   { id:"S1", chip:"Snack", time:"4:00 PM" },
   { id:"D1", chip:"Dinner", time:"8:30 PM" }
 ];
-const SLOT_TIME = {0:"11:00 AM",1:"1:30 PM",2:"4:00 PM",3:"8:30 PM"};
 const ADDON_IDS = ["E1","E2","E3","E4","E5","E6","E7"];
 
 const WORKOUT = [
@@ -825,30 +813,27 @@ const GOAL_KG = 80;
 const LOSS_KG = START_KG - GOAL_KG;
 const SPAN_DAYS = Math.round((END_DATE - START_DATE) / 86400000);
 
-/* ---------- Grocery: weekly buy list in shop pack sizes ---------- */
+/* ---------- Grocery: Mon–Fri plate × 5 → shop packs ---------- */
 const SKIP_ING = /^(ice cubes|water\s+\d)/i;
 
 /**
- * Match recipe lines → accumulate base usage for the week, then convert
- * to shop packs. Order matters (first match wins).
+ * Match one ingredient line → accumulate weekly base usage, then shop().
+ * Only items that appear in RECIPES (or pinch-of-salt spice/ginger lines).
+ * ENERGY_ADDONS intentionally omitted. Order = first match wins.
+ *
+ * Expected weekly raw totals for the current plate:
+ *   chicken 1.5 kg · eggs 10 · paneer 500 g · dahi 250 g · buttermilk 1 L
+ *   palak 1 kg · dhania 50 g · capsicum 175 g · carrot 175 g
+ *   moong dal 250 g · soya 250 g · besan 100 g · makhana 125 g · KILRR 5 packs
  */
 const BUY_CATALOG = [
   { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> packKg(g) },
-  { group:"protein", name:"Chicken keema", re:/chicken keema|keema/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> packKg(g) },
-  { group:"protein", name:"Eggs", re:/\beggs?\b|egg whites?/i, base:"count",
+  { group:"protein", name:"Eggs", re:/\bboiled eggs?\b|\beggs?\b/i, base:"count",
     qty:s=>{
-      let n = 0;
-      const whites = s.match(/(\d+)\s*egg whites?/i);
-      if(whites) n += +whites[1];
-      if(/\bwhole eggs?\b/i.test(s) || /\bboiled eggs?\b/i.test(s) || (/\beggs?\b/i.test(s) && !/egg\s*white/i.test(s))){
-        const m=s.match(/(\d+)\s*(?:whole\s+|boiled\s+)?eggs?\b/i);
-        n += m?+m[1]:1;
-      }
-      return n;
+      const m=s.match(/(\d+)\s*(?:boiled\s+)?eggs?\b/i);
+      return m?+m[1]:1;
     },
     shop:n=>{
       if(n <= 0) return null;
@@ -860,64 +845,32 @@ const BUY_CATALOG = [
     } },
   { group:"dairy", name:"Toned paneer", re:/toned paneer|paneer/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : g <= 400 ? "400 g pack" : g <= 800 ? "2 × 400 g packs" : "1 kg") },
+    shop:g=>{
+      if(g <= 0) return null;
+      if(g <= 200) return "200 g pack";
+      if(g <= 400) return "400 g pack";
+      if(g <= 600) return "500 g pack (or 3 × 200 g)";
+      if(g <= 800) return "2 × 400 g packs";
+      return "1 kg";
+    } },
+  { group:"dairy", name:"Buttermilk (tetra)", re:/buttermilk/i, base:"ml",
+    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
+    shop:ml=> ml <= 0 ? null : (ml <= 500 ? "500 ml tetra" : "1 L tetra pack") },
   { group:"dairy", name:"Toned dahi", re:/toned dahi|dahi|yogurt/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> g <= 0 ? null : (g <= 400 ? "400 g cup" : g <= 1000 ? "1 kg dabba" : "2 kg") },
-  { group:"dairy", name:"Toned milk", re:/toned milk/i, base:"ml",
-    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:150; },
-    shop:ml=> ml <= 0 ? null : (ml <= 500 ? "500 ml packet" : "1 L packet") },
   { group:"veg", name:"Palak (spinach)", re:/palak|spinach/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "1 bunch" : g <= 500 ? "2 bunches" : g <= 750 ? "3 bunches" : "4 bunches (~1 kg)") },
+    shop:g=> g <= 0 ? null : (g <= 250 ? "1 bunch (~250 g)" : g <= 500 ? "2 bunches (~500 g)" : g <= 750 ? "3 bunches" : "1 kg (4 bunches)") },
   { group:"veg", name:"Dhania (coriander)", re:/fresh coriander/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:10; },
-    shop:g=> g <= 0 ? null : "1 small bunch" },
-  { group:"veg", name:"Zucchini (tori)", re:/zucchini|tori/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 300 ? "2 pieces" : "3–4 pieces") },
-  { group:"veg", name:"Cucumber", re:/cucumber/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 300 ? "2–3 pieces" : "4–5 pieces") },
-  { group:"veg", name:"Beans (phali)", re:/green beans/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
-  { group:"veg", name:"Bhindi", re:/bhindi/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
+    shop:g=> g <= 0 ? null : "1 bunch (~" + Math.round(g) + " g)" },
   { group:"veg", name:"Capsicum", re:/capsicum/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "2 pieces" : "3–4 pieces") },
-  { group:"veg", name:"Lettuce", re:/lettuce/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:80; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "1 head" : "2 heads") },
+    shop:g=> g <= 0 ? null : (g <= 130 ? "1 piece" : g <= 260 ? "2 pieces" : "3–4 pieces") },
   { group:"veg", name:"Carrot (gajar)", re:/carrot/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "3–4 pieces" : "500 g") },
-  { group:"veg", name:"Mushroom", re:/mushroom/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:80; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : "400 g pack") },
-  { group:"veg", name:"Papaya", re:/papaya/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:150; },
-    shop:()=> "1 small ripe papaya" },
-  { group:"veg", name:"Banana", re:/banana/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:80; },
-    shop:()=> "3–4 ripe bananas" },
-  { group:"pantry", name:"Rice (raw)", re:/rice,? raw/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:45; },
-    shop:g=> g <= 0 ? null : (g <= 500 ? "500 g" : "1 kg") },
-  { group:"pantry", name:"Puttu podi (rice flour)", re:/puttu podi/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:40; },
-    shop:()=> "1 small pack (250–500 g)" },
-  { group:"pantry", name:"Yoga Bar muesli (Choco Almond)", re:/yoga bar muesli/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:40; },
-    shop:()=> "1 pack 350 g (Sat brunch only — weigh 40 g)" },
-  { group:"pantry", name:"Jowar atta", re:/jowar atta/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
-    shop:()=> "500 g pack" },
-  { group:"pantry", name:"Atta", re:/\batta\s+\d/i, base:"g",
-    qty:s=>{ const m=s.match(/atta\s+(\d+)\s*g/i); return m?+m[1]:30; },
-    shop:g=> g <= 0 ? null : (g <= 500 ? "500 g atta" : "1 kg atta") },
+    shop:g=> g <= 0 ? null : (g <= 80 ? "1 piece" : g <= 250 ? "2 pieces" : "500 g") },
   { group:"pantry", name:"Moong dal", re:/moong dal/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
     shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
@@ -926,40 +879,29 @@ const BUY_CATALOG = [
     shop:g=> g <= 0 ? null : (g <= 250 ? "250 g pack" : "500 g pack") },
   { group:"pantry", name:"Besan", re:/\bbesan\s+\d/i, base:"g",
     qty:s=>{ const m=s.match(/besan\s+(\d+)\s*g/i); return m?+m[1]:20; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : "500 g pack") },
+    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : "500 g pack") + " (week uses " + Math.round(g) + " g)" },
   { group:"pantry", name:"Makhana", re:/makhana/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:20; },
-    shop:()=> "1 pack (100–200 g)" },
-  { group:"pantry", name:"Grated coconut / coconut milk", re:/grated coconut|coconut milk/i, base:"use",
+    shop:g=> g <= 0 ? null : (g <= 100 ? "100 g pack" : g <= 250 ? "250 g pack" : "500 g pack") + " (week uses " + Math.round(g) + " g)" },
+  { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
     qty:()=>1,
-    shop:()=> "1 small coconut or 200 ml coconut milk tetra" },
-  { group:"pantry", name:"Olive oil (light + EVOO)", re:/olive oil/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 bottle light/refined (cook) + EVOO optional for salad" },
-  { group:"pantry", name:"Tahini", re:/tahini/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 jar" },
-  { group:"pantry", name:"Apple cider vinegar", re:/apple cider vinegar/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 bottle (500 ml)" },
-  { group:"pantry", name:"Light soy sauce", re:/soy sauce/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 bottle (200–500 ml)" },
+    shop:()=> "1 bottle" },
   { group:"pantry", name:"Adrak (ginger)", re:/ginger/i, base:"use",
     qty:()=>1,
     shop:()=> "100 g piece" },
   { group:"pantry", name:"Spice kit (jeera, saunf, dhania, haldi, ajwain, hing, curry leaf, kasuri methi, pepper)", re:/jeera|saunf|dhania|turmeric|ajwain|hing|curry leaves|kasuri methi/i, base:"use",
     qty:()=>1,
     shop:()=> "restock as needed" },
-  { group:"pantry", name:"Shin Ramyun (Nongshim)", re:/shin ramyun/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 pack (Sat dinner — full pack)" },
-  { group:"pantry", name:"KILRR marinade combo", re:/kilrr/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 combo box — any pack, random is fine" },
-  { group:"pantry", name:"Protein isolate (plain)", re:/protein isolate/i, base:"use",
-    qty:()=>1,
-    shop:()=> "1 tub (keep for missed meals only)" }
+  { group:"pantry", name:"KILRR marinade", re:/kilrr/i, base:"pack",
+    qty:s=>{
+      const m=s.match(/([\d¼½¾]+)(?:\s*\/\s*\d+)?\s*pack/i);
+      return m ? frac(m[1]) : 0.5;
+    },
+    shop:n=>{
+      if(!(n > 0)) return null;
+      const packs = Math.ceil(n);
+      return packs === 1 ? "1 sachet" : packs + " sachets";
+    } }
 ];
 
 function frac(raw){
@@ -981,12 +923,6 @@ function packKg(g){
   if(g <= 1000) return "1 kg";
   const kg = Math.ceil(g / 500) / 2;
   return kg % 1 === 0 ? kg + " kg" : kg.toFixed(1) + " kg";
-}
-
-function shopPieces(n){
-  if(n <= 0) return null;
-  const c = Math.ceil(n);
-  return c === 1 ? "1 piece" : c + " pieces";
 }
 
 function matchBuyLine(line){

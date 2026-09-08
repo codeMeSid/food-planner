@@ -6,11 +6,11 @@ product
 
 ## Users
 
-One person following a 120-day GERD-safe Indian meal plan while losing fat (95→78 kg). Primary surface is a phone home-screen PWA: day's five meals with cook steps on tap, gym split, weekly grocery with buy quantities. Used in the kitchen and at the gym, often one-handed.
+One person following a GERD-safe Indian meal-prep plan while losing fat (95→80 kg by 1 Jan). Primary surface is a phone home-screen PWA: Mon–Fri same four meals with Sunday batch steps on tap, gym split (10k steps then lift), weekly grocery in shop packs. Used in the kitchen and at the gym, often one-handed.
 
 ## Product Purpose
 
-Make the day's five meals (with cook steps on tap), workout, food rules, and a weekly grocery list available offline with no account. Success is opening Today, cooking the weighed recipe, hitting ~1,500 kcal / ~150 g protein, and buying only what the week needs.
+Make the weekday plate (Sunday batch + day-of assembly), workout, food rules, and a Mon–Fri grocery list available offline with no account. Success is opening Today, cooking the weighed recipe, hitting ~1,500 kcal / ~150 g protein, and buying only what the week needs. Sat/Sun are free eating.
 
 ## Brand Personality
 
