@@ -481,11 +481,11 @@
       </svg>
     </div>
     <div class="brand-text">
-      <div class="eyebrow">Plate 78 · GERD-safe · 1 person</div>
+      <div class="eyebrow">Plate 78 · GERD-safe · one person</div>
       <h1>95 kg to 80 kg</h1>
     </div>
   </div>
-  <div class="sub">6'0" · 28 · Sunday meal prep · 10k treadmill then lift · Jan 1</div>
+  <div class="sub">6'0", age 28. Sunday meal prep. 10k treadmill steps, then lift. Goal date: Jan 1.</div>
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
     <div class="pill">On track <b id="onTrackKg">-</b> kg</div>
@@ -501,8 +501,8 @@
     <div class="day-switch" id="daySwitch" role="toolbar" aria-label="Meal"></div>
     <div class="card energy-card">
       <label class="energy-toggle">
-        <span class="energy-label">Hard session — need fuel?</span>
-        <input type="checkbox" id="energyBoost" class="energy-check" aria-label="Show optional calorie add-ons for hard sessions" />
+        <span class="energy-label">Show optional extras after a hard workout</span>
+        <input type="checkbox" id="energyBoost" class="energy-check" aria-label="Show optional calorie add-ons after a hard workout" />
         <span class="energy-switch" aria-hidden="true">
           <span class="energy-track">
             <span class="energy-thumb">
@@ -552,8 +552,8 @@
 
   <section id="grocery" role="tabpanel">
     <div class="card">
-      <h2>Weekly bazaar list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Mon–Fri plate × 5, rounded to packs you can actually buy. Sat/Sun free eating — not on this list. Also grab 15 SlideSeal bags + 2 ice-cube trays. Protein isolate stays off the list (hard-session add-ons only). Tap a row to tick. Saved on this device only.</p>
+      <h2>Weekly grocery list</h2>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Quantities cover five weekday plates, rounded to packs you can buy. Saturday and Sunday are free eating and are not on this list. Also grab 15 SlideSeal bags and 2 ice-cube trays. Protein isolate stays off the list — use it only as a hard-workout add-on. Tap a row to tick it off. Saved on this device only.</p>
     </div>
     <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
     <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
@@ -1048,14 +1048,14 @@ function renderDayCard(){
         <div class="when">${slot.time} · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein</div>
         <div class="name">${r.name}</div>
         <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^KILRR/i.test(x)).join(", ")}</div>
-        <div class="hint">Tap for Sunday batch + day-of steps</div>
+        <div class="hint">Tap for Sunday batch steps and day-of assembly</div>
       </div>
       <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
     </button>`;
   card.innerHTML = `<h2>${slot.chip} · weekday plate</h2>` +
-    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Sat/Sun is free eating. This is the <b>Mon–Fri</b> prep plate — use it Sunday to batch-cook.</div>` : '') +
+    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Saturday and Sunday are free eating. This is the <b>Monday–Friday</b> prep plate — use it on Sunday when you batch-cook.</div>` : '') +
     mealBtn + (boost ? `
-    <div class="addon-heading">Hard-session add-ons · pick 1 — extra protein if the lift was brutal</div>
+    <div class="addon-heading">Hard-workout add-ons — pick one if you need extra protein</div>
     ${ADDON_IDS.map(id => {
       const ar = ENERGY_ADDONS[id];
       const am = recipeMacros(ar);
@@ -1064,12 +1064,12 @@ function renderDayCard(){
           <div class="when">+${fmtKcal(am.kcal)} kcal · +${fmtProt(am.protein)} g protein</div>
           <div class="name">${ar.name}</div>
           <div class="items">${ar.ing.join(", ")}</div>
-          <div class="hint">Tap for details</div>
+          <div class="hint">Tap for ingredients and steps</div>
         </div>
         <div class="risk ${ar.risk}">Optional</div>
       </button>`;
     }).join('')}
-  ` : '') + `<div class="note">Weekday plate computes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil 2 tsp (cap 3). Dal + cheela are the carbs. Dinner 8:30 → 10-min walk. ${boost ? 'Add-ons are extra fuel, not daily.' : 'Toggle energy above only after a brutal session.'}</div>`;
+  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 2 tsp (cap 3). Dal and cheela are the carbs. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
 
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
@@ -1091,7 +1091,7 @@ function openRecipeDialog(id, trigger){
   const m = recipeMacros(r);
   const kcalNote = m.kcal ? ` · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein` : '';
   const isAddon = !!ENERGY_ADDONS[id];
-  dlgMeta.textContent = `${r.type} · ${isAddon ? 'Optional add-on' : '1 day (Sunday batch in steps)'}${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
+  dlgMeta.textContent = `${r.type} · ${isAddon ? 'Optional add-on' : 'One day (Sunday batch quantities are in the steps)'}${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
   dlgBody.innerHTML = `
     <h3>${isAddon ? 'Ingredients' : 'Ingredients (1 day)'}</h3>
     <ul class="plain">${r.ing.map(i=>`<li>${i}</li>`).join('')}</ul>
