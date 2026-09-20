@@ -521,7 +521,7 @@
       <h2>Reflux ground rules</h2>
       <ul class="plain">
         <li><b>Stop eating 3 hrs before lying down</b>. Dinner is 8:30 PM — then a 10-min upright walk.</li>
-        <li><b>Weigh raw grams</b> for chicken, dal, paneer, soya, oil (level tsp). Eyeballing breaks the deficit.</li>
+        <li><b>Weigh raw grams</b> for chicken, paneer, soya, muesli, whey, oil (level tsp). Eyeballing breaks the deficit.</li>
         <li>Olive oil hard cap: <b>3 level tsp/day</b>. Same bottle for cooking — level tsp, not a free pour.</li>
         <li>Toned paneer + toned dahi for cooking. Snack buttermilk: <b>200 ml from the 1 L tetra</b> — plain salted only, no masala/pudina/chili. No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki. KILRR OK on chicken — if reflux flares, switch to a milder pack.</li>
         <li>After lunch/dinner: saunf or ajwain water. Sit upright 20-30 min. Elevate bed head if nights are rough.</li>
@@ -541,7 +541,7 @@
       <h2>Training around GERD</h2>
       <ul class="plain">
         <li>Every session: <b>10k treadmill steps first</b>, then weights. Stay upright.</li>
-        <li>Train <b>at least 2 hours after eating</b>, never right after a meal. Morning gym → cheela after. Evening gym → after lunch, dinner still 8:30.</li>
+        <li>Train <b>at least 2 hours after eating</b>, never right after a meal. Morning gym → muesli bowl after. Evening gym → after lunch cheela, dinner still 8:30.</li>
         <li>Skip lying-flat crunches/sit-ups and heavy leg raises. Use standing cable crunches, planks, or Pallof presses instead.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session, don't gulp large amounts at once.</li>
@@ -611,7 +611,8 @@ const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 /**
  * Macro ledger — raw weights only. First regex match wins.
  * Buttermilk = Amul-style tetra chaas (~29 kcal / 1.5 g protein per 100 ml).
- * Protein isolate kept for ENERGY_ADDONS display macros (not in grocery).
+ * Yoga Bar Choco Almond muesli label: 386 kcal / 23 g protein per 100 g.
+ * Protein isolate used in weekday breakfast and ENERGY_ADDONS.
  */
 const MACRO_RULES = [
   { re:/chicken breast[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*1.20, protein:g=>g*0.225 },
@@ -619,7 +620,8 @@ const MACRO_RULES = [
   { re:/toned paneer\s+(\d+)\s*g/i, kcal:g=>g*1.85, protein:g=>g*0.19 },
   { re:/buttermilk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.29, protein:ml=>ml*0.015 },
   { re:/toned dahi\s+(\d+)\s*g/i, kcal:g=>g*0.60, protein:g=>g*0.035 },
-  { re:/moong dal[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*(104/30), protein:g=>g*(7.2/30) },
+  { re:/toned milk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.58, protein:ml=>ml*0.033 },
+  { re:/yoga bar[^\d]*(\d+)\s*g/i, kcal:g=>g*3.86, protein:g=>g*0.23 },
   { re:/soya chunks[,\s]+dry\s+(\d+)\s*g/i, kcal:g=>g*3.45, protein:g=>g*0.52 },
   { re:/besan\s+(\d+)\s*g/i, kcal:g=>g*3.87, protein:g=>g*0.22 },
   { re:/fresh coriander\s+(\d+)\s*g/i, kcal:g=>g*0.23, protein:g=>g*0.021 },
@@ -664,7 +666,15 @@ function fmtKcal(n){ return Math.round(n).toLocaleString("en-IN"); }
 function fmtProt(n){ return Math.round(n); }
 
 const RECIPES = {
-  B1:{type:"Breakfast", risk:"low", name:"Paneer-soya cheela + chutney cube",
+  B1:{type:"Breakfast", risk:"low", name:"Yoga Bar muesli + milk + whey",
+    ing:["Toned milk 300 ml","Yoga Bar Choco Almond muesli 50 g","Protein isolate 20 g"],
+    steps:[
+      "No Sunday cook. Buy 1.5 L toned milk (300 ml × 5) + one Yoga Bar Choco Almond pouch. Keep whey in the pantry.",
+      "Day — pour 300 ml cold or lukewarm toned milk (not boiling). Weigh 50 g muesli. Stir in 20 g isolate until smooth.",
+      "Sit upright 20–30 min. Don't chug. If chocolate flares reflux that morning, skip the bowl and use a hard-session add-on later instead.",
+      "Opened milk: finish within 2 days chilled, or buy 500 ml packs and open fresh as needed."
+    ]},
+  L1:{type:"Lunch", risk:"low", name:"Paneer-soya cheela + chutney cube",
     ing:["Toned paneer 100 g","Soya chunks, dry 50 g","Besan 20 g","Capsicum 35 g","Carrot 35 g","Olive oil 0.5 tsp","Palak 40 g","Fresh coriander 10 g","Toned dahi 20 g","Pinch of salt, jeera, grated ginger"],
     steps:[
       "Equipment: 5 SlideSeal bags + 2 ice-cube trays. Sunday cook once; freeze bags + cubes.",
@@ -673,17 +683,7 @@ const RECIPES = {
       "Add water 1 tbsp at a time until thick batter (drops off a spoon, not dosa-thin). Weigh the bowl. Divide by 5. One SlideSeal bag each. Press flat. Label Day 1–5. Freeze.",
       "Sunday chutney — blanch 200 g palak 30 sec, ice-cold, squeeze. Blend with 50 g dhania, 100 g toned dahi, 1 tsp ginger, salt. No garlic, chili, lemon, mint. Fill trays ¾ full (~35–40 ml). Freeze 4–6 h.",
       "Day — thaw 1 bag 10–15 min (or cook from frozen with 1 tbsp water). Non-stick tawa, 0.5 tsp olive oil. Spread. Medium heat, gold both sides.",
-      "Pop 1 chutney cube. Thaw with a splash of water while the cheela cooks. Sit upright 20–30 min."
-    ]},
-  L1:{type:"Lunch", risk:"low", name:"Moong dal + shredded chicken",
-    ing:["Chicken breast, raw 150 g","Moong dal, raw 50 g","Olive oil 0.5 tsp","KILRR ½ pack","Pinch of salt, jeera, turmeric, curry leaves"],
-    steps:[
-      "Sunday chicken — mix 2½ KILRR packs with 3 tbsp water (or 3 tbsp toned dahi — marinade only). Marinate 750 g chicken breast ≥30 min.",
-      "Cook through on non-stick. No extra oil (oil is in the dal tadka). Juices run clear. Rest 5 min. Shred.",
-      "Divide 5 × 150 g into SlideSeal bags. Press flat. Freeze.",
-      "Sunday dal — wash 250 g moong dal. Cook soft with ~1.1 L water, ½ tsp turmeric, salt, 1 tbsp grated ginger (2–3 whistles / ~20 min). Thin stew, not paste. Add water if thick.",
-      "2.5 tsp olive oil (0.5 tsp × 5): crackle 1 tsp jeera + curry leaves. Into the dal. Stir. Cool uncovered 20–30 min. One lidded box. Fridge. Do not freeze. Keeps 5 days.",
-      "Day — ladle ⅕ of the pot (~260 g cooked). Rolling boil. Drop 1 frozen chicken bag in until steaming hot. Sit upright 20–30 min. This is the carb slot."
+      "Pop 1 chutney cube. Thaw with a splash of water while the cheela cooks. Sit upright 20–30 min. This is the carb slot."
     ]},
   S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + buttermilk",
     ing:["2 boiled eggs","Makhana 25 g","Buttermilk 200 ml","Pinch of salt, roasted jeera powder"],
@@ -692,7 +692,7 @@ const RECIPES = {
       "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Airtight jar, room temp.",
       "Buy 1 L tetra buttermilk (plain salted — not masala, not pudina). 200 ml × 5 days = the pack, but an opened tetra only keeps ~3 days chilled. Open Mon, finish by Wed. Thu/Fri: whisk 60 g toned dahi with 150 ml water + salt (the 400 g dahi cup has the spare).",
       "Day — peel 2 eggs. Weigh 25 g makhana. Pour 200 ml buttermilk (⅕ of the tetra). If the pack is unsalted, pinch roasted jeera. Skip extra salt if already salty.",
-      "Sip upright — don't chug. Evening gym (after 1:30 dal, lift ~3:30–5): drink buttermilk after the session, or finish it ≥20 min before you get under the bar."
+      "Sip upright — don't chug. Evening gym (after 1:30 cheela, lift ~3:30–5): drink buttermilk after the session, or finish it ≥20 min before you get under the bar."
     ]},
   D1:{type:"Dinner", risk:"low", name:"Chicken palak (frozen bags)",
     ing:["Chicken breast, raw 150 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","KILRR ½ pack","Pinch of salt, jeera, grated ginger"],
@@ -802,7 +802,7 @@ const WORKOUT = [
   ]},
   {day:"Sun", title:"10k treadmill + meal prep", type:"Walk + cook", exercises:[
     ["Treadmill walk — 10,000 steps","required"],
-    ["Sunday batch cook (cheela bags, dal, chicken, palak bags, eggs, makhana)","after the walk"]
+    ["Sunday batch cook (cheela bags, chicken palak bags, eggs, makhana; buy milk + muesli + whey)","after the walk"]
   ]}
 ];
 
@@ -819,12 +819,14 @@ const SKIP_ING = /^(ice cubes|water\s+\d)/i;
 /**
  * Match one ingredient line → accumulate weekly base usage, then shop().
  * Only items that appear in RECIPES (or pinch-of-salt spice/ginger lines).
- * ENERGY_ADDONS intentionally omitted. Order = first match wins.
+ * ENERGY_ADDONS intentionally omitted (extra whey beyond the weekday 20 g).
+ * Order = first match wins.
  *
  * Expected weekly raw totals for the current plate:
- *   chicken 1.5 kg · eggs 10 · paneer 500 g · dahi 250 g · buttermilk 1 L
+ *   chicken 750 g · eggs 10 · paneer 500 g · dahi 250 g · buttermilk 1 L
+ *   toned milk 1.5 L · Yoga Bar muesli 250 g · protein isolate 100 g
  *   palak 1 kg · dhania 50 g · capsicum 175 g · carrot 175 g
- *   moong dal 250 g · soya 250 g · besan 100 g · makhana 125 g · KILRR 5 packs
+ *   soya 250 g · besan 100 g · makhana 125 g · KILRR 2½ packs
  */
 const BUY_CATALOG = [
   { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
@@ -842,6 +844,18 @@ const BUY_CATALOG = [
       if(n <= 18) return "1½ dozen";
       if(n <= 24) return "2 dozen";
       return Math.ceil(n/12) + " dozen";
+    } },
+  { group:"protein", name:"Protein isolate", re:/protein isolate/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:20; },
+    shop:g=> g <= 0 ? null : "1 tub (week uses " + Math.round(g) + " g)" },
+  { group:"dairy", name:"Toned milk", re:/toned milk/i, base:"ml",
+    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:300; },
+    shop:ml=>{
+      if(ml <= 0) return null;
+      if(ml <= 500) return "500 ml";
+      if(ml <= 1000) return "1 L";
+      if(ml <= 1500) return "1.5 L (or 3 × 500 ml)";
+      return "2 L";
     } },
   { group:"dairy", name:"Toned paneer", re:/toned paneer|paneer/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
@@ -871,9 +885,9 @@ const BUY_CATALOG = [
   { group:"veg", name:"Carrot (gajar)", re:/carrot/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
     shop:g=> g <= 0 ? null : (g <= 80 ? "1 piece" : g <= 250 ? "2 pieces" : "500 g") },
-  { group:"pantry", name:"Moong dal", re:/moong dal/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
+  { group:"pantry", name:"Yoga Bar Choco Almond muesli", re:/yoga bar/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
+    shop:g=> g <= 0 ? null : (g <= 400 ? "1 pouch (400 g)" : "2 pouches") + " (week uses " + Math.round(g) + " g)" },
   { group:"pantry", name:"Soya chunks (dry)", re:/soya chunks/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
     shop:g=> g <= 0 ? null : (g <= 250 ? "250 g pack" : "500 g pack") },
@@ -1069,7 +1083,7 @@ function renderDayCard(){
         <div class="risk ${ar.risk}">Optional</div>
       </button>`;
     }).join('')}
-  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 2 tsp (cap 3). Dal and cheela are the carbs. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
+  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 1.5 tsp (cap 3). Muesli and cheela are the carbs. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
 
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
