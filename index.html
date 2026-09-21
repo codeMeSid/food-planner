@@ -31,8 +31,8 @@
     --terra-brand: #CC956B;   /* right stripe — brand hue */
     /* Deepened brand for AA interactive fills (white ≥4.5:1) */
     --terra: #9A6240;
-    --terra-deep: #7A4A2E;    /* small accent text on sand ≥4.5:1 */
-    --terra-bright: #7A4A2E;
+    --terra-deep: #65422A;    /* accent on clay ≥4.5:1 AA */
+    --terra-bright: #65422A;
     --terra-dim: color-mix(in srgb, var(--terra-brand) 22%, transparent);
     --on-terra: #FFFFFF;
     --bg: var(--sand);
@@ -384,7 +384,7 @@
   }
   nav.tabbar button{
     flex:1; min-width:0; min-height:52px; background:none; border:none; color:var(--muted);
-    font-size:10.5px; font-weight:650; padding:6px 2px; white-space:nowrap;
+    font-size:11px; font-weight:650; padding:6px 2px; white-space:nowrap;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; cursor:pointer;
     letter-spacing:0.02em;
     border-radius: 16px;
@@ -482,16 +482,16 @@
     </div>
     <div class="brand-text">
       <div class="eyebrow">Plate 78 · GERD-safe · one person</div>
-      <h1>95 kg to 80 kg</h1>
+      <h1>95 kg to 80–84 kg</h1>
     </div>
   </div>
-  <div class="sub">6'0", age 28. Sunday meal prep. 10k treadmill steps, then lift. Goal date: Jan 1.</div>
+  <div class="sub">6'0", age 28. Sunday meal prep. Morning incline + core. Gym 4 nights. Goal date: 1 Feb 2027.</div>
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
     <div class="pill">On track <b id="onTrackKg">-</b> kg</div>
-    <div class="pill">Target <b id="kcalTarget">1,500</b> kcal/day</div>
+    <div class="pill">Target <b id="kcalTarget">1,450</b> kcal/day</div>
     <div class="pill">Protein <b>~150</b> g/day</div>
-    <div class="pill">Steps <b>10k</b> + gym</div>
+    <div class="pill">Incline + gym</div>
   </div>
 </header>
 
@@ -520,12 +520,14 @@
     <div class="card">
       <h2>Reflux ground rules</h2>
       <ul class="plain">
+        <li><b>Wake drink:</b> 300–400 ml water + pinch of salt + 1 tbsp ACV. Sip upright 5–10 min. Wait 20–30 min before breakfast. Stop ACV if burn starts.</li>
         <li><b>Stop eating 3 hrs before lying down</b>. Dinner is 8:30 PM — then a 10-min upright walk.</li>
-        <li><b>Weigh raw grams</b> for chicken, dal, paneer, soya, oil (level tsp). Eyeballing breaks the deficit.</li>
-        <li>Olive oil hard cap: <b>3 level tsp/day</b>. Same bottle for cooking — level tsp, not a free pour.</li>
-        <li>Toned paneer + toned dahi for cooking. Snack buttermilk: <b>200 ml from the 1 L tetra</b> — plain salted only, no masala/pudina/chili. No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki. KILRR OK on chicken — if reflux flares, switch to a milder pack.</li>
-        <li>After lunch/dinner: saunf or ajwain water. Sit upright 20-30 min. Elevate bed head if nights are rough.</li>
+        <li><b>Weigh raw grams</b> for chicken, milk, muesli, whey, oil (level tsp). Eyeballing breaks the deficit.</li>
+        <li>Olive oil hard cap: <b>3 level tsp/day</b> (this plate uses 1.5 tsp). Level tsp, not a free pour.</li>
+        <li>Goodlife toned milk + toned dahi for cooking. Snack buttermilk: <b>200 ml from the 1 L tetra</b> — plain salted only, no masala/pudina/chili. Marinate chicken with toned dahi only (no packaged marinade). No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki, cauliflower.</li>
+        <li>After lunch/dinner: saunf or ajwain water. Sit upright 20–30 min. Elevate bed head if nights are rough.</li>
         <li>Week 1 scale may rise 1–1.5 kg (glycogen water). Judge the 7-day average only.</li>
+        <li><b>Soft weekends:</b> keep the wake drink + breakfast bowl, plus one solid protein meal (chicken ≥150 g, 2–3 eggs, or paneer ≥100 g). Other meals flexible — avoid deep-fried and late heavy dinners.</li>
       </ul>
     </div>
   </section>
@@ -534,18 +536,19 @@
     <div class="card">
       <h2>Weekly split</h2>
       <div id="wkOverview"></div>
-      <p class="note">Every day: <b>10,000 treadmill steps first</b>, then lifting on gym days. Upright, incline OK. This is the fat-loss lever after the 1,500 kcal plate.</p>
+      <p class="note">Every day: <b>morning incline walk + home core</b>. Commercial gym <b>Mon / Tue / Thu / Fri</b> in the evening (Workout A / B / A / B). Wed, Sat, Sun = morning only. Incline walking burns more per minute than a slow flat 10k when time is matched — fat loss still needs the calorie deficit.</p>
     </div>
     <div id="wkDetails"></div>
     <div class="card">
-      <h2>Training around GERD</h2>
+      <h2>Training around GERD + lower back</h2>
       <ul class="plain">
-        <li>Every session: <b>10k treadmill steps first</b>, then weights. Stay upright.</li>
-        <li>Train <b>at least 2 hours after eating</b>, never right after a meal. Morning gym → cheela after. Evening gym → after lunch, dinner still 8:30.</li>
-        <li>Skip lying-flat crunches/sit-ups and heavy leg raises. Use standing cable crunches, planks, or Pallof presses instead.</li>
+        <li>Morning cardio + core first. Evening lift on gym days. Stay upright where you can.</li>
+        <li>Train <b>at least 2 hours after lunch</b>. Never right after a meal. Dinner stays at 8:30 after the gym session.</li>
+        <li>Bicycle crunch is allowed (food manages GERD). Keep the low back pressed to the floor. <b>Stop if lumbar pain</b> — swap to dead bug / bird dog / side plank that day.</li>
+        <li>Avoid heavy barbell deadlifts, bent-over barbell rows, and good mornings while the back settles.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
-        <li>Sip water through the session, don't gulp large amounts at once.</li>
-        <li>Protein <b>~150 g/day</b> from the weekday plate so the 15 kg is mostly fat and you can still lift. Add-ons only if a meal is missed or the session was brutal.</li>
+        <li>Sip water through the session; don't gulp large amounts at once.</li>
+        <li>Protein <b>~150 g/day</b> from the weekday plate (whey is in breakfast). Add-ons only if a meal is missed or the session was brutal.</li>
       </ul>
     </div>
   </section>
@@ -553,7 +556,7 @@
   <section id="grocery" role="tabpanel">
     <div class="card">
       <h2>Weekly grocery list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Quantities cover five weekday plates, rounded to packs you can buy. Saturday and Sunday are free eating and are not on this list. Also grab 15 SlideSeal bags and 2 ice-cube trays. Protein isolate stays off the list — use it only as a hard-workout add-on. Tap a row to tick it off. Saved on this device only.</p>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Quantities cover five weekday plates, rounded to packs you can buy. Soft weekends are not on this list. Grab ~12 SlideSeal bags (lunch chicken + dinner palak). Whey isolate is on the list — it is part of breakfast. Tap a row to tick it off. Saved on this device only.</p>
     </div>
     <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
     <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
@@ -611,7 +614,8 @@ const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 /**
  * Macro ledger — raw weights only. First regex match wins.
  * Buttermilk = Amul-style tetra chaas (~29 kcal / 1.5 g protein per 100 ml).
- * Protein isolate kept for ENERGY_ADDONS display macros (not in grocery).
+ * Goodlife toned milk ~60 kcal / 3.2 g protein per 100 ml.
+ * Yoga Bar-style muesli ~420 kcal / 11 g protein per 100 g (label may vary ±40 kcal).
  */
 const MACRO_RULES = [
   { re:/chicken breast[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*1.20, protein:g=>g*0.225 },
@@ -619,10 +623,11 @@ const MACRO_RULES = [
   { re:/toned paneer\s+(\d+)\s*g/i, kcal:g=>g*1.85, protein:g=>g*0.19 },
   { re:/buttermilk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.29, protein:ml=>ml*0.015 },
   { re:/toned dahi\s+(\d+)\s*g/i, kcal:g=>g*0.60, protein:g=>g*0.035 },
-  { re:/moong dal[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*(104/30), protein:g=>g*(7.2/30) },
-  { re:/soya chunks[,\s]+dry\s+(\d+)\s*g/i, kcal:g=>g*3.45, protein:g=>g*0.52 },
-  { re:/besan\s+(\d+)\s*g/i, kcal:g=>g*3.87, protein:g=>g*0.22 },
-  { re:/fresh coriander\s+(\d+)\s*g/i, kcal:g=>g*0.23, protein:g=>g*0.021 },
+  { re:/toned milk\s+(\d+)\s*ml/i, kcal:ml=>ml*0.60, protein:ml=>ml*0.032 },
+  { re:/muesli\s+(\d+)\s*g/i, kcal:g=>g*4.20, protein:g=>g*0.11 },
+  { re:/pomegranate\s+(\d+)\s*g/i, kcal:g=>g*0.83, protein:g=>g*0.017 },
+  { re:/psyllium(?:\s+husk)?\s+(\d+)\s*g/i, kcal:g=>g*2.0, protein:()=>0 },
+  { re:/apple cider vinegar\s+([\d.]+)\s*tbsp/i, kcal:()=>3, protein:()=>0 },
   { re:/olive oil\s+([\d.]+)\s*tsp/i, kcal:n=>n*40, protein:()=>0 },
   { re:/makhana\s+(\d+)\s*g/i, kcal:g=>g*(52/15), protein:g=>g*(1.5/15) },
   { re:/protein isolate\s+(\d+)\s*g/i, kcal:g=>g*(115/30), protein:g=>g*(25/30) },
@@ -664,53 +669,52 @@ function fmtKcal(n){ return Math.round(n).toLocaleString("en-IN"); }
 function fmtProt(n){ return Math.round(n); }
 
 const RECIPES = {
-  B1:{type:"Breakfast", risk:"low", name:"Paneer-soya cheela + chutney cube",
-    ing:["Toned paneer 100 g","Soya chunks, dry 50 g","Besan 20 g","Capsicum 35 g","Carrot 35 g","Olive oil 0.5 tsp","Palak 40 g","Fresh coriander 10 g","Toned dahi 20 g","Pinch of salt, jeera, grated ginger"],
+  B1:{type:"Breakfast", risk:"low", name:"Milk muesli bowl + whey",
+    ing:["Toned milk 250 ml","Muesli 50 g","Pomegranate 25 g","Psyllium husk 10 g","Protein isolate 30 g","Apple cider vinegar 1 tbsp"],
     steps:[
-      "Equipment: 5 SlideSeal bags + 2 ice-cube trays. Sunday cook once; freeze bags + cubes.",
-      "Sunday cheela — soak 250 g dry soya chunks in hot water 15 min. Squeeze hard. Chop fine.",
-      "Crumble 500 g toned paneer. Mix with the soya, 100 g besan, 175 g fine-diced capsicum, 175 g fine-diced carrot, 1 tsp jeera, 1 tbsp grated ginger, salt. No onion, garlic, chili, tomato.",
-      "Add water 1 tbsp at a time until thick batter (drops off a spoon, not dosa-thin). Weigh the bowl. Divide by 5. One SlideSeal bag each. Press flat. Label Day 1–5. Freeze.",
-      "Sunday chutney — blanch 200 g palak 30 sec, ice-cold, squeeze. Blend with 50 g dhania, 100 g toned dahi, 1 tsp ginger, salt. No garlic, chili, lemon, mint. Fill trays ¾ full (~35–40 ml). Freeze 4–6 h.",
-      "Day — thaw 1 bag 10–15 min (or cook from frozen with 1 tbsp water). Non-stick tawa, 0.5 tsp olive oil. Spread. Medium heat, gold both sides.",
-      "Pop 1 chutney cube. Thaw with a splash of water while the cheela cooks. Sit upright 20–30 min."
+      "Wake first (not part of this bowl): drink 300–400 ml water with a pinch of salt and 1 tbsp apple cider vinegar. Sip upright for 5–10 minutes. Wait 20–30 minutes before breakfast.",
+      "Buy for the week: Goodlife toned milk 1 L tetra, Yoga Bar muesli (chocolate & almonds) or equivalent, whey protein isolate, psyllium husk, fresh pomegranate.",
+      "Day — pour 250 ml cold toned milk into a bowl. Whisk in 30 g whey isolate (1 scoop) until smooth with no clumps.",
+      "Stir in 50 g muesli, 25 g pomegranate arils, and 10 g psyllium husk. Eat seated and upright. Sit 20–30 minutes after.",
+      "If whey brand scoop is not 30 g, weigh 30 g on a scale. Do not guess."
     ]},
-  L1:{type:"Lunch", risk:"low", name:"Moong dal + shredded chicken",
-    ing:["Chicken breast, raw 150 g","Moong dal, raw 50 g","Olive oil 0.5 tsp","KILRR ½ pack","Pinch of salt, jeera, turmeric, curry leaves"],
+  L1:{type:"Lunch", risk:"low", name:"Warm chicken salad",
+    ing:["Chicken breast, raw 180 g","Capsicum 60 g","Carrot 60 g","Toned dahi 70 g","Olive oil 0.5 tsp","Pinch of salt, jeera, grated ginger"],
     steps:[
-      "Sunday chicken — mix 2½ KILRR packs with 3 tbsp water (or 3 tbsp toned dahi — marinade only). Marinate 750 g chicken breast ≥30 min.",
-      "Cook through on non-stick. No extra oil (oil is in the dal tadka). Juices run clear. Rest 5 min. Shred.",
-      "Divide 5 × 150 g into SlideSeal bags. Press flat. Freeze.",
-      "Sunday dal — wash 250 g moong dal. Cook soft with ~1.1 L water, ½ tsp turmeric, salt, 1 tbsp grated ginger (2–3 whistles / ~20 min). Thin stew, not paste. Add water if thick.",
-      "2.5 tsp olive oil (0.5 tsp × 5): crackle 1 tsp jeera + curry leaves. Into the dal. Stir. Cool uncovered 20–30 min. One lidded box. Fridge. Do not freeze. Keeps 5 days.",
-      "Day — ladle ⅕ of the pot (~260 g cooked). Rolling boil. Drop 1 frozen chicken bag in until steaming hot. Sit upright 20–30 min. This is the carb slot."
+      "Equipment: 5 SlideSeal bags for chicken, 1 fridge box for vegetables, 1 jar for dressing.",
+      "Sunday chicken — weigh 900 g raw chicken breast (180 g × 5). Marinate with 150 g toned dahi (~10 tbsp), salt, and 1 tbsp grated ginger for at least 30 minutes.",
+      "Cook the chicken through on a non-stick pan. No cooking oil (oil is in the dressing). Juices run clear. Rest 5 minutes. Dice or shred.",
+      "Divide into 5 SlideSeal bags. Press flat. Label Day 1–5. Freeze.",
+      "Sunday vegetables — fine-dice 300 g capsicum and 300 g carrot. Dry-sauté or steam with a splash of water until just soft (not mushy). Cool fully. Store in one fridge box (keeps 3–4 days). Refresh midweek on Wednesday if texture softens.",
+      "Sunday dressing — whisk 200 g toned dahi with 2.5 tsp olive oil (0.5 tsp × 5), salt, roasted jeera, and grated ginger. Jar in the fridge. Keeps 3–4 days; remix if it weeps.",
+      "Day — heat 1 frozen chicken bag with 2 tbsp water until steaming hot. Warm one-fifth of the vegetables in a pan or microwave. Toss with about 2 tbsp dressing (~40 g dahi portion; the remaining ~30 g dahi in the weekly total is the cooked marinade). Sit upright 20–30 minutes."
     ]},
   S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + buttermilk",
     ing:["2 boiled eggs","Makhana 25 g","Buttermilk 200 ml","Pinch of salt, roasted jeera powder"],
     steps:[
-      "Sunday — boil 10 eggs 8–9 min. Cool. Store unpeeled in a fridge box. Peel 2 the day you eat them — peeled eggs go off faster.",
-      "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Airtight jar, room temp.",
-      "Buy 1 L tetra buttermilk (plain salted — not masala, not pudina). 200 ml × 5 days = the pack, but an opened tetra only keeps ~3 days chilled. Open Mon, finish by Wed. Thu/Fri: whisk 60 g toned dahi with 150 ml water + salt (the 400 g dahi cup has the spare).",
-      "Day — peel 2 eggs. Weigh 25 g makhana. Pour 200 ml buttermilk (⅕ of the tetra). If the pack is unsalted, pinch roasted jeera. Skip extra salt if already salty.",
-      "Sip upright — don't chug. Evening gym (after 1:30 dal, lift ~3:30–5): drink buttermilk after the session, or finish it ≥20 min before you get under the bar."
+      "Sunday — boil 10 eggs for 8–9 minutes. Cool. Store unpeeled in a fridge box. Peel 2 on the day you eat them — peeled eggs spoil faster.",
+      "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Store in an airtight jar at room temperature.",
+      "Buy 1 L tetra buttermilk (plain salted — not masala, not pudina). 200 ml × 5 days = the pack, but an opened tetra only keeps about 3 days chilled. Open Monday, finish by Wednesday. Thursday/Friday: whisk 60 g toned dahi with 150 ml water and salt if needed.",
+      "Day — peel 2 eggs. Weigh 25 g makhana. Pour 200 ml buttermilk. If the pack is unsalted, add a pinch of roasted jeera. Skip extra salt if already salty.",
+      "Sip upright — do not chug. On gym evenings (lift after lunch): drink buttermilk after the session, or finish it at least 20 minutes before you lift."
     ]},
   D1:{type:"Dinner", risk:"low", name:"Chicken palak (frozen bags)",
-    ing:["Chicken breast, raw 150 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","KILRR ½ pack","Pinch of salt, jeera, grated ginger"],
+    ing:["Chicken breast, raw 200 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger"],
     steps:[
-      "Sunday — mix 2½ KILRR packs with 3 tbsp water (or dahi, marinade only). Marinate 750 g chicken breast ≥30 min. No cream, butter, tomato, garlic.",
-      "Wilt 800 g palak. Blend with 1 tbsp grated ginger + salt until bright green — not khaki.",
-      "5 tsp olive oil (1 tsp × 5): crackle 1 tsp jeera. Cook marinated chicken through.",
-      "Stir in palak puree + 150 g whisked toned dahi. Soft simmer 3–4 min. Never hard boil or dahi splits.",
-      "Cool fully (shallow, <1 hour to fridge/freezer). Divide into 5 SlideSeal bags. Press flat. Freeze. Fridge palak goes swampy; freeze is the point.",
-      "Day — 1 bag in a pot with 2 tbsp water. Heat until bubbling. Last food of the day. 10-min upright walk. Stop eating 3 h before lying down."
+      "Sunday — weigh 1 kg raw chicken breast (200 g × 5). Marinate with 150 g toned dahi (~10 tbsp), salt, and 1 tbsp grated ginger for at least 30 minutes. No cream, butter, tomato, or garlic.",
+      "Wash and wilt 800 g palak. Blend with 1 tbsp grated ginger and salt until bright green — not khaki.",
+      "Heat 5 tsp olive oil (1 tsp × 5). Crackle 1 tsp jeera. Cook the marinated chicken through.",
+      "Stir in the palak puree and 150 g whisked toned dahi (30 g × 5). Soft simmer 3–4 minutes. Never hard-boil or the dahi splits.",
+      "Cool fully in a shallow layer (under 1 hour to fridge or freezer). Divide into 5 SlideSeal bags. Press flat. Freeze. Fridge-only palak goes swampy; freezing is the point.",
+      "Day — put 1 bag in a pot with 2 tbsp water. Heat until bubbling. This is the last food of the day. Take a 10-minute upright walk. Stop eating at least 3 hours before lying down."
     ]}
 };
 
-/** Optional extras — hard sessions only. Pushes day over 1,500. Not in grocery totals. */
+/** Optional extras — hard sessions only. Pushes day over the weekday plate. Not in grocery totals. */
 const ENERGY_ADDONS = {
   E1:{type:"Add-on", risk:"low", name:"Half scoop protein isolate",
     ing:["Protein isolate 15 g","Water 150 ml"],
-    steps:["Shake until smooth.","Use only if protein lands under ~130 g."]},
+    steps:["Shake until smooth.","Use only if a meal was missed or the session was brutal — breakfast already has a full scoop."]},
   E2:{type:"Add-on", risk:"low", name:"1 boiled egg",
     ing:["1 boiled egg"],
     steps:["Simmer 8–9 min, cool and peel."]},
@@ -722,16 +726,16 @@ const ENERGY_ADDONS = {
     steps:["Eat slowly."]},
   E5:{type:"Add-on", risk:"low", name:"Chicken breast 50 g",
     ing:["Chicken breast, raw 50 g"],
-    steps:["Quick pan-cook with salt + ginger."]},
+    steps:["Quick pan-cook with salt and ginger. Marinate with 1 tbsp toned dahi if you want."]},
   E6:{type:"Add-on", risk:"low", name:"Full scoop protein isolate",
     ing:["Protein isolate 30 g","Water 200 ml"],
-    steps:["Shake until smooth. Emergency only — not daily."]},
+    steps:["Shake until smooth. Emergency only — not daily. Breakfast already includes 30 g."]},
   E7:{type:"Add-on", risk:"low", name:"Paneer + dahi",
     ing:["Toned paneer 40 g","Toned dahi 100 g"],
     steps:["Cube paneer; serve with dahi."]}
 };
 
-/* Mon–Fri same 4 slots. Sat/Sun free (not in grocery). */
+/* Mon–Fri same 4 slots. Sat/Sun soft weekends (not in grocery). */
 const WEEKDAY_MEALS = ["B1","L1","S1","D1"];
 const PLAN = {
   Mon: WEEKDAY_MEALS,
@@ -744,72 +748,90 @@ const PLAN = {
 };
 /** Today chips — same 4 meals Mon–Fri. Times live here (no separate SLOT_TIME). */
 const MEAL_SLOTS = [
-  { id:"B1", chip:"Breakfast", time:"11:00 AM" },
+  { id:"B1", chip:"Breakfast", time:"9:30 AM" },
   { id:"L1", chip:"Lunch", time:"1:30 PM" },
   { id:"S1", chip:"Snack", time:"4:00 PM" },
   { id:"D1", chip:"Dinner", time:"8:30 PM" }
 ];
 const ADDON_IDS = ["E1","E2","E3","E4","E5","E6","E7"];
 
+const MORNING_BLOCK = [
+  ["Incline walk warm-up — 3 min · incline 1–2% · 4.5 km/h","first"],
+  ["Incline work × 6 — 2 min · incline 7–8% · 4.8–5.2 km/h","each"],
+  ["Easy between × 6 — 1 min · incline 3% · 5.0–5.5 km/h","between"],
+  ["Cool-down — 2 min · incline 0–1% · 4.0 km/h","last card"],
+  ["Dead bug","3 × 8 / side"],
+  ["Bird dog","3 × 8 / side"],
+  ["Glute bridge","3 × 12"],
+  ["Bicycle crunch (stop if lumbar pain)","3 × 12 / side"],
+  ["Side plank (knees OK)","3 × 20 s / side"],
+  ["Dead hang on pull-up bar","3 × 15–20 s"]
+];
+
+const GYM_A = [
+  ["Leg press (feet mid; stop short of back pain)","3 × 10"],
+  ["Machine chest press or DB bench","3 × 10"],
+  ["Lat pulldown (wide, to upper chest)","3 × 10"],
+  ["Seated cable row or chest-supported row","3 × 10"],
+  ["Hip thrust (bar or machine)","3 × 10"],
+  ["Seated DB / machine shoulder press","3 × 10"],
+  ["Cable triceps pushdown","3 × 12"],
+  ["DB / cable biceps curl","3 × 12"],
+  ["Pallof press","3 × 10 / side"]
+];
+
+const GYM_B = [
+  ["Seated leg curl","3 × 12"],
+  ["Goblet squat or smith squat (light)","3 × 8"],
+  ["Lat pulldown (close / neutral grip)","3 × 10"],
+  ["One-arm DB row (chest on incline if possible)","3 × 10 / arm"],
+  ["Incline machine / DB press","3 × 10"],
+  ["Cable face pull","3 × 15"],
+  ["Lateral raise","3 × 12"],
+  ["Overhead cable / DB triceps extension","3 × 12"],
+  ["Hammer curl","3 × 12"],
+  ["Standing calf raise","3 × 15"]
+];
+
 const WORKOUT = [
-  {day:"Mon", title:"10k treadmill + Upper A", type:"Walk then lift", exercises:[
-    ["Treadmill walk — 10,000 steps (incline OK, conversational)","first"],
-    ["DB bench press or push-up","3 x 8-10"],
-    ["Seated cable row / DB row","3 x 10"],
-    ["Overhead DB shoulder press","3 x 10"],
-    ["Lat pulldown","3 x 10"],
-    ["Bicep curl","3 x 10-12"],
-    ["Triceps pushdown","3 x 10-12"]
+  {day:"Mon", title:"Morning incline + core · Gym A", type:"Home then gym", exercises:[
+    ...MORNING_BLOCK,
+    ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
+    ...GYM_A
   ]},
-  {day:"Tue", title:"10k treadmill + Lower A", type:"Walk then lift", exercises:[
-    ["Treadmill walk — 10,000 steps","first"],
-    ["Goblet squat or leg press","3 x 8-10"],
-    ["Romanian deadlift (DB or barbell)","3 x 8-10"],
-    ["Walking lunges","3 x 10/leg"],
-    ["Leg curl","3 x 10-12"],
-    ["Standing calf raise","3 x 12-15"]
+  {day:"Tue", title:"Morning incline + core · Gym B", type:"Home then gym", exercises:[
+    ...MORNING_BLOCK,
+    ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
+    ...GYM_B
   ]},
-  {day:"Wed", title:"10k treadmill + Upper B (pull)", type:"Walk then lift", exercises:[
-    ["Treadmill walk — 10,000 steps","first"],
-    ["Chest-supported or DB row","3 x 10"],
-    ["Lat pulldown (close or wide)","3 x 10"],
-    ["Face pull","3 x 15"],
-    ["Rear-delt fly","3 x 12-15"],
-    ["Hammer curl","3 x 10-12"],
-    ["Plank (not a crunch)","3 x 30-40s"]
+  {day:"Wed", title:"Morning incline + core", type:"Home only", exercises:[
+    ...MORNING_BLOCK,
+    ["No heavy gym — recover for Thu","—"]
   ]},
-  {day:"Thu", title:"10k treadmill + Lower B", type:"Walk then lift", exercises:[
-    ["Treadmill walk — 10,000 steps","first"],
-    ["Hip thrust","3 x 8-10"],
-    ["Leg press","3 x 10"],
-    ["Step-ups","3 x 10/leg"],
-    ["Leg curl","3 x 12"],
-    ["Standing calf raise","3 x 12-15"]
+  {day:"Thu", title:"Morning incline + core · Gym A", type:"Home then gym", exercises:[
+    ...MORNING_BLOCK,
+    ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
+    ...GYM_A
   ]},
-  {day:"Fri", title:"10k treadmill + Upper C", type:"Walk then lift", exercises:[
-    ["Treadmill walk — 10,000 steps","first"],
-    ["Incline DB press","3 x 10"],
-    ["Seated row","3 x 10"],
-    ["Lateral raise","3 x 12-15"],
-    ["Overhead triceps extension","3 x 10-12"],
-    ["Bicep curl","3 x 10-12"],
-    ["Standing cable crunch or Pallof press","3 x 12-15"]
+  {day:"Fri", title:"Morning incline + core · Gym B", type:"Home then gym", exercises:[
+    ...MORNING_BLOCK,
+    ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
+    ...GYM_B
   ]},
-  {day:"Sat", title:"10k treadmill + mobility", type:"Walk", exercises:[
-    ["Treadmill walk — 10,000 steps","required"],
-    ["Light full-body mobility","10 min"],
-    ["No heavy lift — recover for Mon","—"]
+  {day:"Sat", title:"Morning incline + core", type:"Home only", exercises:[
+    ...MORNING_BLOCK,
+    ["Soft weekend food — keep breakfast bowl + one protein meal","—"]
   ]},
-  {day:"Sun", title:"10k treadmill + meal prep", type:"Walk + cook", exercises:[
-    ["Treadmill walk — 10,000 steps","required"],
-    ["Sunday batch cook (cheela bags, dal, chicken, palak bags, eggs, makhana)","after the walk"]
+  {day:"Sun", title:"Morning incline + core · meal prep", type:"Home + cook", exercises:[
+    ...MORNING_BLOCK,
+    ["Sunday batch: salad chicken bags, veg box, dressing jar, palak bags, eggs, makhana","after the walk"]
   ]}
 ];
 
-const START_DATE = new Date(2026, 8, 8); // 8 Sep 2026 local — clock starts today
-const END_DATE = new Date(2027, 0, 1);
+const START_DATE = new Date(2026, 9, 1); // 1 Oct 2026 — plan start
+const END_DATE = new Date(2027, 1, 1);   // 1 Feb 2027
 const START_KG = 95;
-const GOAL_KG = 80;
+const GOAL_KG = 82; // midpoint of 80–84 band
 const LOSS_KG = START_KG - GOAL_KG;
 const SPAN_DAYS = Math.round((END_DATE - START_DATE) / 86400000);
 
@@ -822,9 +844,9 @@ const SKIP_ING = /^(ice cubes|water\s+\d)/i;
  * ENERGY_ADDONS intentionally omitted. Order = first match wins.
  *
  * Expected weekly raw totals for the current plate:
- *   chicken 1.5 kg · eggs 10 · paneer 500 g · dahi 250 g · buttermilk 1 L
- *   palak 1 kg · dhania 50 g · capsicum 175 g · carrot 175 g
- *   moong dal 250 g · soya 250 g · besan 100 g · makhana 125 g · KILRR 5 packs
+ *   chicken 1.9 kg · eggs 10 · milk 1.25 L · dahi ~500 g · buttermilk 1 L
+ *   palak 800 g · capsicum 300 g · carrot 300 g · makhana 125 g
+ *   muesli 250 g · whey 150 g · psyllium 50 g · pomegranate 125 g
  */
 const BUY_CATALOG = [
   { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
@@ -843,15 +865,20 @@ const BUY_CATALOG = [
       if(n <= 24) return "2 dozen";
       return Math.ceil(n/12) + " dozen";
     } },
-  { group:"dairy", name:"Toned paneer", re:/toned paneer|paneer/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+  { group:"protein", name:"Whey protein isolate", re:/protein isolate/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
     shop:g=>{
       if(g <= 0) return null;
-      if(g <= 200) return "200 g pack";
-      if(g <= 400) return "400 g pack";
-      if(g <= 600) return "500 g pack (or 3 × 200 g)";
-      if(g <= 800) return "2 × 400 g packs";
-      return "1 kg";
+      if(g <= 150) return "1 tub (week uses " + Math.round(g) + " g)";
+      return "1 tub (week uses " + Math.round(g) + " g)";
+    } },
+  { group:"dairy", name:"Goodlife toned milk", re:/toned milk/i, base:"ml",
+    qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:250; },
+    shop:ml=>{
+      if(ml <= 0) return null;
+      if(ml <= 1000) return "1 L tetra";
+      if(ml <= 2000) return "2 × 1 L tetra";
+      return Math.ceil(ml/1000) + " × 1 L tetra";
     } },
   { group:"dairy", name:"Buttermilk (tetra)", re:/buttermilk/i, base:"ml",
     qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
@@ -862,46 +889,36 @@ const BUY_CATALOG = [
   { group:"veg", name:"Palak (spinach)", re:/palak|spinach/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
     shop:g=> g <= 0 ? null : (g <= 250 ? "1 bunch (~250 g)" : g <= 500 ? "2 bunches (~500 g)" : g <= 750 ? "3 bunches" : "1 kg (4 bunches)") },
-  { group:"veg", name:"Dhania (coriander)", re:/fresh coriander/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:10; },
-    shop:g=> g <= 0 ? null : "1 bunch (~" + Math.round(g) + " g)" },
   { group:"veg", name:"Capsicum", re:/capsicum/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
     shop:g=> g <= 0 ? null : (g <= 130 ? "1 piece" : g <= 260 ? "2 pieces" : "3–4 pieces") },
   { group:"veg", name:"Carrot (gajar)", re:/carrot/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
     shop:g=> g <= 0 ? null : (g <= 80 ? "1 piece" : g <= 250 ? "2 pieces" : "500 g") },
-  { group:"pantry", name:"Moong dal", re:/moong dal/i, base:"g",
-    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g" : "500 g") },
-  { group:"pantry", name:"Soya chunks (dry)", re:/soya chunks/i, base:"g",
+  { group:"veg", name:"Pomegranate", re:/pomegranate/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:25; },
+    shop:g=> g <= 0 ? null : (g <= 150 ? "1 fruit" : "2 fruits") },
+  { group:"pantry", name:"Yoga Bar muesli (choc-almond)", re:/muesli/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:50; },
-    shop:g=> g <= 0 ? null : (g <= 250 ? "250 g pack" : "500 g pack") },
-  { group:"pantry", name:"Besan", re:/\bbesan\s+\d/i, base:"g",
-    qty:s=>{ const m=s.match(/besan\s+(\d+)\s*g/i); return m?+m[1]:20; },
-    shop:g=> g <= 0 ? null : (g <= 200 ? "200 g pack" : "500 g pack") + " (week uses " + Math.round(g) + " g)" },
+    shop:g=> g <= 0 ? null : (g <= 400 ? "1 pack (week uses " + Math.round(g) + " g)" : "2 packs") },
+  { group:"pantry", name:"Psyllium husk", re:/psyllium/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:10; },
+    shop:g=> g <= 0 ? null : "1 pack (week uses " + Math.round(g) + " g)" },
   { group:"pantry", name:"Makhana", re:/makhana/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:20; },
     shop:g=> g <= 0 ? null : (g <= 100 ? "100 g pack" : g <= 250 ? "250 g pack" : "500 g pack") + " (week uses " + Math.round(g) + " g)" },
   { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
     qty:()=>1,
     shop:()=> "1 bottle" },
+  { group:"pantry", name:"Apple cider vinegar", re:/acv|apple cider/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 bottle (wake drink)" },
   { group:"pantry", name:"Adrak (ginger)", re:/ginger/i, base:"use",
     qty:()=>1,
     shop:()=> "100 g piece" },
-  { group:"pantry", name:"Spice kit (jeera, saunf, dhania, haldi, ajwain, hing, curry leaf, kasuri methi, pepper)", re:/jeera|saunf|dhania|turmeric|ajwain|hing|curry leaves|kasuri methi/i, base:"use",
+  { group:"pantry", name:"Spice kit (jeera, saunf, ajwain)", re:/jeera|saunf|ajwain/i, base:"use",
     qty:()=>1,
-    shop:()=> "restock as needed" },
-  { group:"pantry", name:"KILRR marinade", re:/kilrr/i, base:"pack",
-    qty:s=>{
-      const m=s.match(/([\d¼½¾]+)(?:\s*\/\s*\d+)?\s*pack/i);
-      return m ? frac(m[1]) : 0.5;
-    },
-    shop:n=>{
-      if(!(n > 0)) return null;
-      const packs = Math.ceil(n);
-      return packs === 1 ? "1 sachet" : packs + " sachets";
-    } }
+    shop:()=> "restock as needed" }
 ];
 
 function frac(raw){
@@ -1011,7 +1028,7 @@ function isEnergyBoostOn(){
 function setEnergyBoost(on){
   safeStorage.set(ENERGY_KEY, on ? '1' : '0');
   document.getElementById('energyBoost').checked = on;
-  document.getElementById('kcalTarget').textContent = on ? '1,500+' : '1,500';
+  document.getElementById('kcalTarget').textContent = on ? '1,450+' : '1,450';
   renderDayCard();
 }
 
@@ -1047,13 +1064,13 @@ function renderDayCard(){
       <div>
         <div class="when">${slot.time} · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein</div>
         <div class="name">${r.name}</div>
-        <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^KILRR/i.test(x)).join(", ")}</div>
+        <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^Apple cider/i.test(x)).join(", ")}</div>
         <div class="hint">Tap for Sunday batch steps and day-of assembly</div>
       </div>
       <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
     </button>`;
   card.innerHTML = `<h2>${slot.chip} · weekday plate</h2>` +
-    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Saturday and Sunday are free eating. This is the <b>Monday–Friday</b> prep plate — use it on Sunday when you batch-cook.</div>` : '') +
+    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Soft weekend: keep the wake drink + breakfast bowl, plus one solid protein meal. This screen still shows the <b>Monday–Friday</b> prep plate for Sunday batch cook.</div>` : '') +
     mealBtn + (boost ? `
     <div class="addon-heading">Hard-workout add-ons — pick one if you need extra protein</div>
     ${ADDON_IDS.map(id => {
@@ -1069,7 +1086,7 @@ function renderDayCard(){
         <div class="risk ${ar.risk}">Optional</div>
       </button>`;
     }).join('')}
-  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 2 tsp (cap 3). Dal and cheela are the carbs. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
+  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 1.5 tsp (cap 3). Carbs come from muesli and a little from veg. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
 
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
@@ -1210,7 +1227,7 @@ if('serviceWorker' in navigator){
 
 /* ---------- Init ---------- */
 document.getElementById('energyBoost').checked = isEnergyBoostOn();
-document.getElementById('kcalTarget').textContent = isEnergyBoostOn() ? '1,500+' : '1,500';
+document.getElementById('kcalTarget').textContent = isEnergyBoostOn() ? '1,450+' : '1,450';
 document.getElementById('energyBoost').addEventListener('change', (e)=>{
   setEnergyBoost(e.target.checked);
 });
