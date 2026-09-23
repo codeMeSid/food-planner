@@ -8,14 +8,14 @@ Vanilla PWA. No framework, no backend, no build. Source files + icon PNGs + self
 |---|---|
 | `index.html` | All UI, CSS, data, JS |
 | `manifest.json` | PWA: `Plate 78`, standalone, theme/background `#E3CFBB` |
-| `service-worker.js` | Cache `plate78-v17`; bump name after every deploy |
+| `service-worker.js` | Cache `plate78-v18`; bump name after every deploy |
 | `fonts/SourceSans3VF-Upright.woff2` | Source Sans 3 VF (SIL OFL); cached by SW |
 | `icon-192.png` / `icon-512.png` / `icon-maskable-512.png` | Home-screen icons |
 | `README.md` | GitHub Pages install notes |
 
 Palette (sampled 3-stripe PNG): sand `#E3CFBB` / clay `#DBBF9F` / brand `#CC956B`. Interactive fills deepen to `#9A6240` for AA. Accent text `#65422A` on clay. Self-hosted Source Sans 3 (no Google Fonts). Light-only.
 
-Edit meals → change `RECIPES` / `WEEKDAY_MEALS` near top of `<script>` in `index.html`. Keep ingredient strings matchable by `MACRO_RULES` (day kcal/protein is computed, not hand-typed). Weekly grocery rebuilds from `PLAN` (Mon–Fri only). Workout → `WORKOUT` (+ `MORNING_BLOCK` / `HOME_BAND_BLOCK` / `GYM_A` / `GYM_B`).
+Edit meals → change `RECIPES` / `WEEKDAY_MEALS` near top of `<script>` in `index.html`. Keep ingredient strings matchable by `MACRO_RULES` (day kcal/protein is computed, not hand-typed). Weekly grocery rebuilds from `PLAN` (Mon–Fri only). Workout → `WORKOUT` (+ `MORNING_BLOCK` / `HOME_BAND_BLOCK` / `HOME_A` / `HOME_B` / `GYM_A` / `GYM_B`). Workout tab uses Mon–Sun day chips (`wkDaySwitch`); gym days include `homeAlt` for miss-gym swaps.
 
 ## Product
 
@@ -26,7 +26,7 @@ GERD-safe Indian home cooking for fat loss. 1 person. **95 kg → 80–84 kg** (
 ## Tabs (bottom nav)
 
 1. **Today** — meal chips (`MEAL_SLOTS`: Breakfast / Lunch / Snack / Dinner), tap → recipe `<dialog>` with Sunday batch + day-of steps, reflux rules, optional hard-session add-ons
-2. **Workout** — daily morning incline + core + Boldfit bands + pull-up ladder; Gym A/B evenings Mon/Tue/Thu/Fri; Wed/Sat home band block; Sun meal prep
+2. **Workout** — Mon–Sun day chips; morning incline + core + Boldfit + pull-up ladder; Gym A/B evenings Mon/Tue/Thu/Fri with Home A/B miss-gym swap; Wed/Sat home band block; Sun meal prep
 3. **Grocery** — weekly buy list in shop packs from Mon–Fri `PLAN` × 5; tap to check; persist locally
 
 ## Data shape
@@ -40,8 +40,8 @@ PLAN[Mon…Fri]           // WEEKDAY_MEALS; Sat/Sun = []
 MEAL_SLOTS[]            // { id, chip, time } — Today toolbar
 BUY_CATALOG[]           // match RECIPES ing lines → group/name/shop pack
 GROCERY = buildWeeklyGrocery()  // { protein|veg|pantry|dairy: [{name, qtyLabel, key}] }
-MORNING_BLOCK / HOME_BAND_BLOCK / GYM_A / GYM_B
-WORKOUT[]               // { day, title, type, exercises: [[name, sets]] }
+MORNING_BLOCK / HOME_BAND_BLOCK / HOME_A / HOME_B / GYM_A / GYM_B
+WORKOUT[]               // { day, title, type, exercises, homeAlt? }
 ```
 
 Sunday batch quantities in `steps[]` must equal `ing × 5` for that recipe.

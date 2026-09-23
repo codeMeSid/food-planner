@@ -359,6 +359,14 @@
   .ex{ display:flex; justify-content:space-between; padding:var(--space-2) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); font-size:0.875rem; gap:var(--space-3); min-height:44px; align-items:center; }
   .ex:last-child{ border-bottom:none; }
   .ex .sr{ font-family: inherit; font-variant-numeric:tabular-nums; color:var(--terra-bright); font-size:13px; font-weight:600; white-space:nowrap; padding-left:var(--space-2);}
+  .ex.ex-sep{
+    display:block; border-bottom:none; margin-top:var(--space-3); padding-top:var(--space-3);
+    border-top:1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    font-size:0.8125rem; font-weight:600; color:var(--terra-bright);
+    letter-spacing:0.04em; text-transform:uppercase; min-height:0;
+  }
+  .ex.ex-sep .sr{ display:none; }
+  #wkDayCard .ex:first-child{ padding-top:0; }
 
   nav.tabbar{
     position:fixed;
@@ -533,19 +541,21 @@
   </section>
 
   <section id="workout" role="tabpanel">
-    <div class="card">
-      <h2>Weekly split</h2>
-      <div id="wkOverview"></div>
-      <p class="note">Every day: <b>morning incline + core + Boldfit bands + pull-up ladder</b>. Commercial gym <b>Mon / Tue / Thu / Fri</b> evening (A / B / A / B). Wed + Sat also get a short home band strength block. Sun = morning + meal prep. Incline beats a slow flat 10k per minute when time matches — fat loss still needs the deficit.</p>
+    <div class="day-switch" id="wkDaySwitch" role="toolbar" aria-label="Weekday"></div>
+    <div class="card" id="wkDayCard">
+      <h2 id="wkDayTitle">Workout</h2>
+      <p class="note" id="wkDayType" style="margin:0 0 var(--space-3);padding:0;border:none;"></p>
+      <div id="wkDetails"></div>
     </div>
-    <div id="wkDetails"></div>
     <div class="card">
-      <h2>Training around GERD + lower back</h2>
+      <h2>How the week works</h2>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Every day: <b>morning incline + core + Boldfit bands + pull-up ladder</b>. Gym nights <b>Mon / Tue / Thu / Fri</b> (A / B / A / B). Miss the gym? Use the <b>Home A / Home B</b> block on that day’s tab (bands + pull bar + skip rope). Wed + Sat already home-only. Sun = morning + meal prep.</p>
       <ul class="plain">
-        <li>Morning cardio + core + bands first. Evening lift on gym days. Stay upright where you can.</li>
-        <li>Train <b>at least 2 hours after lunch</b>. Never right after a meal. Dinner stays at 8:30 after the gym session.</li>
+        <li>Morning cardio + core + bands first. Evening lift on gym days (or Home A/B if you skip). Stay upright where you can.</li>
+        <li>Train <b>at least 2 hours after lunch</b>. Never right after a meal. Dinner stays at 8:30 after the session.</li>
         <li>Bicycle crunch is allowed (food manages GERD). Keep the low back pressed to the floor. <b>Stop if lumbar pain</b> — swap to dead bug / bird dog / side plank that day.</li>
         <li><b>Inverted row</b> (lying pull under a bar/table, knees bent OK) builds toward pull-ups. Advance: hang → inverted row 3×10 → scapular pulls → Boldfit band-assisted pull-ups → slow negatives → strict pull-ups.</li>
+        <li>Skip rope: soft knees, easy pace. Back or reflux flare → swap to incline walk for that cardio slot.</li>
         <li>Avoid heavy barbell deadlifts, bent-over barbell rows, and good mornings while the back settles.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session; don't gulp large amounts at once.</li>
@@ -783,6 +793,34 @@ const HOME_BAND_BLOCK = [
   ["Band-assisted pull-up (loop on bar, foot/knee in) — when inverted row hits 3 × 10","3 × 5–8"]
 ];
 
+/** Full home swap when you miss commercial Gym A (Mon/Thu). Bands + pull bar + rope. */
+const HOME_A = [
+  ["— Miss gym? Home A (bands + bar + rope) —","do instead of Gym A"],
+  ["Skip rope (or incline walk if back/reflux flares)","8–10 min easy"],
+  ["Band squat (band under feet, handles at shoulders)","3 × 10"],
+  ["Push-up or band chest press (knees OK)","3 × 10"],
+  ["Inverted row (under bar/table)","3 × 8–10"],
+  ["Band seated or standing row","3 × 12"],
+  ["Band hip thrust / glute bridge","3 × 12"],
+  ["Band overhead press","3 × 10"],
+  ["Band triceps pushdown (anchor high)","3 × 12"],
+  ["Band biceps curl","3 × 12"]
+];
+
+/** Full home swap when you miss commercial Gym B (Tue/Fri). */
+const HOME_B = [
+  ["— Miss gym? Home B (bands + bar + rope) —","do instead of Gym B"],
+  ["Skip rope (or incline walk if back/reflux flares)","8–10 min easy"],
+  ["Band Romanian hinge (soft knees; stop if lumbar pain)","3 × 10"],
+  ["Band split squat or reverse lunge","3 × 8 / leg"],
+  ["Band-assisted pull-up or inverted row + scapular pulls","3 × 5–8"],
+  ["Band face-pull","3 × 15"],
+  ["Band lateral raise","3 × 12"],
+  ["Band overhead triceps extension","3 × 12"],
+  ["Band hammer curl","3 × 12"],
+  ["Calf raise (bodyweight or band)","3 × 15"]
+];
+
 const GYM_A = [
   ["Leg press (feet mid; stop short of back pain)","3 × 10"],
   ["Machine chest press or DB bench","3 × 10"],
@@ -810,40 +848,40 @@ const GYM_B = [
 ];
 
 const WORKOUT = [
-  {day:"Mon", title:"Morning incline + bands · Gym A", type:"Home then gym", exercises:[
+  {day:"Mon", title:"Morning + Gym A", type:"Home then gym · Home A if skip", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
     ...GYM_A
-  ]},
-  {day:"Tue", title:"Morning incline + bands · Gym B", type:"Home then gym", exercises:[
+  ], homeAlt: HOME_A},
+  {day:"Tue", title:"Morning + Gym B", type:"Home then gym · Home B if skip", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
     ...GYM_B
-  ]},
-  {day:"Wed", title:"Morning + Boldfit home strength", type:"Home only", exercises:[
+  ], homeAlt: HOME_B},
+  {day:"Wed", title:"Morning + Boldfit home", type:"Home only", exercises:[
     ...MORNING_BLOCK,
     ...HOME_BAND_BLOCK,
     ["No commercial gym — recover for Thu","—"]
-  ]},
-  {day:"Thu", title:"Morning incline + bands · Gym A", type:"Home then gym", exercises:[
+  ], homeAlt: null},
+  {day:"Thu", title:"Morning + Gym A", type:"Home then gym · Home A if skip", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
     ...GYM_A
-  ]},
-  {day:"Fri", title:"Morning incline + bands · Gym B", type:"Home then gym", exercises:[
+  ], homeAlt: HOME_A},
+  {day:"Fri", title:"Morning + Gym B", type:"Home then gym · Home B if skip", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
     ...GYM_B
-  ]},
-  {day:"Sat", title:"Morning + Boldfit home strength", type:"Home only", exercises:[
+  ], homeAlt: HOME_B},
+  {day:"Sat", title:"Morning + Boldfit home", type:"Home only", exercises:[
     ...MORNING_BLOCK,
     ...HOME_BAND_BLOCK,
     ["Soft weekend food — keep breakfast bowl + one protein meal","—"]
-  ]},
-  {day:"Sun", title:"Morning incline + bands · meal prep", type:"Home + cook", exercises:[
+  ], homeAlt: null},
+  {day:"Sun", title:"Morning + meal prep", type:"Home + cook", exercises:[
     ...MORNING_BLOCK,
     ["Sunday batch: salad chicken bags, veg box, dressing jar, palak bags, eggs, makhana","after the walk"]
-  ]}
+  ], homeAlt: null}
 ];
 
 const START_DATE = new Date(2026, 9, 1); // 1 Oct 2026 — plan start
@@ -1168,18 +1206,50 @@ dialog.addEventListener('keydown', (e)=>{
   else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
 });
 
-/* ---------- Workout ---------- */
-function renderWorkout(){
-  document.getElementById('wkOverview').innerHTML = WORKOUT.map(w=>`
-    <div class="wk-day"><span class="d">${w.day}: ${w.title}</span><span class="t">${w.type}</span></div>
-  `).join('');
+/* ---------- Workout (weekday folder tabs) ---------- */
+function defaultWkDay(){
+  // Date.getDay: Sun=0 … Sat=6 → map to DAYS Mon…Sun
+  const js = new Date().getDay();
+  return DAYS[(js + 6) % 7];
+}
+let activeWkDay = defaultWkDay();
 
-  document.getElementById('wkDetails').innerHTML = WORKOUT.map(w=>`
-    <div class="card">
-      <h3>${w.day} · ${w.title}</h3>
-      ${w.exercises.map(e=>`<div class="ex"><span>${e[0]}</span><span class="sr">${e[1]}</span></div>`).join('')}
-    </div>
-  `).join('');
+function exRow(e){
+  const name = e[0] || "";
+  const isSep = /^—/.test(name);
+  if(isSep) return `<div class="ex ex-sep"><span>${name}</span><span class="sr">${e[1] || ""}</span></div>`;
+  return `<div class="ex"><span>${name}</span><span class="sr">${e[1] || ""}</span></div>`;
+}
+
+function renderWkDaySwitch(){
+  const el = document.getElementById('wkDaySwitch');
+  if(!el) return;
+  el.innerHTML = "";
+  WORKOUT.forEach(w=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = w.day;
+    b.setAttribute('aria-pressed', w.day === activeWkDay ? 'true' : 'false');
+    if(w.day === activeWkDay) b.classList.add('on');
+    b.addEventListener('click', ()=>{ activeWkDay = w.day; renderWorkout(); });
+    el.appendChild(b);
+  });
+}
+
+function renderWorkout(){
+  renderWkDaySwitch();
+  const w = WORKOUT.find(x => x.day === activeWkDay) || WORKOUT[0];
+  const title = document.getElementById('wkDayTitle');
+  const type = document.getElementById('wkDayType');
+  if(title) title.textContent = w.day + " · " + w.title;
+  if(type) type.textContent = w.type;
+  const details = document.getElementById('wkDetails');
+  if(!details) return;
+  let html = w.exercises.map(exRow).join('');
+  if(w.homeAlt && w.homeAlt.length){
+    html += w.homeAlt.map(exRow).join('');
+  }
+  details.innerHTML = html;
 }
 
 /* ---------- Grocery ---------- */
