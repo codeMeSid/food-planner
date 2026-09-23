@@ -536,15 +536,16 @@
     <div class="card">
       <h2>Weekly split</h2>
       <div id="wkOverview"></div>
-      <p class="note">Every day: <b>morning incline walk + home core</b>. Commercial gym <b>Mon / Tue / Thu / Fri</b> in the evening (Workout A / B / A / B). Wed, Sat, Sun = morning only. Incline walking burns more per minute than a slow flat 10k when time is matched — fat loss still needs the calorie deficit.</p>
+      <p class="note">Every day: <b>morning incline + core + Boldfit bands + pull-up ladder</b>. Commercial gym <b>Mon / Tue / Thu / Fri</b> evening (A / B / A / B). Wed + Sat also get a short home band strength block. Sun = morning + meal prep. Incline beats a slow flat 10k per minute when time matches — fat loss still needs the deficit.</p>
     </div>
     <div id="wkDetails"></div>
     <div class="card">
       <h2>Training around GERD + lower back</h2>
       <ul class="plain">
-        <li>Morning cardio + core first. Evening lift on gym days. Stay upright where you can.</li>
+        <li>Morning cardio + core + bands first. Evening lift on gym days. Stay upright where you can.</li>
         <li>Train <b>at least 2 hours after lunch</b>. Never right after a meal. Dinner stays at 8:30 after the gym session.</li>
         <li>Bicycle crunch is allowed (food manages GERD). Keep the low back pressed to the floor. <b>Stop if lumbar pain</b> — swap to dead bug / bird dog / side plank that day.</li>
+        <li><b>Inverted row</b> (lying pull under a bar/table, knees bent OK) builds toward pull-ups. Advance: hang → inverted row 3×10 → scapular pulls → Boldfit band-assisted pull-ups → slow negatives → strict pull-ups.</li>
         <li>Avoid heavy barbell deadlifts, bent-over barbell rows, and good mornings while the back settles.</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session; don't gulp large amounts at once.</li>
@@ -765,7 +766,21 @@ const MORNING_BLOCK = [
   ["Glute bridge","3 × 12"],
   ["Bicycle crunch (stop if lumbar pain)","3 × 12 / side"],
   ["Side plank (knees OK)","3 × 20 s / side"],
-  ["Dead hang on pull-up bar","3 × 15–20 s"]
+  ["Dead hang on pull-up bar","3 × 15–30 s"],
+  ["Inverted row (lying pull under bar/table; knees bent OK)","3 × 6–10"],
+  ["Scapular pull (hang, shrug shoulders down — arms stay straight)","3 × 8"],
+  ["Boldfit band pull-apart (light; arms straight)","3 × 15"],
+  ["Boldfit band face-pull (anchor at face height)","3 × 12"],
+  ["Boldfit Pallof press (stand sideways to anchor)","3 × 10 / side"]
+];
+
+/** Extra home strength — Wed + Sat (no commercial gym). */
+const HOME_BAND_BLOCK = [
+  ["— Home Boldfit block —","after morning"],
+  ["Band seated or standing row","3 × 12"],
+  ["Band chest press or push-up","3 × 10"],
+  ["Band glute bridge (loop above knees)","3 × 12"],
+  ["Band-assisted pull-up (loop on bar, foot/knee in) — when inverted row hits 3 × 10","3 × 5–8"]
 ];
 
 const GYM_A = [
@@ -777,7 +792,8 @@ const GYM_A = [
   ["Seated DB / machine shoulder press","3 × 10"],
   ["Cable triceps pushdown","3 × 12"],
   ["DB / cable biceps curl","3 × 12"],
-  ["Pallof press","3 × 10 / side"]
+  ["Pallof press","3 × 10 / side"],
+  ["Optional: inverted row on smith (low bar) if home row skipped","3 × 8"]
 ];
 
 const GYM_B = [
@@ -794,35 +810,37 @@ const GYM_B = [
 ];
 
 const WORKOUT = [
-  {day:"Mon", title:"Morning incline + core · Gym A", type:"Home then gym", exercises:[
+  {day:"Mon", title:"Morning incline + bands · Gym A", type:"Home then gym", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
     ...GYM_A
   ]},
-  {day:"Tue", title:"Morning incline + core · Gym B", type:"Home then gym", exercises:[
+  {day:"Tue", title:"Morning incline + bands · Gym B", type:"Home then gym", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
     ...GYM_B
   ]},
-  {day:"Wed", title:"Morning incline + core", type:"Home only", exercises:[
+  {day:"Wed", title:"Morning + Boldfit home strength", type:"Home only", exercises:[
     ...MORNING_BLOCK,
-    ["No heavy gym — recover for Thu","—"]
+    ...HOME_BAND_BLOCK,
+    ["No commercial gym — recover for Thu","—"]
   ]},
-  {day:"Thu", title:"Morning incline + core · Gym A", type:"Home then gym", exercises:[
+  {day:"Thu", title:"Morning incline + bands · Gym A", type:"Home then gym", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
     ...GYM_A
   ]},
-  {day:"Fri", title:"Morning incline + core · Gym B", type:"Home then gym", exercises:[
+  {day:"Fri", title:"Morning incline + bands · Gym B", type:"Home then gym", exercises:[
     ...MORNING_BLOCK,
     ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
     ...GYM_B
   ]},
-  {day:"Sat", title:"Morning incline + core", type:"Home only", exercises:[
+  {day:"Sat", title:"Morning + Boldfit home strength", type:"Home only", exercises:[
     ...MORNING_BLOCK,
+    ...HOME_BAND_BLOCK,
     ["Soft weekend food — keep breakfast bowl + one protein meal","—"]
   ]},
-  {day:"Sun", title:"Morning incline + core · meal prep", type:"Home + cook", exercises:[
+  {day:"Sun", title:"Morning incline + bands · meal prep", type:"Home + cook", exercises:[
     ...MORNING_BLOCK,
     ["Sunday batch: salad chicken bags, veg box, dressing jar, palak bags, eggs, makhana","after the walk"]
   ]}
