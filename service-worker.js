@@ -1,8 +1,9 @@
-const CACHE = "plate78-v18";
+const CACHE = "plate78-v34";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./exercises.json",
   "./logo.svg",
   "./icon-192.png",
   "./icon-512.png",

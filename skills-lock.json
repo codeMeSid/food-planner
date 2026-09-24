@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "evidence-based-fitness-coach": {
+      "source": "Lancetnik/evidence-based-fitness-coach",
+      "sourceType": "github",
+      "skillPath": "skills/evidence-based-fitness-coach/SKILL.md",
+      "computedHash": "a581fa6135080598134d6defacaf97842c6e525fe97f597e1f8c928dbf0f065e"
+    },
+    "personal-trainer": {
+      "source": "npapatheodorou/personal-trainer-skill",
+      "sourceType": "github",
+      "skillPath": "personal-trainer/SKILL.md",
+      "computedHash": "239142198011e2baa149182ee8b9993622232672f14bdef1b92e82dd6313187b"
+    }
+  }
+}

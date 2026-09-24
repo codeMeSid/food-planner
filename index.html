@@ -196,13 +196,32 @@
     background:var(--bg-raised);
     border-radius:var(--radius);
   }
+  .meal-pre{
+    list-style:none; margin:0; padding:var(--space-3) var(--space-4);
+    background:var(--bg-raised); border-radius:var(--radius);
+    font-size:0.875rem; line-height:1.4;
+  }
+  .meal-pre li{
+    padding:6px 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  }
+  .meal-pre li:last-child{ border-bottom:none; padding-bottom:0; }
+  .meal-pre li:first-child{ padding-top:0; }
+  .meal-pre b{ font-weight:650; color:var(--terra-deep); }
 
   .day-switch{
     display:flex; gap:var(--space-2); overflow-x:auto; overscroll-behavior-x:contain;
     margin-bottom:var(--space-3); scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
   }
-  .day-switch::-webkit-scrollbar{ display:none; }
+  .day-switch.meal-rows{
+    flex-direction:column; overflow-x:visible; gap:var(--space-2);
+  }
+  .day-switch .day-row{
+    display:flex; gap:var(--space-2); overflow-x:auto; overscroll-behavior-x:contain;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch;
+  }
+  .day-switch::-webkit-scrollbar,
+  .day-switch .day-row::-webkit-scrollbar{ display:none; }
   .day-switch button{
     flex:0 0 auto; min-height:44px; min-width:44px;
     background:var(--bg-raised); border:none; color:var(--muted);
@@ -212,6 +231,157 @@
   }
   .day-switch button:hover{ color:var(--ink); background:var(--clay); }
   .day-switch button.on{ background:var(--terra); color:var(--on-terra); }
+
+  .place-switch{
+    display:flex; gap:3px; margin:0 0 var(--space-4);
+    padding:4px;
+    background: color-mix(in srgb, var(--sand) 55%, var(--bg-raised));
+    border-radius:14px;
+  }
+  .place-switch button{
+    flex:1; min-height:44px; min-width:0;
+    background:transparent; border:none; color:var(--muted);
+    padding:8px 6px; border-radius:11px; font-size:12px; font-weight:650; cursor:pointer;
+    letter-spacing:0.02em;
+    transition: background .18s var(--ease), color .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .place-switch button:hover{ color:var(--ink); background: color-mix(in srgb, var(--clay) 70%, transparent); }
+  .place-switch button.on{
+    background:var(--terra); color:var(--on-terra);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 14%, transparent),
+                0 3px 8px color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+  .place-switch button:focus-visible{ outline-offset: 1px; }
+
+  #wkDayCard{
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
+  }
+  #wkDayCard > h2{
+    font-size:1.2rem;
+    letter-spacing:-0.035em;
+  }
+  #wkDayType{
+    margin: var(--space-1) 0 var(--space-4) !important;
+    padding:0 !important;
+    border:none !important;
+    font-size:0.8125rem;
+    line-height:1.45;
+    color:var(--muted);
+  }
+  .ex-list{
+    display:flex;
+    flex-direction:column;
+    gap: var(--space-2);
+  }
+  .ex-list-empty{
+    margin:0;
+    padding: var(--space-4);
+    text-align:center;
+    background: color-mix(in srgb, var(--sand) 45%, transparent);
+    border-radius: 12px;
+    font-size:0.875rem;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .ex-list-empty b{ color:var(--terra-bright); font-weight:650; }
+
+  .ex{
+    display:grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    align-items:center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    min-height:56px;
+    background: color-mix(in srgb, var(--sand) 42%, transparent);
+    border:none;
+    border-radius: 12px;
+    font-size:0.9375rem;
+    line-height:1.35;
+  }
+  .ex-lead{
+    width:44px; height:44px;
+    display:grid; place-items:center;
+    flex-shrink:0;
+  }
+  .ex-lead-gap{
+    width:44px; height:44px;
+    border-radius:12px;
+    background: color-mix(in srgb, var(--line) 35%, transparent);
+  }
+  .ex-body{ min-width:0; }
+  .ex-name{
+    display:block;
+    font-weight:600;
+    letter-spacing:-0.015em;
+    color:var(--ink);
+  }
+  .ex .sr{
+    font-family: inherit;
+    font-variant-numeric:tabular-nums;
+    color:var(--terra-deep);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    white-space:nowrap;
+    padding:6px 10px;
+    border-radius:999px;
+    background: color-mix(in srgb, var(--terra-brand) 22%, transparent);
+    justify-self:end;
+  }
+  .ex .sr.is-ghost{
+    visibility:hidden;
+  }
+  .ex-vid{
+    width:44px; height:44px; padding:0; margin:0;
+    border:none; border-radius:12px; cursor:pointer;
+    background: color-mix(in srgb, var(--terra) 16%, var(--sand));
+    color: var(--terra-deep);
+    display:grid; place-items:center;
+    transition: background .15s var(--ease), color .15s var(--ease), transform .15s var(--ease);
+  }
+  .ex-vid:hover{
+    background: color-mix(in srgb, var(--terra) 28%, var(--sand));
+    color: var(--terra);
+  }
+  .ex-vid:active{ transform: scale(0.96); }
+  .ex-vid:disabled, .ex-vid.is-empty{
+    opacity:0.42; cursor:not-allowed;
+    transform:none;
+  }
+  .ex-vid:focus-visible{ outline: 2px solid var(--terra); outline-offset: 2px; }
+  .ex-vid svg{ width:18px; height:18px; display:block; margin-left:1px; }
+  .ex.ex-sep{
+    display:block;
+    grid-template-columns: none;
+    margin: var(--space-2) 0 0;
+    padding: var(--space-2) var(--space-1) 0;
+    min-height:0;
+    background:transparent;
+    border-radius:0;
+    border-top:1px solid color-mix(in srgb, var(--line) 75%, transparent);
+    font-size:0.75rem; font-weight:700; color:var(--terra-bright);
+    letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .ex.ex-sep .sr{ display:none; }
+  @media (prefers-reduced-motion: no-preference){
+    .ex-list .ex{
+      animation: exIn .22s var(--ease) both;
+    }
+    .ex-list .ex:nth-child(1){ animation-delay: 0ms; }
+    .ex-list .ex:nth-child(2){ animation-delay: 20ms; }
+    .ex-list .ex:nth-child(3){ animation-delay: 40ms; }
+    .ex-list .ex:nth-child(4){ animation-delay: 60ms; }
+    .ex-list .ex:nth-child(5){ animation-delay: 80ms; }
+    .ex-list .ex:nth-child(6){ animation-delay: 100ms; }
+    .ex-list .ex:nth-child(7){ animation-delay: 120ms; }
+    .ex-list .ex:nth-child(8){ animation-delay: 140ms; }
+    .ex-list .ex:nth-child(n+9){ animation-delay: 160ms; }
+    @keyframes exIn{
+      from{ opacity:0; transform: translateY(4px); }
+      to{ opacity:1; transform: none; }
+    }
+  }
 
   .meal{
     display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-3);
@@ -356,17 +526,28 @@
   .wk-day:last-child{ border-bottom:none; }
   .wk-day .d{ font-weight:600; font-size:0.9375rem; }
   .wk-day .t{ font-size:0.8125rem; color:var(--muted); text-align:right; }
-  .ex{ display:flex; justify-content:space-between; padding:var(--space-2) 0; border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent); font-size:0.875rem; gap:var(--space-3); min-height:44px; align-items:center; }
-  .ex:last-child{ border-bottom:none; }
-  .ex .sr{ font-family: inherit; font-variant-numeric:tabular-nums; color:var(--terra-bright); font-size:13px; font-weight:600; white-space:nowrap; padding-left:var(--space-2);}
-  .ex.ex-sep{
-    display:block; border-bottom:none; margin-top:var(--space-3); padding-top:var(--space-3);
-    border-top:1px solid color-mix(in srgb, var(--line) 80%, transparent);
-    font-size:0.8125rem; font-weight:600; color:var(--terra-bright);
-    letter-spacing:0.04em; text-transform:uppercase; min-height:0;
+
+  dialog.yt-dialog{
+    width:100%; max-width:none; height:100%; max-height:none;
+    margin:0; padding:0; border:none; background:#000;
+    inset:0;
   }
-  .ex.ex-sep .sr{ display:none; }
-  #wkDayCard .ex:first-child{ padding-top:0; }
+  dialog.yt-dialog::backdrop{ background:#000; }
+  .yt-shell{
+    position:relative; width:100%; height:100%;
+    display:flex; flex-direction:column; background:#000;
+  }
+  .yt-close{
+    position:absolute; z-index:2; top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    width:44px; height:44px; border:none; border-radius:12px;
+    background: color-mix(in srgb, #fff 18%, transparent);
+    color:#fff; font-size:1.5rem; line-height:1; cursor:pointer;
+  }
+  .yt-frame-wrap{ flex:1; width:100%; height:100%; }
+  .yt-frame-wrap iframe{
+    width:100%; height:100%; border:0; display:block; background:#000;
+  }
 
   nav.tabbar{
     position:fixed;
@@ -497,7 +678,7 @@
   <div class="goal-strip">
     <div class="pill">Days left <b id="daysLeft">-</b></div>
     <div class="pill">On track <b id="onTrackKg">-</b> kg</div>
-    <div class="pill">Target <b id="kcalTarget">1,450</b> kcal/day</div>
+    <div class="pill">Target <b id="kcalTarget">1,500</b> kcal/day</div>
     <div class="pill">Protein <b>~150</b> g/day</div>
     <div class="pill">Incline + gym</div>
   </div>
@@ -506,60 +687,35 @@
 <main id="main">
 
   <section id="today" class="active" role="tabpanel">
-    <div class="day-switch" id="daySwitch" role="toolbar" aria-label="Meal"></div>
-    <div class="card energy-card">
-      <label class="energy-toggle">
-        <span class="energy-label">Show optional extras after a hard workout</span>
-        <input type="checkbox" id="energyBoost" class="energy-check" aria-label="Show optional calorie add-ons after a hard workout" />
-        <span class="energy-switch" aria-hidden="true">
-          <span class="energy-track">
-            <span class="energy-thumb">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
-                <path d="M7 2v20"/>
-                <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
-              </svg>
-            </span>
-          </span>
-        </span>
-      </label>
-    </div>
+    <div class="day-switch meal-rows" id="daySwitch" role="toolbar" aria-label="Meal"></div>
     <div class="card" id="dayCard"></div>
-    <div class="card">
-      <h2>Reflux ground rules</h2>
-      <ul class="plain">
-        <li><b>Wake drink:</b> 300–400 ml water + pinch of salt + 1 tbsp ACV. Sip upright 5–10 min. Wait 20–30 min before breakfast. Stop ACV if burn starts.</li>
-        <li><b>Stop eating 3 hrs before lying down</b>. Dinner is 8:30 PM — then a 10-min upright walk.</li>
-        <li><b>Weigh raw grams</b> for chicken, milk, muesli, whey, oil (level tsp). Eyeballing breaks the deficit.</li>
-        <li>Olive oil hard cap: <b>3 level tsp/day</b> (this plate uses 1.5 tsp). Level tsp, not a free pour.</li>
-        <li>Goodlife toned milk + toned dahi for cooking. Snack buttermilk: <b>200 ml from the 1 L tetra</b> — plain salted only, no masala/pudina/chili. Marinate chicken with toned dahi only (no packaged marinade). No coffee, alcohol, or soda. No tomato, raw onion, garlic, red chili, mint, lauki, cauliflower.</li>
-        <li>After lunch/dinner: saunf or ajwain water. Sit upright 20–30 min. Elevate bed head if nights are rough.</li>
-        <li>Week 1 scale may rise 1–1.5 kg (glycogen water). Judge the 7-day average only.</li>
-        <li><b>Soft weekends:</b> keep the wake drink + breakfast bowl, plus one solid protein meal (chicken ≥150 g, 2–3 eggs, or paneer ≥100 g). Other meals flexible — avoid deep-fried and late heavy dinners.</li>
-      </ul>
-    </div>
   </section>
 
   <section id="workout" role="tabpanel">
-    <div class="day-switch" id="wkDaySwitch" role="toolbar" aria-label="Weekday"></div>
+    <div class="day-switch" id="wkDaySwitch" role="tablist" aria-label="Workout day"></div>
     <div class="card" id="wkDayCard">
       <h2 id="wkDayTitle">Workout</h2>
-      <p class="note" id="wkDayType" style="margin:0 0 var(--space-3);padding:0;border:none;"></p>
+      <p class="note" id="wkDayType"></p>
+      <div class="place-switch" id="wkPlaceSwitch" role="tablist" aria-label="Home, gym, or alternative"></div>
       <div id="wkDetails"></div>
     </div>
     <div class="card">
       <h2>How the week works</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Every day: <b>morning incline + core + Boldfit bands + pull-up ladder</b>. Gym nights <b>Mon / Tue / Thu / Fri</b> (A / B / A / B). Miss the gym? Use the <b>Home A / Home B</b> block on that day’s tab (bands + pull bar + skip rope). Wed + Sat already home-only. Sun = morning + meal prep.</p>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;"><b>Home (morning, every day)</b> = 30-min incline walk first (warm 3%/4.5 → fat-burn 12%/4.8 → cool 2%/4.0), then core + pull-up path. Wed/Sat add 3 band compounds. <b>Gym (evening)</b> Mon/Tue/Thu/Fri = 6 lifts only + optional easy walk after — no hard incline before bars. Wed/Sat/Sun = no gym lifts (incline already done at Home). <b>Alternative</b> = miss-gym makeup.</p>
       <ul class="plain">
-        <li>Morning cardio + core + bands first. Evening lift on gym days (or Home A/B if you skip). Stay upright where you can.</li>
+        <li>Morning cardio + evening lifts on purpose — keeps strength work fresh (less cardio interference).</li>
+        <li>Miss the gym? Open <b>Alternative</b> and run that block instead of the Gym lifts.</li>
         <li>Train <b>at least 2 hours after lunch</b>. Never right after a meal. Dinner stays at 8:30 after the session.</li>
-        <li>Bicycle crunch is allowed (food manages GERD). Keep the low back pressed to the floor. <b>Stop if lumbar pain</b> — swap to dead bug / bird dog / side plank that day.</li>
-        <li><b>Inverted row</b> (lying pull under a bar/table, knees bent OK) builds toward pull-ups. Advance: hang → inverted row 3×10 → scapular pulls → Boldfit band-assisted pull-ups → slow negatives → strict pull-ups.</li>
-        <li>Skip rope: soft knees, easy pace. Back or reflux flare → swap to incline walk for that cardio slot.</li>
-        <li>Avoid heavy barbell deadlifts, bent-over barbell rows, and good mornings while the back settles.</li>
+        <li>Lifts: do the <b>exact sets and reps</b> written for each move. Stop a set if form breaks. Do not grind to failure.</li>
+        <li><b>Progression:</b> finish every listed rep with good form for 2 gym sessions in a row → next time add <b>2.5 kg</b> on upper-body lifts or <b>5 kg</b> on leg lifts (or keep the same weight and add 1 rep next block if plates are awkward). <b>Every 5th week:</b> cut each exercise to <b>2 sets</b> and use a lighter weight.</li>
+        <li>Core stays lumbar-friendly: dead bug, glute bridge, side plank. <b>Stop if lumbar pain</b> — drop that move that day.</li>
+        <li><b>Inverted row</b> builds toward pull-ups. Advance: hang → scapular pulls → inverted row easy at 3 × 8 → band-assisted pull-ups → slow negatives → strict pull-ups.</li>
+        <li>Treadmill is lock-in numbers — no ranges. Fat-burn block stays at <b>12% · 4.8 km/h</b> for 20 min. Lumbar or reflux flare: drop main to <b>8% · 4.8 km/h</b> that day, keep the same times.</li>
+        <li>Skip rope (Alternative): soft knees, easy pace. Flare → swap for an easy incline walk.</li>
+        <li>Avoid heavy barbell deadlifts, bent-over barbell rows, and good mornings while the back settles. DB Romanian hinge on Gym B is the posterior-chain lift (soft knees).</li>
         <li>Avoid deep forward folds or inversions on a full stomach.</li>
         <li>Sip water through the session; don't gulp large amounts at once.</li>
-        <li>Protein <b>~150 g/day</b> from the weekday plate (whey is in breakfast). Add-ons only if a meal is missed or the session was brutal.</li>
+        <li>Protein <b>~150 g/day</b>. Miss a meal → whey protein on that meal’s Today card.</li>
       </ul>
     </div>
   </section>
@@ -567,7 +723,7 @@
   <section id="grocery" role="tabpanel">
     <div class="card">
       <h2>Weekly grocery list</h2>
-      <p class="note" style="margin-top:0;padding-top:0;border:none;">Quantities cover five weekday plates, rounded to packs you can buy. Soft weekends are not on this list. Grab ~12 SlideSeal bags (lunch chicken + dinner palak). Whey isolate is on the list — it is part of breakfast. Tap a row to tick it off. Saved on this device only.</p>
+      <p class="note" style="margin-top:0;padding-top:0;border:none;">Five weekday plates. Sat/Sun food is on Today tabs — not listed here. ~12 SlideSeal bags. Tap to tick.</p>
     </div>
     <div class="card grocery-group"><h3>Chicken &amp; eggs</h3><ul class="g-list" data-group="protein"></ul></div>
     <div class="card grocery-group"><h3>Sabzi</h3><ul class="g-list" data-group="veg"></ul></div>
@@ -605,6 +761,13 @@
   </div>
 </dialog>
 
+<dialog class="yt-dialog" id="ytDialog" aria-label="Exercise video">
+  <div class="yt-shell" id="ytShell">
+    <button type="button" class="yt-close" id="ytClose" aria-label="Close video">×</button>
+    <div class="yt-frame-wrap" id="ytFrameWrap"></div>
+  </div>
+</dialog>
+
 <script>
 /* ---------- Safe storage (works in sandboxed previews AND on GitHub Pages) ---------- */
 const memoryStore = {};
@@ -627,6 +790,7 @@ const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
  * Buttermilk = Amul-style tetra chaas (~29 kcal / 1.5 g protein per 100 ml).
  * Goodlife toned milk ~60 kcal / 3.2 g protein per 100 ml.
  * Yoga Bar-style muesli ~420 kcal / 11 g protein per 100 g (label may vary ±40 kcal).
+ * Whey protein powder (avg of isolate / concentrate / plant blend): ~115 kcal / ~23 g protein per 30 g.
  */
 const MACRO_RULES = [
   { re:/chicken breast[,\s]+raw\s+(\d+)\s*g/i, kcal:g=>g*1.20, protein:g=>g*0.225 },
@@ -641,7 +805,8 @@ const MACRO_RULES = [
   { re:/apple cider vinegar\s+([\d.]+)\s*tbsp/i, kcal:()=>3, protein:()=>0 },
   { re:/olive oil\s+([\d.]+)\s*tsp/i, kcal:n=>n*40, protein:()=>0 },
   { re:/makhana\s+(\d+)\s*g/i, kcal:g=>g*(52/15), protein:g=>g*(1.5/15) },
-  { re:/protein isolate\s+(\d+)\s*g/i, kcal:g=>g*(115/30), protein:g=>g*(25/30) },
+  { re:/whey protein\s+(\d+)\s*g/i, kcal:g=>g*(115/30), protein:g=>g*(23/30) },
+  { re:/creatine(?:\s+monohydrate)?\s+(\d+)\s*g/i, kcal:()=>0, protein:()=>0 },
   { re:/(?:palak|spinach|carrot|capsicum)[^\d]*(\d+)\s*g/i,
     kcal:g=>g*0.25, protein:g=>g*0.015 }
 ];
@@ -681,72 +846,104 @@ function fmtProt(n){ return Math.round(n); }
 
 const RECIPES = {
   B1:{type:"Breakfast", risk:"low", name:"Milk muesli bowl + whey",
-    ing:["Toned milk 250 ml","Muesli 50 g","Pomegranate 25 g","Psyllium husk 10 g","Protein isolate 30 g","Apple cider vinegar 1 tbsp"],
+    ing:["Toned milk 250 ml","Muesli 30 g","Pomegranate 25 g","Psyllium husk 10 g","Whey protein 40 g","Creatine monohydrate 5 g","Apple cider vinegar 1 tbsp"],
     steps:[
-      "Wake first (not part of this bowl): drink 300–400 ml water with a pinch of salt and 1 tbsp apple cider vinegar. Sip upright for 5–10 minutes. Wait 20–30 minutes before breakfast.",
-      "Buy for the week: Goodlife toned milk 1 L tetra, Yoga Bar muesli (chocolate & almonds) or equivalent, whey protein isolate, psyllium husk, fresh pomegranate.",
-      "Day — pour 250 ml cold toned milk into a bowl. Whisk in 30 g whey isolate (1 scoop) until smooth with no clumps.",
-      "Stir in 50 g muesli, 25 g pomegranate arils, and 10 g psyllium husk. Eat seated and upright. Sit 20–30 minutes after.",
-      "If whey brand scoop is not 30 g, weigh 30 g on a scale. Do not guess."
+      "Pour 250 ml cold toned milk into a bowl. Whisk in 40 g whey protein until smooth.",
+      "Stir in 30 g muesli, 25 g pomegranate arils, and 10 g psyllium husk. Eat seated upright.",
+      "Weigh 40 g whey protein if the scoop is wrong."
     ]},
   L1:{type:"Lunch", risk:"low", name:"Warm chicken salad",
-    ing:["Chicken breast, raw 180 g","Capsicum 60 g","Carrot 60 g","Toned dahi 70 g","Olive oil 0.5 tsp","Pinch of salt, jeera, grated ginger"],
+    ing:["Chicken breast, raw 150 g","Toned paneer 40 g","Capsicum 80 g","Carrot 80 g","Toned dahi 70 g","Olive oil 0.5 tsp","Pinch of salt, jeera, grated ginger"],
     steps:[
-      "Equipment: 5 SlideSeal bags for chicken, 1 fridge box for vegetables, 1 jar for dressing.",
-      "Sunday chicken — weigh 900 g raw chicken breast (180 g × 5). Marinate with 150 g toned dahi (~10 tbsp), salt, and 1 tbsp grated ginger for at least 30 minutes.",
+      "Equipment: 5 SlideSeal bags for chicken, 1 fridge box for vegetables, 1 fridge box for lunch paneer, 1 jar for dressing.",
+      "Sunday chicken — weigh 750 g raw chicken breast (150 g × 5). Marinate with 150 g toned dahi (~10 tbsp), salt, and 1 tbsp grated ginger for at least 30 minutes.",
       "Cook the chicken through on a non-stick pan. No cooking oil (oil is in the dressing). Juices run clear. Rest 5 minutes. Dice or shred.",
       "Divide into 5 SlideSeal bags. Press flat. Label Day 1–5. Freeze.",
-      "Sunday vegetables — fine-dice 300 g capsicum and 300 g carrot. Dry-sauté or steam with a splash of water until just soft (not mushy). Cool fully. Store in one fridge box (keeps 3–4 days). Refresh midweek on Wednesday if texture softens.",
+      "Sunday lunch paneer — cube 200 g toned paneer (40 g × 5). Light salt. One fridge box (keeps 3–4 days). Refresh midweek if the box weeps. (Snack + dinner paneer are separate — see those recipes.)",
+      "Sunday vegetables — fine-dice 400 g capsicum and 400 g carrot. Dry-sauté or steam with a splash of water until just soft (not mushy). Cool fully. Store in one fridge box (keeps 3–4 days). Refresh midweek on Wednesday if texture softens.",
       "Sunday dressing — whisk 200 g toned dahi with 2.5 tsp olive oil (0.5 tsp × 5), salt, roasted jeera, and grated ginger. Jar in the fridge. Keeps 3–4 days; remix if it weeps.",
-      "Day — heat 1 frozen chicken bag with 2 tbsp water until steaming hot. Warm one-fifth of the vegetables in a pan or microwave. Toss with about 2 tbsp dressing (~40 g dahi portion; the remaining ~30 g dahi in the weekly total is the cooked marinade). Sit upright 20–30 minutes."
+      "Day — heat 1 frozen chicken bag with 2 tbsp water until steaming hot. Warm one-fifth of the vegetables and 40 g paneer cubes in a pan or microwave. Toss with about 2 tbsp dressing (~40 g dahi portion; the remaining ~30 g dahi in the weekly total is the cooked marinade). Sit upright 20–30 minutes."
     ]},
-  S1:{type:"Snack", risk:"low", name:"2 boiled eggs + makhana + buttermilk",
-    ing:["2 boiled eggs","Makhana 25 g","Buttermilk 200 ml","Pinch of salt, roasted jeera powder"],
+  S1:{type:"Snack", risk:"low", name:"Eggs + paneer + makhana + buttermilk",
+    ing:["2 boiled eggs","Toned paneer 50 g","Makhana 15 g","Buttermilk 200 ml","Pinch of salt, roasted jeera powder"],
     steps:[
       "Sunday — boil 10 eggs for 8–9 minutes. Cool. Store unpeeled in a fridge box. Peel 2 on the day you eat them — peeled eggs spoil faster.",
-      "Dry-roast 125 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Store in an airtight jar at room temperature.",
+      "Sunday snack paneer — cube 250 g toned paneer (50 g × 5). Light salt. Fridge box separate from lunch paneer. Keeps 3–4 days; refresh midweek if it weeps.",
+      "Dry-roast 75 g makhana with a pinch of salt (no chili, no pepper if it triggers). Cool fully. Store in an airtight jar at room temperature.",
       "Buy 1 L tetra buttermilk (plain salted — not masala, not pudina). 200 ml × 5 days = the pack, but an opened tetra only keeps about 3 days chilled. Open Monday, finish by Wednesday. Thursday/Friday: whisk 60 g toned dahi with 150 ml water and salt if needed.",
-      "Day — peel 2 eggs. Weigh 25 g makhana. Pour 200 ml buttermilk. If the pack is unsalted, add a pinch of roasted jeera. Skip extra salt if already salty.",
-      "Sip upright — do not chug. On gym evenings (lift after lunch): drink buttermilk after the session, or finish it at least 20 minutes before you lift."
+      "Day — peel 2 eggs. Weigh 50 g paneer and 15 g makhana. Pour 200 ml buttermilk. If the pack is unsalted, add a pinch of roasted jeera. Skip extra salt if already salty.",
+      "Sip buttermilk upright — do not chug. On gym evenings (lift after lunch): drink buttermilk after the session, or finish it at least 20 minutes before you lift."
     ]},
-  D1:{type:"Dinner", risk:"low", name:"Chicken palak (frozen bags)",
-    ing:["Chicken breast, raw 200 g","Palak 160 g","Toned dahi 30 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger"],
+  D1:{type:"Dinner", risk:"low", name:"Palak paneer (frozen bags)",
+    ing:["Toned paneer 150 g","Palak 160 g","Toned dahi 60 g","Olive oil 1 tsp","Pinch of salt, jeera, grated ginger"],
     steps:[
-      "Sunday — weigh 1 kg raw chicken breast (200 g × 5). Marinate with 150 g toned dahi (~10 tbsp), salt, and 1 tbsp grated ginger for at least 30 minutes. No cream, butter, tomato, or garlic.",
+      "Sunday — cube 750 g toned paneer (150 g × 5). No cream, butter, tomato, or garlic.",
       "Wash and wilt 800 g palak. Blend with 1 tbsp grated ginger and salt until bright green — not khaki.",
-      "Heat 5 tsp olive oil (1 tsp × 5). Crackle 1 tsp jeera. Cook the marinated chicken through.",
-      "Stir in the palak puree and 150 g whisked toned dahi (30 g × 5). Soft simmer 3–4 minutes. Never hard-boil or the dahi splits.",
+      "Heat 5 tsp olive oil (1 tsp × 5). Crackle 1 tsp jeera. Soft-cook the paneer cubes 2–3 minutes (do not brown hard).",
+      "Stir in the palak puree and 300 g whisked toned dahi (60 g × 5). Soft simmer 3–4 minutes. Never hard-boil or the dahi splits.",
       "Cool fully in a shallow layer (under 1 hour to fridge or freezer). Divide into 5 SlideSeal bags. Press flat. Freeze. Fridge-only palak goes swampy; freezing is the point.",
       "Day — put 1 bag in a pot with 2 tbsp water. Heat until bubbling. This is the last food of the day. Take a 10-minute upright walk. Stop eating at least 3 hours before lying down."
+    ]},
+  Sat:{type:"Saturday", risk:"low", name:"Saturday plate",
+    ing:["Toned milk 250 ml","Muesli 30 g","Pomegranate 25 g","Psyllium husk 10 g","Whey protein 40 g","Creatine monohydrate 5 g","Apple cider vinegar 1 tbsp","Toned paneer 100 g"],
+    steps:[
+      "Wake drink first (see list above), then creatine 5 g.",
+      "Breakfast bowl: 250 ml toned milk + 40 g whey protein + 30 g muesli + 25 g pomegranate + 10 g psyllium.",
+      "One protein meal — prefer toned paneer 100 g or 3 boiled eggs. Backup: chicken breast 150 g raw. Cook simple — salt, jeera, ginger. No deep fry.",
+      "Rest of the day: light. No late heavy dinner. Stop eating 3 hrs before bed."
+    ]},
+  Sun:{type:"Sunday", risk:"low", name:"Sunday plate + meal prep",
+    ing:["Toned milk 250 ml","Muesli 30 g","Pomegranate 25 g","Psyllium husk 10 g","Whey protein 40 g","Creatine monohydrate 5 g","Apple cider vinegar 1 tbsp","Toned paneer 100 g"],
+    steps:[
+      "Wake drink first (see list above), then creatine 5 g.",
+      "Breakfast bowl: 250 ml toned milk + 40 g whey protein + 30 g muesli + 25 g pomegranate + 10 g psyllium.",
+      "One protein meal — prefer toned paneer 100 g or 3 boiled eggs. Backup: chicken breast 150 g raw.",
+      "After morning workout: Sunday batch — salad chicken bags, lunch paneer box, snack paneer box, veg box, dressing jar, palak-paneer bags, eggs, makhana.",
+      "Stop eating 3 hrs before bed."
     ]}
 };
 
-/** Optional extras — hard sessions only. Pushes day over the weekday plate. Not in grocery totals. */
+/** Catch-ups: missed/light meal protein OR hard-session fuel. Extra kcal — not everyday. Prefer whey protein powder when food is hard. */
 const ENERGY_ADDONS = {
-  E1:{type:"Add-on", risk:"low", name:"Half scoop protein isolate",
-    ing:["Protein isolate 15 g","Water 150 ml"],
-    steps:["Shake until smooth.","Use only if a meal was missed or the session was brutal — breakfast already has a full scoop."]},
-  E2:{type:"Add-on", risk:"low", name:"1 boiled egg",
-    ing:["1 boiled egg"],
-    steps:["Simmer 8–9 min, cool and peel."]},
-  E3:{type:"Add-on", risk:"low", name:"Toned paneer 40 g",
-    ing:["Toned paneer 40 g"],
-    steps:["Cube; pinch of salt."]},
-  E4:{type:"Add-on", risk:"low", name:"Toned dahi 100 g",
-    ing:["Toned dahi 100 g"],
-    steps:["Eat slowly."]},
-  E5:{type:"Add-on", risk:"low", name:"Chicken breast 50 g",
-    ing:["Chicken breast, raw 50 g"],
-    steps:["Quick pan-cook with salt and ginger. Marinate with 1 tbsp toned dahi if you want."]},
-  E6:{type:"Add-on", risk:"low", name:"Full scoop protein isolate",
-    ing:["Protein isolate 30 g","Water 200 ml"],
-    steps:["Shake until smooth. Emergency only — not daily. Breakfast already includes 30 g."]},
-  E7:{type:"Add-on", risk:"low", name:"Paneer + dahi",
-    ing:["Toned paneer 40 g","Toned dahi 100 g"],
-    steps:["Cube paneer; serve with dahi."]}
+  E1:{type:"Catch-up", risk:"low", name:"Whey protein 15 g (~12 g protein)",
+    ing:["Whey protein 15 g","Water 150 ml"],
+    steps:[
+      "Any whey protein powder is fine.",
+      "Shake 15 g in 150 ml water until smooth.",
+      "Small gap — snack mostly skipped, or appetite is low."
+    ]},
+  E6:{type:"Catch-up", risk:"low", name:"Whey protein 30 g (~23 g protein)",
+    ing:["Whey protein 30 g","Water 200 ml"],
+    steps:[
+      "Any whey protein powder is fine.",
+      "Shake 30 g in 200 ml water until smooth.",
+      "Default catch-up when one meal is light/missed. Breakfast already has 40 g — this is on top only if that meal failed."
+    ]},
+  E8:{type:"Catch-up", risk:"low", name:"Whey protein 60 g (~46 g protein)",
+    ing:["Whey protein 60 g","Water 350 ml"],
+    steps:[
+      "Any whey protein powder is fine.",
+      "Shake 60 g in 350 ml water. Sip upright — do not chug.",
+      "Big gap only (e.g. lunch or dinner mostly skipped). Prefer food if you can eat."
+    ]},
+  E2:{type:"Catch-up", risk:"low", name:"2 boiled eggs (~13 g protein)",
+    ing:["2 boiled eggs"],
+    steps:["Simmer 9 minutes, cool and peel.","Food backup when you can chew but do not want a full meal."]},
+  E3:{type:"Catch-up", risk:"low", name:"Toned paneer 80 g (~15 g protein)",
+    ing:["Toned paneer 80 g"],
+    steps:["Cube; pinch of salt.","GERD-safe solid backup."]},
+  E5:{type:"Catch-up", risk:"low", name:"Chicken breast 100 g raw (~22 g protein)",
+    ing:["Chicken breast, raw 100 g"],
+    steps:["Quick pan-cook with salt and ginger. Marinate with 2 tbsp toned dahi if you want.","Solid backup closest to a real meal."]},
+  E7:{type:"Catch-up", risk:"low", name:"Paneer 80 g + dahi 100 g (~18 g protein)",
+    ing:["Toned paneer 80 g","Toned dahi 100 g"],
+    steps:["Cube paneer; serve with dahi.","Softer meal when appetite is medium."]},
+  E4:{type:"Catch-up", risk:"low", name:"Toned dahi 200 g (~7 g protein)",
+    ing:["Toned dahi 200 g"],
+    steps:["Eat slowly.","Light bridge only — pair with whey protein or eggs if the protein gap is bigger."]}
 };
 
-/* Mon–Fri same 4 slots. Sat/Sun soft weekends (not in grocery). */
+/* Mon–Fri grocery plate. Sat/Sun have Today tabs — not in grocery. */
 const WEEKDAY_MEALS = ["B1","L1","S1","D1"];
 const PLAN = {
   Mon: WEEKDAY_MEALS,
@@ -757,131 +954,158 @@ const PLAN = {
   Sat: [],
   Sun: []
 };
-/** Today chips — same 4 meals Mon–Fri. Times live here (no separate SLOT_TIME). */
+/** Today chips — weekday meals + weekend day tabs. */
 const MEAL_SLOTS = [
   { id:"B1", chip:"Breakfast", time:"9:30 AM" },
   { id:"L1", chip:"Lunch", time:"1:30 PM" },
   { id:"S1", chip:"Snack", time:"4:00 PM" },
-  { id:"D1", chip:"Dinner", time:"8:30 PM" }
-];
-const ADDON_IDS = ["E1","E2","E3","E4","E5","E6","E7"];
-
-const MORNING_BLOCK = [
-  ["Incline walk warm-up — 3 min · incline 1–2% · 4.5 km/h","first"],
-  ["Incline work × 6 — 2 min · incline 7–8% · 4.8–5.2 km/h","each"],
-  ["Easy between × 6 — 1 min · incline 3% · 5.0–5.5 km/h","between"],
-  ["Cool-down — 2 min · incline 0–1% · 4.0 km/h","last card"],
-  ["Dead bug","3 × 8 / side"],
-  ["Bird dog","3 × 8 / side"],
-  ["Glute bridge","3 × 12"],
-  ["Bicycle crunch (stop if lumbar pain)","3 × 12 / side"],
-  ["Side plank (knees OK)","3 × 20 s / side"],
-  ["Dead hang on pull-up bar","3 × 15–30 s"],
-  ["Inverted row (lying pull under bar/table; knees bent OK)","3 × 6–10"],
-  ["Scapular pull (hang, shrug shoulders down — arms stay straight)","3 × 8"],
-  ["Boldfit band pull-apart (light; arms straight)","3 × 15"],
-  ["Boldfit band face-pull (anchor at face height)","3 × 12"],
-  ["Boldfit Pallof press (stand sideways to anchor)","3 × 10 / side"]
+  { id:"D1", chip:"Dinner", time:"8:30 PM" },
+  { id:"Sat", chip:"Saturday", time:"All day" },
+  { id:"Sun", chip:"Sunday", time:"All day" }
 ];
 
-/** Extra home strength — Wed + Sat (no commercial gym). */
-const HOME_BAND_BLOCK = [
-  ["— Home Boldfit block —","after morning"],
-  ["Band seated or standing row","3 × 12"],
-  ["Band chest press or push-up","3 × 10"],
-  ["Band glute bridge (loop above knees)","3 × 12"],
-  ["Band-assisted pull-up (loop on bar, foot/knee in) — when inverted row hits 3 × 10","3 × 5–8"]
+/** Short cues above each meal card — no long rules. */
+const MEAL_PRE = {
+  B1:[
+    "<b>Wake drink</b> — 350 ml water + pinch salt + 1 tbsp ACV · sip 10 min · wait 20 min",
+    "<b>Creatine</b> — 5 g in water (every day)",
+    "<b>Whey protein</b> — 40 g in the bowl",
+    "<b>Missed this meal?</b> Whey protein 40 g in water"
+  ],
+  L1:[
+    "<b>Missed this meal?</b> Whey protein 60 g in water"
+  ],
+  S1:[
+    "<b>Missed this meal?</b> Whey protein 30 g in water"
+  ],
+  D1:[
+    "<b>Missed this meal?</b> Whey protein 60 g in water",
+    "<b>After</b> — 10-min upright walk · stop eating 3 hrs before bed"
+  ],
+  Sat:[
+    "<b>Wake drink</b> — 350 ml water + pinch salt + 1 tbsp ACV · sip 10 min · wait 20 min",
+    "<b>Creatine</b> — 5 g in water",
+    "<b>Breakfast bowl</b> — same as weekday (milk 250 ml + whey 40 g + muesli 30 g)",
+    "<b>Protein meal (pick 1)</b> — prefer paneer 100 g · or 3 eggs · backup chicken 150 g raw",
+    "<b>Missed protein meal?</b> Whey protein 60 g in water",
+    "<b>Rest of day</b> — light · no deep fry · stop eating 3 hrs before bed"
+  ],
+  Sun:[
+    "<b>Wake drink</b> — 350 ml water + pinch salt + 1 tbsp ACV · sip 10 min · wait 20 min",
+    "<b>Creatine</b> — 5 g in water",
+    "<b>Breakfast bowl</b> — same as weekday (milk 250 ml + whey 40 g + muesli 30 g)",
+    "<b>Protein meal (pick 1)</b> — prefer paneer 100 g · or 3 eggs · backup chicken 150 g raw",
+    "<b>Missed protein meal?</b> Whey protein 60 g in water",
+    "<b>After workout</b> — Sunday batch cook for Mon–Fri",
+    "<b>Rest of day</b> — light · stop eating 3 hrs before bed"
+  ]
+};
+
+const ADDON_IDS = ["E1","E6","E8","E2","E3","E5","E7","E4"];
+
+/** Daily treadmill — exact settings, ~30 min, high fat-burn incline walk. */
+const TREADMILL_BLOCK = [
+  ["Warm-up — 5 min · incline 3% · 4.5 km/h","5 min","incline-warm-up"],
+  ["Fat-burn — 20 min · incline 12% · 4.8 km/h","20 min","incline-main"],
+  ["Cool-down — 5 min · incline 2% · 4.0 km/h","5 min","incline-cooldown"]
 ];
 
-/** Full home swap when you miss commercial Gym A (Mon/Thu). Bands + pull bar + rope. */
-const HOME_A = [
-  ["— Miss gym? Home A (bands + bar + rope) —","do instead of Gym A"],
-  ["Skip rope (or incline walk if back/reflux flares)","8–10 min easy"],
-  ["Band squat (band under feet, handles at shoulders)","3 × 10"],
-  ["Push-up or band chest press (knees OK)","3 × 10"],
-  ["Inverted row (under bar/table)","3 × 8–10"],
-  ["Band seated or standing row","3 × 12"],
-  ["Band hip thrust / glute bridge","3 × 12"],
-  ["Band overhead press","3 × 10"],
-  ["Band triceps pushdown (anchor high)","3 × 12"],
-  ["Band biceps curl","3 × 12"]
+/** Daily home — short: core + pull-up path (bands on Wed/Sat + Alternative only). Exact sets/reps. */
+const HOME_BASE = [
+  ["Dead bug","3 × 8 / side","dead-bug"],
+  ["Glute bridge","3 × 12","glute-bridge"],
+  ["Side plank (knees OK)","3 × 25 s / side","side-plank"],
+  ["Dead hang on pull-up bar","3 × 20 s","dead-hang"],
+  ["Scapular pull (hang, shrug shoulders down — arms stay straight)","3 × 8","scapular-pull"],
+  ["Inverted row (lying pull under bar/table; knees bent OK)","3 × 8","inverted-row"]
 ];
 
-/** Full home swap when you miss commercial Gym B (Tue/Fri). */
-const HOME_B = [
-  ["— Miss gym? Home B (bands + bar + rope) —","do instead of Gym B"],
-  ["Skip rope (or incline walk if back/reflux flares)","8–10 min easy"],
-  ["Band Romanian hinge (soft knees; stop if lumbar pain)","3 × 10"],
-  ["Band split squat or reverse lunge","3 × 8 / leg"],
-  ["Band-assisted pull-up or inverted row + scapular pulls","3 × 5–8"],
-  ["Band face-pull","3 × 15"],
-  ["Band lateral raise","3 × 12"],
-  ["Band overhead triceps extension","3 × 12"],
-  ["Band hammer curl","3 × 12"],
-  ["Calf raise (bodyweight or band)","3 × 15"]
+/** Extra home strength — Wed + Sat only. */
+const HOME_EXTRA = [
+  ["Band seated or standing row","3 × 12","band-row"],
+  ["Push-up or band chest press (knees OK)","3 × 10","push-up-or-band-chest"],
+  ["Band-assisted pull-up (loop on bar, foot/knee in) — start after inverted row is easy at 3 × 8","3 × 6","band-assisted-pull-up"]
 ];
 
-const GYM_A = [
-  ["Leg press (feet mid; stop short of back pain)","3 × 10"],
-  ["Machine chest press or DB bench","3 × 10"],
-  ["Lat pulldown (wide, to upper chest)","3 × 10"],
-  ["Seated cable row or chest-supported row","3 × 10"],
-  ["Hip thrust (bar or machine)","3 × 10"],
-  ["Seated DB / machine shoulder press","3 × 10"],
-  ["Cable triceps pushdown","3 × 12"],
-  ["DB / cable biceps curl","3 × 12"],
-  ["Pallof press","3 × 10 / side"],
-  ["Optional: inverted row on smith (low bar) if home row skipped","3 × 8"]
+/** Miss-gym makeup — Mon / Thu. Compounds only. */
+const ALT_LIFT_A = [
+  ["Skip rope (or incline walk if back/reflux flares)","10 min easy","skip-rope"],
+  ["Band squat (band under feet, handles at shoulders)","3 × 10","band-squat"],
+  ["Push-up or band chest press (knees OK)","3 × 10","push-up-or-band-chest"],
+  ["Inverted row (under bar/table)","3 × 8","inverted-row-short"],
+  ["Band hip thrust / glute bridge","3 × 12","band-hip-thrust"],
+  ["Band overhead press","3 × 10","band-overhead-press"]
 ];
 
-const GYM_B = [
-  ["Seated leg curl","3 × 12"],
-  ["Goblet squat or smith squat (light)","3 × 8"],
-  ["Lat pulldown (close / neutral grip)","3 × 10"],
-  ["One-arm DB row (chest on incline if possible)","3 × 10 / arm"],
-  ["Incline machine / DB press","3 × 10"],
-  ["Cable face pull","3 × 15"],
-  ["Lateral raise","3 × 12"],
-  ["Overhead cable / DB triceps extension","3 × 12"],
-  ["Hammer curl","3 × 12"],
-  ["Standing calf raise","3 × 15"]
+/** Miss-gym makeup — Tue / Fri. Compounds only. */
+const ALT_LIFT_B = [
+  ["Skip rope (or incline walk if back/reflux flares)","10 min easy","skip-rope"],
+  ["Band Romanian hinge (soft knees; stop if lumbar pain)","3 × 10","band-romanian-hinge"],
+  ["Band split squat or reverse lunge","3 × 8 / leg","band-split-squat"],
+  ["Band-assisted pull-up or inverted row + scapular pulls","3 × 6","band-assisted-or-row"],
+  ["Band face-pull","3 × 12","band-face-pull-home"],
+  ["Band lateral raise","3 × 12","band-lateral-raise"]
+];
+
+/** Optional easy walk after lifts — fine after strength; not a hard incline block. */
+const LIFT_COOLDOWN = [
+  ["Easy cool-down walk (flat or incline 3%) — optional","10 min","easy-cooldown"]
+];
+
+/** Gym lifts — Mon / Thu. Big compounds only. No hard cardio before these. */
+const GYM_LIFT_A = [
+  ["Leg press (feet mid; stop short of back pain)","3 × 10","leg-press"],
+  ["Machine chest press or DB bench","3 × 10","chest-press"],
+  ["Lat pulldown (wide, to upper chest)","3 × 10","lat-pulldown-wide"],
+  ["Seated cable row or chest-supported row","3 × 10","seated-cable-row"],
+  ["Hip thrust (bar or machine)","3 × 10","hip-thrust"],
+  ["Seated DB / machine shoulder press","3 × 10","shoulder-press"]
+];
+
+/** Gym lifts — Tue / Fri. Hinge + pull bias. */
+const GYM_LIFT_B = [
+  ["DB Romanian deadlift (soft knees; stop if lumbar pain)","3 × 10","db-romanian-dl"],
+  ["Seated leg curl","3 × 12","seated-leg-curl"],
+  ["Lat pulldown (close / neutral grip)","3 × 10","lat-pulldown-close"],
+  ["One-arm DB row (chest on incline if possible)","3 × 10 / arm","one-arm-db-row"],
+  ["Incline machine / DB press","3 × 10","incline-press"],
+  ["Cable face pull","3 × 12","cable-face-pull"]
+];
+
+/** Non-lift gym days — incline already done on Home morning. */
+const GYM_REST = [
+  ["No gym lifts today — morning incline is on Home","—","gym-rest-note"]
 ];
 
 const WORKOUT = [
-  {day:"Mon", title:"Morning + Gym A", type:"Home then gym · Home A if skip", exercises:[
-    ...MORNING_BLOCK,
-    ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
-    ...GYM_A
-  ], homeAlt: HOME_A},
-  {day:"Tue", title:"Morning + Gym B", type:"Home then gym · Home B if skip", exercises:[
-    ...MORNING_BLOCK,
-    ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
-    ...GYM_B
-  ], homeAlt: HOME_B},
-  {day:"Wed", title:"Morning + Boldfit home", type:"Home only", exercises:[
-    ...MORNING_BLOCK,
-    ...HOME_BAND_BLOCK,
-    ["No commercial gym — recover for Thu","—"]
-  ], homeAlt: null},
-  {day:"Thu", title:"Morning + Gym A", type:"Home then gym · Home A if skip", exercises:[
-    ...MORNING_BLOCK,
-    ["— Evening Gym A (commercial) —","rest 90–120 s compounds"],
-    ...GYM_A
-  ], homeAlt: HOME_A},
-  {day:"Fri", title:"Morning + Gym B", type:"Home then gym · Home B if skip", exercises:[
-    ...MORNING_BLOCK,
-    ["— Evening Gym B (commercial) —","rest 90–120 s compounds"],
-    ...GYM_B
-  ], homeAlt: HOME_B},
-  {day:"Sat", title:"Morning + Boldfit home", type:"Home only", exercises:[
-    ...MORNING_BLOCK,
-    ...HOME_BAND_BLOCK,
-    ["Soft weekend food — keep breakfast bowl + one protein meal","—"]
-  ], homeAlt: null},
-  {day:"Sun", title:"Morning + meal prep", type:"Home + cook", exercises:[
-    ...MORNING_BLOCK,
-    ["Sunday batch: salad chicken bags, veg box, dressing jar, palak bags, eggs, makhana","after the walk"]
-  ], homeAlt: null}
+  {day:"Mon", title:"Home + Gym", type:"Morning incline + core · evening lifts · Alternative if you miss gym",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE],
+    gym:[...GYM_LIFT_A, ...LIFT_COOLDOWN],
+    alt:[...ALT_LIFT_A]},
+  {day:"Tue", title:"Home + Gym", type:"Morning incline + core · evening lifts · Alternative if you miss gym",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE],
+    gym:[...GYM_LIFT_B, ...LIFT_COOLDOWN],
+    alt:[...ALT_LIFT_B]},
+  {day:"Wed", title:"Home (no lifts)", type:"Morning incline + home strength · no gym lifts",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE, ...HOME_EXTRA],
+    gym:[...GYM_REST],
+    alt:[]},
+  {day:"Thu", title:"Home + Gym", type:"Morning incline + core · evening lifts · Alternative if you miss gym",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE],
+    gym:[...GYM_LIFT_A, ...LIFT_COOLDOWN],
+    alt:[...ALT_LIFT_A]},
+  {day:"Fri", title:"Home + Gym", type:"Morning incline + core · evening lifts · Alternative if you miss gym",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE],
+    gym:[...GYM_LIFT_B, ...LIFT_COOLDOWN],
+    alt:[...ALT_LIFT_B]},
+  {day:"Sat", title:"Home (no lifts)", type:"Morning incline + home strength · food on Today → Saturday",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE, ...HOME_EXTRA],
+    gym:[...GYM_REST],
+    alt:[]},
+  {day:"Sun", title:"Home + meal prep", type:"Morning incline + core · cook · food on Today → Sunday",
+    home:[...TREADMILL_BLOCK, ...HOME_BASE, ["Sunday batch: salad chicken bags, lunch + snack paneer boxes, veg box, dressing jar, palak-paneer bags, eggs, makhana","after the walk"]],
+    gym:[...GYM_REST],
+    alt:[]}
 ];
 
 const START_DATE = new Date(2026, 9, 1); // 1 Oct 2026 — plan start
@@ -900,9 +1124,9 @@ const SKIP_ING = /^(ice cubes|water\s+\d)/i;
  * ENERGY_ADDONS intentionally omitted. Order = first match wins.
  *
  * Expected weekly raw totals for the current plate:
- *   chicken 1.9 kg · eggs 10 · milk 1.25 L · dahi ~500 g · buttermilk 1 L
- *   palak 800 g · capsicum 300 g · carrot 300 g · makhana 125 g
- *   muesli 250 g · whey 150 g · psyllium 50 g · pomegranate 125 g
+ *   chicken 750 g · paneer 1.2 kg · eggs 10 · milk 1.25 L · dahi ~650 g · buttermilk 1 L
+ *   palak 800 g · capsicum 400 g · carrot 400 g · makhana 75 g
+ *   muesli 150 g · whey 200 g · psyllium 50 g · pomegranate 125 g
  */
 const BUY_CATALOG = [
   { group:"protein", name:"Chicken breast", re:/chicken breast/i, base:"g",
@@ -921,11 +1145,10 @@ const BUY_CATALOG = [
       if(n <= 24) return "2 dozen";
       return Math.ceil(n/12) + " dozen";
     } },
-  { group:"protein", name:"Whey protein isolate", re:/protein isolate/i, base:"g",
+  { group:"protein", name:"Whey protein", re:/whey protein|protein isolate|protein powder/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:30; },
     shop:g=>{
       if(g <= 0) return null;
-      if(g <= 150) return "1 tub (week uses " + Math.round(g) + " g)";
       return "1 tub (week uses " + Math.round(g) + " g)";
     } },
   { group:"dairy", name:"Goodlife toned milk", re:/toned milk/i, base:"ml",
@@ -935,6 +1158,18 @@ const BUY_CATALOG = [
       if(ml <= 1000) return "1 L tetra";
       if(ml <= 2000) return "2 × 1 L tetra";
       return Math.ceil(ml/1000) + " × 1 L tetra";
+    } },
+  { group:"dairy", name:"Toned paneer", re:/toned paneer|paneer/i, base:"g",
+    qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:100; },
+    shop:g=>{
+      if(g <= 0) return null;
+      if(g <= 200) return "200 g pack";
+      if(g <= 400) return "400 g pack";
+      if(g <= 600) return "500 g pack (or 3 × 200 g)";
+      if(g <= 800) return "2 × 400 g packs";
+      if(g <= 1000) return "1 kg";
+      if(g <= 1200) return "1.2 kg (3 × 400 g)";
+      return (Math.ceil(g/100)/10) + " kg";
     } },
   { group:"dairy", name:"Buttermilk (tetra)", re:/buttermilk/i, base:"ml",
     qty:s=>{ const m=s.match(/(\d+)\s*ml/i); return m?+m[1]:200; },
@@ -963,6 +1198,9 @@ const BUY_CATALOG = [
   { group:"pantry", name:"Makhana", re:/makhana/i, base:"g",
     qty:s=>{ const m=s.match(/(\d+)\s*g/i); return m?+m[1]:20; },
     shop:g=> g <= 0 ? null : (g <= 100 ? "100 g pack" : g <= 250 ? "250 g pack" : "500 g pack") + " (week uses " + Math.round(g) + " g)" },
+  { group:"pantry", name:"Creatine monohydrate", re:/creatine/i, base:"use",
+    qty:()=>1,
+    shop:()=> "1 tub (5 g/day)" },
   { group:"pantry", name:"Olive oil", re:/olive oil/i, base:"use",
     qty:()=>1,
     shop:()=> "1 bottle" },
@@ -1068,6 +1306,9 @@ document.querySelectorAll('.tabbar .tab').forEach(btn=>{
 
 /* ---------- Today / meal chips (Mon–Fri plate) ---------- */
 function defaultMealId(){
+  const dow = new Date().getDay(); // Sun=0 … Sat=6
+  if(dow === 6) return "Sat";
+  if(dow === 0) return "Sun";
   const h = new Date().getHours();
   if(h < 13) return "B1";
   if(h < 16) return "L1";
@@ -1079,12 +1320,12 @@ let lastMealTrigger = null;
 const ENERGY_KEY = 'plate78_energy';
 
 function isEnergyBoostOn(){
-  return safeStorage.get(ENERGY_KEY) === '1';
+  return false;
 }
 function setEnergyBoost(on){
   safeStorage.set(ENERGY_KEY, on ? '1' : '0');
-  document.getElementById('energyBoost').checked = on;
-  document.getElementById('kcalTarget').textContent = on ? '1,450+' : '1,450';
+  const el = document.getElementById('kcalTarget');
+  if(el) el.textContent = on ? '1,500+' : '1,500';
   renderDayCard();
 }
 
@@ -1092,57 +1333,51 @@ function getRecipe(id){
   return RECIPES[id] || ENERGY_ADDONS[id] || null;
 }
 
+function mealPreambleHtml(id){
+  const lines = MEAL_PRE[id] || [];
+  if(!lines.length) return '';
+  return `<ul class="meal-pre">${lines.map(l=>`<li>${l}</li>`).join('')}</ul>`;
+}
+
 function renderDaySwitch(){
   const el = document.getElementById('daySwitch');
   el.innerHTML = '';
   el.setAttribute('aria-label', 'Meal');
-  MEAL_SLOTS.forEach(slot=>{
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = slot.chip;
-    b.setAttribute('aria-pressed', slot.id === activeMealId ? 'true' : 'false');
-    if(slot.id === activeMealId) b.classList.add('on');
-    b.addEventListener('click', ()=>{ activeMealId = slot.id; renderDaySwitch(); renderDayCard(); });
-    el.appendChild(b);
+  const week = MEAL_SLOTS.filter(s=> s.id !== 'Sat' && s.id !== 'Sun');
+  const weekend = MEAL_SLOTS.filter(s=> s.id === 'Sat' || s.id === 'Sun');
+  [week, weekend].forEach(group=>{
+    const row = document.createElement('div');
+    row.className = 'day-row';
+    group.forEach(slot=>{
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = slot.chip;
+      b.setAttribute('aria-pressed', slot.id === activeMealId ? 'true' : 'false');
+      if(slot.id === activeMealId) b.classList.add('on');
+      b.addEventListener('click', ()=>{ activeMealId = slot.id; renderDaySwitch(); renderDayCard(); });
+      row.appendChild(b);
+    });
+    el.appendChild(row);
   });
 }
 
 function renderDayCard(){
   const card = document.getElementById('dayCard');
-  const boost = isEnergyBoostOn();
-  const totals = dayMacros(WEEKDAY_MEALS);
   const slot = MEAL_SLOTS.find(s=> s.id === activeMealId) || MEAL_SLOTS[0];
   const r = RECIPES[slot.id];
   const m = recipeMacros(r);
-  const dow = new Date().getDay();
-  const weekend = dow === 0 || dow === 6;
   const mealBtn = `<button type="button" class="meal" data-recipe="${slot.id}" aria-haspopup="dialog">
       <div>
         <div class="when">${slot.time} · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein</div>
         <div class="name">${r.name}</div>
-        <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^Apple cider/i.test(x)).join(", ")}</div>
-        <div class="hint">Tap for Sunday batch steps and day-of assembly</div>
+        <div class="items">${r.ing.filter(x=>!/^Pinch of salt/i.test(x) && !/^Apple cider/i.test(x) && !/^Creatine/i.test(x)).join(", ")}</div>
+        <div class="hint">Tap for steps</div>
       </div>
       <div class="risk ${r.risk}">${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}</div>
     </button>`;
-  card.innerHTML = `<h2>${slot.chip} · weekday plate</h2>` +
-    (weekend ? `<div class="note" style="margin:0 0 12px;padding:12px;border:none;">Soft weekend: keep the wake drink + breakfast bowl, plus one solid protein meal. This screen still shows the <b>Monday–Friday</b> prep plate for Sunday batch cook.</div>` : '') +
-    mealBtn + (boost ? `
-    <div class="addon-heading">Hard-workout add-ons — pick one if you need extra protein</div>
-    ${ADDON_IDS.map(id => {
-      const ar = ENERGY_ADDONS[id];
-      const am = recipeMacros(ar);
-      return `<button type="button" class="meal addon" data-recipe="${id}" aria-haspopup="dialog">
-        <div>
-          <div class="when">+${fmtKcal(am.kcal)} kcal · +${fmtProt(am.protein)} g protein</div>
-          <div class="name">${ar.name}</div>
-          <div class="items">${ar.ing.join(", ")}</div>
-          <div class="hint">Tap for ingredients and steps</div>
-        </div>
-        <div class="risk ${ar.risk}">Optional</div>
-      </button>`;
-    }).join('')}
-  ` : '') + `<div class="note">This weekday plate comes to <b>${fmtKcal(totals.kcal)} kcal</b> and <b>~${fmtProt(totals.protein)} g protein</b> from weighed ingredients. Olive oil is 1.5 tsp (cap 3). Carbs come from muesli and a little from veg. Dinner at 8:30, then a 10-minute upright walk. ${boost ? 'Add-ons are extra fuel for hard days, not everyday food.' : 'Turn on the toggle above only after a hard workout.'}</div>`;
+  card.innerHTML = `<h2>${slot.chip}</h2>` +
+    mealPreambleHtml(slot.id) +
+    mealBtn;
 
   card.querySelectorAll('.meal').forEach(btn=>{
     btn.addEventListener('click', ()=> openRecipeDialog(btn.dataset.recipe, btn));
@@ -1164,7 +1399,7 @@ function openRecipeDialog(id, trigger){
   const m = recipeMacros(r);
   const kcalNote = m.kcal ? ` · ${fmtKcal(m.kcal)} kcal · ${fmtProt(m.protein)} g protein` : '';
   const isAddon = !!ENERGY_ADDONS[id];
-  dlgMeta.textContent = `${r.type} · ${isAddon ? 'Optional add-on' : 'One day (Sunday batch quantities are in the steps)'}${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
+  dlgMeta.textContent = `${r.type} · ${isAddon ? 'Missed-meal catch-up' : (id === 'Sat' || id === 'Sun' ? 'Weekend day' : 'One day')}${kcalNote} · ${r.risk==='low' ? 'Low reflux risk' : 'Watch portion'}`;
   dlgBody.innerHTML = `
     <h3>${isAddon ? 'Ingredients' : 'Ingredients (1 day)'}</h3>
     <ul class="plain">${r.ing.map(i=>`<li>${i}</li>`).join('')}</ul>
@@ -1207,18 +1442,46 @@ dialog.addEventListener('keydown', (e)=>{
 });
 
 /* ---------- Workout (weekday folder tabs) ---------- */
+const WK_DAY_LABEL = {
+  Mon:"Monday", Tue:"Tuesday", Wed:"Wednesday", Thu:"Thursday",
+  Fri:"Friday", Sat:"Saturday", Sun:"Sunday"
+};
+const VID_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.5 6.8v10.4L17.2 12 8.5 6.8z"/></svg>`;
+
 function defaultWkDay(){
   // Date.getDay: Sun=0 … Sat=6 → map to DAYS Mon…Sun
   const js = new Date().getDay();
   return DAYS[(js + 6) % 7];
 }
 let activeWkDay = defaultWkDay();
+let activeWkPlace = "home"; // "home" | "gym" | "alt"
+let EXERCISES = {};
+
+function loadExercises(){
+  return fetch('./exercises.json', { cache:'no-cache' })
+    .then(r => { if(!r.ok) throw new Error('exercises.json'); return r.json(); })
+    .then(data => { EXERCISES = data || {}; })
+    .catch(() => { EXERCISES = {}; });
+}
 
 function exRow(e){
   const name = e[0] || "";
+  const sets = e[1] || "";
+  const id = e[2];
   const isSep = /^—/.test(name);
-  if(isSep) return `<div class="ex ex-sep"><span>${name}</span><span class="sr">${e[1] || ""}</span></div>`;
-  return `<div class="ex"><span>${name}</span><span class="sr">${e[1] || ""}</span></div>`;
+  if(isSep) return `<div class="ex ex-sep"><span>${name}</span></div>`;
+  const meta = id ? EXERCISES[id] : null;
+  const skipVideo = !id || (meta && meta.skipVideo);
+  let lead = `<span class="ex-lead" aria-hidden="true"><span class="ex-lead-gap"></span></span>`;
+  if(!skipVideo){
+    const yt = (meta && meta.youtubeId) ? String(meta.youtubeId).trim() : "";
+    const empty = !yt;
+    lead = `<span class="ex-lead"><button type="button" class="ex-vid${empty ? ' is-empty' : ''}" data-yt="${yt}" ${empty ? 'disabled' : ''} aria-label="${empty ? 'Add YouTube ID in exercises.json' : 'Watch form demo'}">${VID_ICON}</button></span>`;
+  }
+  const setsHtml = sets && sets !== "—"
+    ? `<span class="sr">${sets}</span>`
+    : `<span class="sr is-ghost">—</span>`;
+  return `<div class="ex">${lead}<span class="ex-body"><span class="ex-name">${name}</span></span>${setsHtml}</div>`;
 }
 
 function renderWkDaySwitch(){
@@ -1228,7 +1491,9 @@ function renderWkDaySwitch(){
   WORKOUT.forEach(w=>{
     const b = document.createElement('button');
     b.type = 'button';
-    b.textContent = w.day;
+    b.setAttribute('role', 'tab');
+    b.textContent = WK_DAY_LABEL[w.day] || w.day;
+    b.setAttribute('aria-selected', w.day === activeWkDay ? 'true' : 'false');
     b.setAttribute('aria-pressed', w.day === activeWkDay ? 'true' : 'false');
     if(w.day === activeWkDay) b.classList.add('on');
     b.addEventListener('click', ()=>{ activeWkDay = w.day; renderWorkout(); });
@@ -1236,21 +1501,107 @@ function renderWkDaySwitch(){
   });
 }
 
+function renderWkPlaceSwitch(){
+  const el = document.getElementById('wkPlaceSwitch');
+  if(!el) return;
+  el.innerHTML = "";
+  [
+    { id:"home", label:"Home" },
+    { id:"gym", label:"Gym" },
+    { id:"alt", label:"Alternative" }
+  ].forEach(p=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.textContent = p.label;
+    b.setAttribute('aria-selected', p.id === activeWkPlace ? 'true' : 'false');
+    if(p.id === activeWkPlace) b.classList.add('on');
+    b.addEventListener('click', ()=>{ activeWkPlace = p.id; renderWorkout(); });
+    el.appendChild(b);
+  });
+}
+
 function renderWorkout(){
   renderWkDaySwitch();
+  renderWkPlaceSwitch();
   const w = WORKOUT.find(x => x.day === activeWkDay) || WORKOUT[0];
   const title = document.getElementById('wkDayTitle');
   const type = document.getElementById('wkDayType');
-  if(title) title.textContent = w.day + " · " + w.title;
+  if(title) title.textContent = (WK_DAY_LABEL[w.day] || w.day) + " · " + w.title;
   if(type) type.textContent = w.type;
   const details = document.getElementById('wkDetails');
   if(!details) return;
-  let html = w.exercises.map(exRow).join('');
-  if(w.homeAlt && w.homeAlt.length){
-    html += w.homeAlt.map(exRow).join('');
+  const list = activeWkPlace === "gym" ? (w.gym || [])
+    : activeWkPlace === "alt" ? (w.alt || [])
+    : (w.home || []);
+  if(!list.length){
+    details.innerHTML = `<div class="ex-list"><p class="ex-list-empty">${
+      activeWkPlace === "alt"
+        ? `No gym lift today — nothing to make up. Use <b>Home</b>.`
+        : `Nothing on this tab.`
+    }</p></div>`;
+  } else {
+    details.innerHTML = `<div class="ex-list">${list.map(exRow).join('')}</div>`;
   }
-  details.innerHTML = html;
+  details.querySelectorAll('.ex-vid:not([disabled])').forEach(btn=>{
+    btn.addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      openExerciseVideo(btn.dataset.yt);
+    });
+  });
 }
+
+/* ---------- Exercise YouTube (fullscreen embed) ---------- */
+const ytDialog = document.getElementById('ytDialog');
+const ytFrameWrap = document.getElementById('ytFrameWrap');
+const ytShell = document.getElementById('ytShell');
+
+function openExerciseVideo(youtubeId){
+  if(!youtubeId || !ytDialog || !ytFrameWrap) return;
+  const id = String(youtubeId).trim();
+  if(!/^[a-zA-Z0-9_-]{6,20}$/.test(id)) return;
+  ytFrameWrap.innerHTML = `<iframe
+    src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=0&fs=1"
+    title="Exercise form"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  if(typeof ytDialog.showModal === 'function') ytDialog.showModal();
+  else ytDialog.setAttribute('open','');
+  const goFs = ()=>{
+    const target = ytShell || ytDialog;
+    const req = target.requestFullscreen || target.webkitRequestFullscreen;
+    if(req) req.call(target).catch(()=>{});
+  };
+  // slight delay so dialog paints before FS request
+  setTimeout(goFs, 50);
+}
+
+function closeExerciseVideo(){
+  if(document.fullscreenElement){
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if(exit) exit.call(document).catch(()=>{});
+  }
+  if(ytDialog && ytDialog.open) ytDialog.close();
+  if(ytFrameWrap) ytFrameWrap.innerHTML = "";
+}
+
+document.getElementById('ytClose')?.addEventListener('click', closeExerciseVideo);
+ytDialog?.addEventListener('click', (e)=>{
+  if(e.target === ytDialog) closeExerciseVideo();
+});
+ytDialog?.addEventListener('cancel', (e)=>{
+  e.preventDefault();
+  closeExerciseVideo();
+});
+ytDialog?.addEventListener('close', ()=>{
+  if(ytFrameWrap) ytFrameWrap.innerHTML = "";
+});
+document.addEventListener('fullscreenchange', ()=>{
+  if(!document.fullscreenElement && ytDialog && ytDialog.open){
+    // keep dialog open until user hits × — intentional
+  }
+});
 
 /* ---------- Grocery ---------- */
 function loadChecked(){
@@ -1314,14 +1665,10 @@ if('serviceWorker' in navigator){
 }
 
 /* ---------- Init ---------- */
-document.getElementById('energyBoost').checked = isEnergyBoostOn();
-document.getElementById('kcalTarget').textContent = isEnergyBoostOn() ? '1,450+' : '1,450';
-document.getElementById('energyBoost').addEventListener('change', (e)=>{
-  setEnergyBoost(e.target.checked);
-});
+document.getElementById('kcalTarget').textContent = '1,500';
 renderDaySwitch();
 renderDayCard();
-renderWorkout();
+loadExercises().then(()=> renderWorkout());
 renderGrocery();
 renderDaysLeft();
 renderOnTrack();

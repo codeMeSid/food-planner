@@ -1,0 +1,235 @@
+{
+  "incline-warm-up": {
+    "name": "Warm-up — 5 min · incline 3% · 4.5 km/h",
+    "youtubeId": "",
+    "skipVideo": true
+  },
+  "incline-main": {
+    "name": "Fat-burn — 20 min · incline 12% · 4.8 km/h",
+    "youtubeId": "",
+    "skipVideo": true
+  },
+  "incline-cooldown": {
+    "name": "Cool-down — 5 min · incline 2% · 4.0 km/h",
+    "youtubeId": "",
+    "skipVideo": true
+  },
+  "gym-rest-note": {
+    "name": "No gym lifts today — morning incline is on Home",
+    "youtubeId": "",
+    "skipVideo": true
+  },
+  "easy-cooldown": {
+    "name": "Easy cool-down walk (flat or incline 3%) — optional",
+    "youtubeId": "",
+    "skipVideo": true
+  },
+  "db-romanian-dl": {
+    "name": "DB Romanian deadlift (soft knees; stop if lumbar pain)",
+    "youtubeId": ""
+  },
+  "dead-bug": {
+    "name": "Dead bug",
+    "youtubeId": ""
+  },
+  "bird-dog": {
+    "name": "Bird dog",
+    "youtubeId": ""
+  },
+  "glute-bridge": {
+    "name": "Glute bridge",
+    "youtubeId": ""
+  },
+  "bicycle-crunch": {
+    "name": "Bicycle crunch (stop if lumbar pain)",
+    "youtubeId": ""
+  },
+  "side-plank": {
+    "name": "Side plank (knees OK)",
+    "youtubeId": ""
+  },
+  "dead-hang": {
+    "name": "Dead hang on pull-up bar",
+    "youtubeId": ""
+  },
+  "inverted-row": {
+    "name": "Inverted row (lying pull under bar/table; knees bent OK)",
+    "youtubeId": ""
+  },
+  "scapular-pull": {
+    "name": "Scapular pull (hang, shrug shoulders down — arms stay straight)",
+    "youtubeId": ""
+  },
+  "band-pull-apart": {
+    "name": "Resistance band pull-apart (light; arms straight)",
+    "youtubeId": ""
+  },
+  "band-face-pull": {
+    "name": "Resistance band face-pull (anchor at face height)",
+    "youtubeId": ""
+  },
+  "band-pallof": {
+    "name": "Resistance band Pallof press (stand sideways to anchor)",
+    "youtubeId": ""
+  },
+  "band-row": {
+    "name": "Band seated or standing row",
+    "youtubeId": ""
+  },
+  "band-chest-press": {
+    "name": "Band chest press or push-up",
+    "youtubeId": ""
+  },
+  "band-glute-bridge": {
+    "name": "Band glute bridge (loop above knees)",
+    "youtubeId": ""
+  },
+  "band-assisted-pull-up": {
+    "name": "Band-assisted pull-up (loop on bar, foot/knee in)",
+    "youtubeId": ""
+  },
+  "skip-rope": {
+    "name": "Skip rope (or incline walk if back/reflux flares)",
+    "youtubeId": ""
+  },
+  "band-squat": {
+    "name": "Band squat (band under feet, handles at shoulders)",
+    "youtubeId": ""
+  },
+  "push-up-or-band-chest": {
+    "name": "Push-up or band chest press (knees OK)",
+    "youtubeId": ""
+  },
+  "inverted-row-short": {
+    "name": "Inverted row (under bar/table)",
+    "youtubeId": ""
+  },
+  "band-hip-thrust": {
+    "name": "Band hip thrust / glute bridge",
+    "youtubeId": ""
+  },
+  "band-overhead-press": {
+    "name": "Band overhead press",
+    "youtubeId": ""
+  },
+  "band-triceps-pushdown": {
+    "name": "Band triceps pushdown (anchor high)",
+    "youtubeId": ""
+  },
+  "band-biceps-curl": {
+    "name": "Band biceps curl",
+    "youtubeId": ""
+  },
+  "band-romanian-hinge": {
+    "name": "Band Romanian hinge (soft knees; stop if lumbar pain)",
+    "youtubeId": ""
+  },
+  "band-split-squat": {
+    "name": "Band split squat or reverse lunge",
+    "youtubeId": ""
+  },
+  "band-assisted-or-row": {
+    "name": "Band-assisted pull-up or inverted row + scapular pulls",
+    "youtubeId": ""
+  },
+  "band-face-pull-home": {
+    "name": "Band face-pull",
+    "youtubeId": ""
+  },
+  "band-lateral-raise": {
+    "name": "Band lateral raise",
+    "youtubeId": ""
+  },
+  "band-oh-triceps": {
+    "name": "Band overhead triceps extension",
+    "youtubeId": ""
+  },
+  "band-hammer-curl": {
+    "name": "Band hammer curl",
+    "youtubeId": ""
+  },
+  "calf-raise-home": {
+    "name": "Calf raise (bodyweight or band)",
+    "youtubeId": ""
+  },
+  "leg-press": {
+    "name": "Leg press (feet mid; stop short of back pain)",
+    "youtubeId": ""
+  },
+  "chest-press": {
+    "name": "Machine chest press or DB bench",
+    "youtubeId": ""
+  },
+  "lat-pulldown-wide": {
+    "name": "Lat pulldown (wide, to upper chest)",
+    "youtubeId": ""
+  },
+  "seated-cable-row": {
+    "name": "Seated cable row or chest-supported row",
+    "youtubeId": ""
+  },
+  "hip-thrust": {
+    "name": "Hip thrust (bar or machine)",
+    "youtubeId": ""
+  },
+  "shoulder-press": {
+    "name": "Seated DB / machine shoulder press",
+    "youtubeId": ""
+  },
+  "cable-triceps-pushdown": {
+    "name": "Cable triceps pushdown",
+    "youtubeId": ""
+  },
+  "biceps-curl": {
+    "name": "DB / cable biceps curl",
+    "youtubeId": ""
+  },
+  "pallof-press": {
+    "name": "Pallof press",
+    "youtubeId": ""
+  },
+  "smith-inverted-row": {
+    "name": "Optional: inverted row on smith (low bar) if home row skipped",
+    "youtubeId": ""
+  },
+  "seated-leg-curl": {
+    "name": "Seated leg curl",
+    "youtubeId": ""
+  },
+  "goblet-squat": {
+    "name": "Goblet squat or smith squat (light)",
+    "youtubeId": ""
+  },
+  "lat-pulldown-close": {
+    "name": "Lat pulldown (close / neutral grip)",
+    "youtubeId": ""
+  },
+  "one-arm-db-row": {
+    "name": "One-arm DB row (chest on incline if possible)",
+    "youtubeId": ""
+  },
+  "incline-press": {
+    "name": "Incline machine / DB press",
+    "youtubeId": ""
+  },
+  "cable-face-pull": {
+    "name": "Cable face pull",
+    "youtubeId": ""
+  },
+  "lateral-raise": {
+    "name": "Lateral raise",
+    "youtubeId": ""
+  },
+  "oh-triceps": {
+    "name": "Overhead cable / DB triceps extension",
+    "youtubeId": ""
+  },
+  "hammer-curl": {
+    "name": "Hammer curl",
+    "youtubeId": ""
+  },
+  "standing-calf-raise": {
+    "name": "Standing calf raise",
+    "youtubeId": ""
+  }
+}
