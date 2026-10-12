@@ -6,11 +6,11 @@ product
 
 ## Users
 
-One person following a GERD-safe Indian meal-prep plan while losing fat (95→80–84 kg by 1 Feb 2027). Primary surface is a phone home-screen PWA: Mon–Fri same four meals with Sunday batch steps on tap, morning incline + core then gym A/B four nights, weekly grocery in shop packs. Used in the kitchen and at the gym, often one-handed.
+One person following a GERD-safe Indian meal-prep plan while losing fat (95→85 kg by 15 Feb 2027). Primary surface is a phone home-screen PWA: Mon–Fri four meals (smoothie, paneer pulao, fruit+eggs, tandoori chicken) with Sunday batch steps on tap, morning incline + core then gym A/B four nights, weekly grocery in shop packs. Used in the kitchen and at the gym, often one-handed.
 
 ## Product Purpose
 
-Make the weekday plate (Sunday batch + day-of assembly), workout, food rules, and a Mon–Fri grocery list available offline with no account. Success is opening Today, cooking the weighed recipe, hitting ~1,450 kcal / ~150 g protein, and buying only what the week needs. Soft weekends keep breakfast + one protein meal.
+Make the weekday plate (Sunday batch + day-of assembly), workout, food rules, and a Mon–Fri grocery list available offline with no account. Success is opening Today, cooking the weighed recipe, hitting ~1,680 kcal / ~134 g protein, and buying only what the week needs. Soft weekends: protein each meal, one relaxed meal.
 
 ## Brand Personality
 

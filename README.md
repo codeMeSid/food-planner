@@ -1,6 +1,6 @@
 # Plate 78 (PWA)
 
-Installable app with the daily meal plan (~1,500 kcal, ~150 g protein),
+Installable app with the daily meal plan (~1,680 kcal, ~134 g protein),
 workout split, and weekly grocery checklist with quantities. Works offline
 once installed.
 

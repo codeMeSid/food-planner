@@ -9,7 +9,7 @@ Vanilla PWA. No framework, no backend, no build. Source files + icon PNGs + self
 | `index.html` | All UI, CSS, data, JS |
 | `exercises.json` | Exercise id → `{ name, youtubeId, skipVideo? }` for form videos |
 | `manifest.json` | PWA: `Plate 78`, standalone, theme/background `#E3CFBB` |
-| `service-worker.js` | Cache `plate78-v25`; bump name after every deploy |
+| `service-worker.js` | Cache `plate78-v35`; bump name after every deploy |
 | `fonts/SourceSans3VF-Upright.woff2` | Source Sans 3 VF (SIL OFL); cached by SW |
 | `icon-192.png` / `icon-512.png` / `icon-maskable-512.png` | Home-screen icons |
 | `README.md` | GitHub Pages install notes |
@@ -20,9 +20,9 @@ Edit meals → change `RECIPES` / `WEEKDAY_MEALS` near top of `<script>` in `ind
 
 ## Product
 
-GERD-safe Indian home cooking for fat loss. 1 person. **95 kg → 80–84 kg** (track midpoint 82) by `END_DATE` (`2027-02-01`) from `START_DATE` (`2026-10-01`). **~1,450 kcal/day**, **~150 g protein**. Morning incline treadmill (Gym tab) + home core/bands daily; commercial gym lifts **Mon/Tue/Thu/Fri** (alternating lift blocks). Proteins: chicken breast, eggs, toned dahi, buttermilk (tetra), whey isolate in breakfast. Carbs: muesli bowl. Olive oil ≤ 3 level tsp/day (plate uses 1.5). No cauliflower, no lauki, no tomato/raw onion/garlic/red chili/mint. Chicken marinated with toned dahi only (no packaged marinade brands).
+GERD-safe Indian home cooking for fat loss. 1 person. **95 kg → 85 kg** by `END_DATE` (`2027-02-15`) from `START_DATE` (`2026-10-12`). **~1,680 kcal/day**, **~134–143 g protein** (computed from ingredients). Morning incline treadmill + home core/bands daily; commercial gym lifts **Mon/Tue/Thu/Fri** (alternating lift blocks). Weekday plate: Yogabar protein smoothie · brown rice paneer pulao + salad + curd · fruit bowl + eggs (fruit rotates by day) · mild tandoori chicken + veggies + salad. Avoid tomato/raw onion/garlic/chili/mint/citrus/fried. Chicken marinated with toned dahi only.
 
-**Meal prep:** Sunday batch → Mon–Fri same 4 meals. Soft weekends (wake drink + breakfast bowl + one protein meal; not in grocery).
+**Meal prep:** Sunday ~45 min → marinate chicken (600 g Mon–Wed; rest Wed night), cook rice 2–3 days, boil eggs, soak moong, chop salad. Soft weekends (protein each meal, one relaxed meal; not in grocery).
 
 ## Tabs (bottom nav)
 
@@ -34,11 +34,10 @@ GERD-safe Indian home cooking for fat loss. 1 person. **95 kg → 80–84 kg** (
 
 ```js
 MACRO_RULES[]           // regex → kcal/protein from ingredient lines (raw weights)
-RECIPES[id]             // { type, risk, name, ing[], steps[] } — B1 L1 S1 D1
-ENERGY_ADDONS[id]       // hard-session only; macros shown, not in grocery
-WEEKDAY_MEALS           // ["B1","L1","S1","D1"]
-PLAN[Mon…Fri]           // WEEKDAY_MEALS; Sat/Sun = []
-MEAL_SLOTS[]            // { id, chip, time } — Today toolbar
+RECIPES[id]             // { type, risk, name, ing[], steps[] } — B1 L1 SM–SF D1 (+ S1 rotation overview)
+ENERGY_ADDONS[id]       // catch-ups; macros shown, not in grocery
+PLAN[Mon…Fri]           // ["B1","L1", snackId, "D1"] — snack fruit rotates SM/ST/SW/STh/SF
+MEAL_SLOTS[]            // { id, chip, time } — Today toolbar; S1 resolves to today's snack
 BUY_CATALOG[]           // match RECIPES ing lines → group/name/shop pack
 GROCERY = buildWeeklyGrocery()  // { protein|veg|pantry|dairy: [{name, qtyLabel, key}] }
 TREADMILL_BLOCK / HOME_BASE / HOME_EXTRA / ALT_LIFT_A|B / GYM_LIFT_A|B
